@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,12 +39,12 @@ public class AccountTypeController {
     }
 
 
-    @GetMapping(value = "/{AccountTypeId}",
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<AccountType> getTicketById(@PathVariable Long AccountTypeId) {
-//        log.info("GET id=" + ticketId);
-        return ResponseEntity.of(Optional.ofNullable(accountTypeService.getAccountTypeById(AccountTypeId)));
-    }
+//    @GetMapping(value = "/{AccountTypeId}",
+//            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+//    public ResponseEntity<AccountType> getTicketById(@PathVariable Long AccountTypeId) {
+////        log.info("GET id=" + ticketId);
+//        return ResponseEntity.of(Optional.ofNullable(accountTypeService.getAccountTypeById(AccountTypeId)));
+//    }
 
     @PostMapping(value = "/test")
     public String Test1(){
