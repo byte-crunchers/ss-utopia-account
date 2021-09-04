@@ -62,7 +62,7 @@ public class H2DataBootstrap implements CommandLineRunner {
     private void loadAllAccountType(){
         var AccountType1 = AccountType.builder()
                 .id(1L)
-                .accountName("checking")
+                .accountName("Utopia checking")
                 .accounttype("Checking")
                 .apy(0.0f)
                 .fee(0)
@@ -75,7 +75,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
         var AccountType2 = AccountType.builder()
                 .id(2L)
-                .accountName("saving")
+                .accountName("Utopia saving")
                 .accounttype("Saving")
                 .apy(0.005f)
                 .fee(0)
@@ -88,7 +88,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
         var AccountType3 = AccountType.builder()
                 .id(3L)
-                .accountName("IRA")
+                .accountName("Utopia IRA")
                 .accounttype("IRA")
                 .apy(0.008f)
                 .fee(0)
@@ -101,7 +101,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
         var AccountType4 = AccountType.builder()
                 .id(4L)
-                .accountName("investing")
+                .accountName("Utopia investing")
                 .accounttype("Investing")
                 .apy(0.00f)
                 .fee(5)
