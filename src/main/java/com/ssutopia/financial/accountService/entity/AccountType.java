@@ -24,6 +24,10 @@ public class AccountType {
     @NotBlank
     private String accountName;
 
+    @NotBlank
+    private String accounttype;
+
+
     @Builder.Default
     private int fee = 0;
 

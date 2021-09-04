@@ -64,7 +64,7 @@ public class AccountTypesControllerSecurityTests {
     AccountType mockAccountType = AccountType.builder()
             .id(1L)
             .accountName("test1")
-
+            .accounttype("Saving")
             .build();
 
     User mockAdminUser = User.builder()

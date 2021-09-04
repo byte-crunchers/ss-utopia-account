@@ -15,6 +15,9 @@ public class AccountTypeDto {
     @NotBlank
     private String accountName;
 
+    @NotBlank
+    private String accounttype;
+
     private float taxes = 0.0f;
 
     private int fee = 0;

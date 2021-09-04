@@ -38,6 +38,7 @@ public class AccountTypeServiceImpl implements AccountTypeService {
                 .contributionLimits(account_typeDto.getContributionLimits())
                 .withdrawalAgeLimits(account_typeDto.getWithdrawalAgeLimits())
                 .fee(account_typeDto.getFee())
+                .accounttype(account_typeDto.getAccounttype())
                 .withdrawalLimits(account_typeDto.getWithdrawalLimits())
                 .build();
         account_type = account_typeRepository.save(account_type);

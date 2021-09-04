@@ -28,17 +28,20 @@ public class AccountTypeServiceImplTest {
         account1 = AccountType.builder()
                 .id(1L)
                 .accountName("test1")
+                .accounttype("Saving")
                 .build();
 
         account2 = AccountType.builder()
                 .id(2L)
                 .accountName("test2")
+                .accounttype("Saving")
                 .build();
 
 
         account3 = AccountType.builder()
                 .id(3L)
                 .accountName("test3")
+                .accounttype("Saving")
                 .build();
 
     }
@@ -52,6 +55,7 @@ public class AccountTypeServiceImplTest {
         when(repository.save(any(AccountType.class))).thenReturn(account1);
         var result = service.createNewAccount_type(accountTypeDto.builder()
                 .accountName(account1.getAccountName())
+                .accounttype(account1.getAccounttype())
                 .build())
                 ;
         assertEquals(account1, result);
@@ -75,6 +79,7 @@ public class AccountTypeServiceImplTest {
         assertThrows(DuplicateAccountNameException.class,
                 () -> service.createNewAccount_type(accountTypeDto.builder()
                         .accountName(account1.getAccountName())
+                        .accounttype(account1.getAccounttype())
                         .build()));
     }
 }
