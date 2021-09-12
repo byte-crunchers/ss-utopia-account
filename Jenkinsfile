@@ -18,6 +18,7 @@ pipeline {
           }
           stage("Quality Gate") {
             steps {
+              echo message: "can not do on local machine"
              /* timeout(time: 5, unit: 'MINUTES') {
                 waitForQualityGate abortPipeline: true
               }*/
