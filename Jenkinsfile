@@ -24,7 +24,7 @@ pipeline {
               }*/
             }
           }
-          stage ('Package')//mvn clena
+          stage ('Package') {
             steps {
               sh 'mvn clean package'   
             }         
@@ -43,4 +43,5 @@ pipeline {
             }
         }
     }
+}
 
