@@ -4,11 +4,11 @@ pipeline {
     stages {
       stage('checkout') {
         steps {
-          git branch: 'feature_jenkins', credentialsId: 'git_login', url: 'https://github.com/byte-crunchers/ss-utopia-account.git'
+          git branch: 'develop', credentialsId: 'git_login', url: 'https://github.com/byte-crunchers/ss-utopia-account.git'
         }
       }
         
-        stage("build & SonarQube analysis") {
+        stage("SonarQube analysis") {
             agent any
             steps {
               withSonarQubeEnv('SonarQube') {
