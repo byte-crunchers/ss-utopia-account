@@ -25,9 +25,9 @@ pipeline {
             }
           }
           stage ('Package')//mvn clena
-          steps {
-            
-              sh 'mvn clean package'            
+            steps {
+              sh 'mvn clean package'   
+            }         
           }
           stage('Build') {
             steps {
