@@ -47,7 +47,7 @@ pipeline {
 
       stage('Build') {
         steps {
-          sh 'docker build . -t ss-utopia-loan:latest'
+          sh 'docker build . -t ss-utopia-account:latest'
         }
       }
 
