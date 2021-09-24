@@ -19,6 +19,7 @@ public class AccountTypeController {
     public static final String MAPPING = EndpointConstants.API_V_0_1_ACCOUNTTYPES;
     private final AccountTypeService accountTypeService;
 
+    @CrossOrigin
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<AccountType> createNewAccountType(@Valid @RequestBody AccountTypeDto accountTypeDto){
 //        log.info("post account types");
@@ -27,7 +28,7 @@ public class AccountTypeController {
         return ResponseEntity.created(uri).body(accountType);
     }
 
-
+    @CrossOrigin
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<AccountType>> getAllAccountTypes() {
 //        log.info("GET all");
