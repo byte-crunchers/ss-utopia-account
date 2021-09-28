@@ -31,7 +31,7 @@ public class Accounts {
 
     private int limit;
 
-    private boolean is_active ;
+    private boolean active ;
 
     @ManyToOne
     @JoinColumn(

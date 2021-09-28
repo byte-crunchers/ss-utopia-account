@@ -38,6 +38,8 @@ public class Users {
 
     private int active;
 
+    private String address;
+
     private boolean is_admin;
 
     private String roles = "";
