@@ -15,14 +15,14 @@ public interface CardsRepository extends CrudRepository<Cards,Long> {
     @Query(
             "select new com.ssutopia.financial.accountService.entity.CreditAccount" +
                     "( c.id,c.card_num, c.pin,c.cvc1,c.cvc2,c.exp_date,c.accounts.balance," +
-                    "c.accounts.debt_interest,c.accounts.payment_due,c.accounts.due_date,c.accounts.limit ) " +
+                    "c.accounts.debt_interest,c.accounts.payment_due,c.accounts.due_date,c.accounts.limit,c.accounts.users.first_name,c.accounts.users.last_name) " +
                     "from Cards c, Accounts a where c.accounts = a and a.due_date is not null"
     )
     List<CreditAccount> findAllCreditCard();
 
     @Query(
             "select new com.ssutopia.financial.accountService.entity.DebitAccount" +
-                    "( c.id,c.card_num, c.pin,c.cvc1,c.cvc2,c.exp_date,c.accounts.balance) " +
+                    "( c.id,c.card_num, c.pin,c.cvc1,c.cvc2,c.exp_date,c.accounts.balance,c.accounts.users.first_name,c.accounts.users.last_name) " +
                     "from Cards c, Accounts a where c.accounts = a and a.due_date is null"
     )
     List<DebitAccount> findAllDebitCard();
