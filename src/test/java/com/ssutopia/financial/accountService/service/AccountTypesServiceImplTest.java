@@ -1,8 +1,7 @@
 package com.ssutopia.financial.accountService.service;
 
-import com.ssutopia.financial.accountService.dto.AccountTypeDto;
-import com.ssutopia.financial.accountService.entity.AccountType;
-import com.ssutopia.financial.accountService.exception.DuplicateAccountNameException;
+import com.ssutopia.financial.accountService.dto.AccountTypesDto;
+import com.ssutopia.financial.accountService.entity.AccountTypes;
 import com.ssutopia.financial.accountService.repository.AccountTypeRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,35 +9,31 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class AccountTypeServiceImplTest {
-    private static AccountType account1,  account2,  account3;
-    private static AccountTypeDto accountTypeDto;
+public class AccountTypesServiceImplTest {
+    private static AccountTypes account1,  account2,  account3;
+    private static AccountTypesDto accountTypesDto;
     private final AccountTypeRepository repository = Mockito.mock(AccountTypeRepository.class);
     private final AccountTypeService service = new AccountTypeServiceImpl(repository);
 
     @BeforeAll
     static void beforeAll(){
-        account1 = AccountType.builder()
+        account1 = AccountTypes.builder()
                 .id(1L)
-                .accountName("test1")
                 .build();
 
-        account2 = AccountType.builder()
+        account2 = AccountTypes.builder()
                 .id(2L)
-                .accountName("test2")
                 .build();
 
 
-        account3 = AccountType.builder()
+        account3 = AccountTypes.builder()
                 .id(3L)
-                .accountName("test3")
                 .build();
 
     }
@@ -49,9 +44,8 @@ public class AccountTypeServiceImplTest {
 
     @Test
     void test_createNewAccountTypes_ReturnsAccountTypesWithExpectedValuesOnSuccess() {
-        when(repository.save(any(AccountType.class))).thenReturn(account1);
-        var result = service.createNewAccount_type(accountTypeDto.builder()
-                .accountName(account1.getAccountName())
+        when(repository.save(any(AccountTypes.class))).thenReturn(account1);
+        var result = service.createNewAccount_type(accountTypesDto.builder()
                 .build())
                 ;
         assertEquals(account1, result);
@@ -67,14 +61,14 @@ public class AccountTypeServiceImplTest {
         assertEquals(expectedAccountTypes, accountTypes);
     }
 
-    @Test
-    void test_createNewAccountType_ThrowsDuplicateLoanTypeNameExceptionOnDuplicateAccountTypeNameRecord() {
-        when(repository.findByAccountName(account1.getAccountName())).thenReturn(Optional.of(account1));
-
-//        repository.save(loan2);
-        assertThrows(DuplicateAccountNameException.class,
-                () -> service.createNewAccount_type(accountTypeDto.builder()
-                        .accountName(account1.getAccountName())
-                        .build()));
-    }
+//    @Test
+//    void test_createNewAccountType_ThrowsDuplicateLoanTypeNameExceptionOnDuplicateAccountTypeNameRecord() {
+//        when(repository.findByAccountName(account1.getAccountName())).thenReturn(Optional.of(account1));
+//
+////        repository.save(loan2);
+//        assertThrows(DuplicateAccountNameException.class,
+//                () -> service.createNewAccount_type(accountTypeDto.builder()
+//                        .accountName(account1.getAccountName())
+//                        .build()));
+//    }
 }

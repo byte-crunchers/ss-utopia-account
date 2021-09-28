@@ -1,7 +1,7 @@
 package com.ssutopia.financial.accountService.service;
 
-import com.ssutopia.financial.accountService.entity.User;
+import com.ssutopia.financial.accountService.entity.Users;
 
 public interface UserService {
-    User findUserByUsername(String name);
+    Users findUserByUsername(String name);
 }

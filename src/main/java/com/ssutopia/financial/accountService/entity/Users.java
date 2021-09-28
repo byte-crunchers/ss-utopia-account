@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -30,7 +30,15 @@ public class User {
     @NotBlank
     private String password;
 
+    private String email;
+
+    private String first_name;
+
+    private String last_name;
+
     private int active;
+
+    private boolean is_admin;
 
     private String roles = "";
 

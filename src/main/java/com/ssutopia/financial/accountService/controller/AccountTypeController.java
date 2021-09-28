@@ -1,7 +1,7 @@
 package com.ssutopia.financial.accountService.controller;
 
-import com.ssutopia.financial.accountService.dto.AccountTypeDto;
-import com.ssutopia.financial.accountService.entity.AccountType;
+import com.ssutopia.financial.accountService.dto.AccountTypesDto;
+import com.ssutopia.financial.accountService.entity.AccountTypes;
 import com.ssutopia.financial.accountService.service.AccountTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -20,22 +20,22 @@ public class AccountTypeController {
     private final AccountTypeService accountTypeService;
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<AccountType> createNewAccountType(@Valid @RequestBody AccountTypeDto accountTypeDto){
+    public ResponseEntity<AccountTypes> createNewAccountType(@Valid @RequestBody AccountTypesDto accountTypesDto){
 //        log.info("post account types");
-        var accountType = accountTypeService.createNewAccount_type(accountTypeDto);
+        var accountType = accountTypeService.createNewAccount_type(accountTypesDto);
         var uri = URI.create(MAPPING+"/"+accountType.getId());
         return ResponseEntity.created(uri).body(accountType);
     }
 
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<AccountType>> getAllAccountTypes() {
+    public ResponseEntity<List<AccountTypes>> getAllAccountTypes() {
 //        log.info("GET all");
-        List<AccountType> AccountType = accountTypeService.getAllAccountTypes();
-        if (AccountType.isEmpty()) {
+        List<AccountTypes> AccountTypes = accountTypeService.getAllAccountTypes();
+        if (AccountTypes.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(AccountType);
+        return ResponseEntity.ok(AccountTypes);
     }
 
 

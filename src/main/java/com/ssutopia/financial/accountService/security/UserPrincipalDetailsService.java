@@ -1,6 +1,6 @@
 package com.ssutopia.financial.accountService.security;
 
-import com.ssutopia.financial.accountService.entity.User;
+import com.ssutopia.financial.accountService.entity.Users;
 import com.ssutopia.financial.accountService.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,8 +18,8 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = this.userRepository.findByUsername(s);
-        UserPrincipal userPrincipal = new UserPrincipal(user);
+        Users users = this.userRepository.findByUsername(s);
+        UserPrincipal userPrincipal = new UserPrincipal(users);
 
         return userPrincipal;
     }

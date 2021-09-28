@@ -40,6 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //for Admin role to create card types
                 .antMatchers(HttpMethod.POST, EndpointConstants.API_V_0_1_ACCOUNTTYPES).hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, EndpointConstants.API_V_0_1_ACCOUNTS).hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, EndpointConstants.API_V_0_1_CARDS+"/credit").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, EndpointConstants.API_V_0_1_CARDS+"/debit").hasRole("ADMIN")
                 //for Admin and user role to view card types
                 .antMatchers(HttpMethod.GET,EndpointConstants.API_V_0_1_ACCOUNTTYPES).hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated();  }

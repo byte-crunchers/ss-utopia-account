@@ -1,6 +1,6 @@
 package com.ssutopia.financial.accountService.security;
 
-import com.ssutopia.financial.accountService.entity.User;
+import com.ssutopia.financial.accountService.entity.Users;
 import com.ssutopia.financial.accountService.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -55,8 +55,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             // Search in the DB if we find the user by token subject (username)
             // If so, then grab user details and create spring auth token using username, pass, authorities/roles
             if (userName != null) {
-                User user = userRepository.findByUsername(userName);
-                UserPrincipal principal = new UserPrincipal(user);
+                Users users = userRepository.findByUsername(userName);
+                UserPrincipal principal = new UserPrincipal(users);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userName, null, principal.getAuthorities());
                 return auth;
             }

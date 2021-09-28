@@ -20,3 +20,4 @@ public enum UserRole {
         return roleName.replace("ROLE_", "");
     }
 }
+

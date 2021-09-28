@@ -3,9 +3,9 @@ package com.ssutopia.financial.accountService.controller;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssutopia.financial.accountService.dto.AccountTypeDto;
-import com.ssutopia.financial.accountService.entity.AccountType;
-import com.ssutopia.financial.accountService.entity.User;
+import com.ssutopia.financial.accountService.dto.AccountTypesDto;
+import com.ssutopia.financial.accountService.entity.AccountTypes;
+import com.ssutopia.financial.accountService.entity.Users;
 import com.ssutopia.financial.accountService.repository.AccountTypeRepository;
 import com.ssutopia.financial.accountService.repository.UserRepository;
 import com.ssutopia.financial.accountService.security.JwtAuthorizationFilter;
@@ -51,7 +51,7 @@ public class AccountTypesControllerSecurityTests {
     AccountTypeRepository accountTypeRepository;
 
     @MockBean
-    AccountTypeDto accountTypeDto;
+    AccountTypesDto accountTypesDto;
 
     @MockBean
     UserRepository userRepository;
@@ -61,20 +61,20 @@ public class AccountTypesControllerSecurityTests {
     MockMvc mvc;
 
 
-    AccountType mockAccountType = AccountType.builder()
+    AccountTypes mockAccountTypes = AccountTypes.builder()
             .id(1L)
-            .accountName("test1")
+
 
             .build();
 
-    User mockAdminUser = User.builder()
+    Users mockAdminUsers = Users.builder()
             .username("admin")
             .password("admin123")
             .roles("ADMIN")
             .permissions("ACCESS_TEST1,ACCESS_TEST2")
             .build();
 
-    User mockUser1 = User.builder()
+    Users mockUsers1 = Users.builder()
             .username("adan")
             .password("adan123")
             .roles("USER")
@@ -92,9 +92,9 @@ public class AccountTypesControllerSecurityTests {
         Mockito.reset(accountTypeService);
         Mockito.reset(accountTypeRepository);
 
-        when(accountTypeRepository.save(any(AccountType.class))).thenReturn( mockAccountType);
-        when(userRepository.findByUsername(any())).thenReturn(mockAdminUser);
-        when(accountTypeService.createNewAccount_type(any())).thenReturn(mockAccountType);
+        when(accountTypeRepository.save(any(AccountTypes.class))).thenReturn(mockAccountTypes);
+        when(userRepository.findByUsername(any())).thenReturn(mockAdminUsers);
+        when(accountTypeService.createNewAccount_type(any())).thenReturn(mockAccountTypes);
 
     }
     String getJwt(MockUser mockUser) {
@@ -108,7 +108,7 @@ public class AccountTypesControllerSecurityTests {
 
     @Test
     void test_createNewAccountType_CanOnlyBePerformedByAdmin() throws Exception {
-        var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountType);
+        var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
         mvc
                 .perform(
                         post(EndpointConstants.API_V_0_1_ACCOUNTTYPES)
@@ -129,7 +129,7 @@ public class AccountTypesControllerSecurityTests {
 
     @Test
     void test_createNewAccountType_CanBeForbiddenByNormalUser() throws Exception{
-        when(userRepository.findByUsername(any())).thenReturn(mockUser1);
+        when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
         var unauthed = List.of(MockUser.DEFAULT,
                 MockUser.DEFAULT,
                 MockUser.MATCH_USER,
@@ -137,7 +137,7 @@ public class AccountTypesControllerSecurityTests {
         );
 
         for (var user : unauthed) {
-            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountType);
+            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
 
             mvc
                     .perform(
