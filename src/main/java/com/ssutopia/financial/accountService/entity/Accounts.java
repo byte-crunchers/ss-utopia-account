@@ -25,13 +25,17 @@ public class Accounts {
 
     private float debt_interest;
 
-    private Date payment_due;
+    private float payment_due;
 
     private Date due_date;
 
     private int limit;
 
     private boolean active ;
+
+    private boolean approved ;
+
+    private boolean confirmed;
 
     @ManyToOne
     @JoinColumn(

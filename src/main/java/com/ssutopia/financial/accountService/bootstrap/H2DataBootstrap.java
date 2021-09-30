@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -24,6 +26,10 @@ public class H2DataBootstrap implements CommandLineRunner {
     private final CardsRepository cardsRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();;
+    String sDate1="12/2025";
+    String expDate = "11/25"; // for example
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/yy");
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -85,22 +91,21 @@ public class H2DataBootstrap implements CommandLineRunner {
 
     }
 
-    private void loadAllDebitAccounts(){
-        var AccountType11 = AccountTypes.builder()
-                .id(11L)
+    private void loadAllDebitAccounts() throws ParseException {
+        var AccountType12 = AccountTypes.builder()
+                .id(12L)
                 .foodie_pts(0.0f)
-                .savings_interest(0.02f)
+                .savings_interest(0.01f)
                 .cashBack(0.00f)
                 .annual_fee(50)
-                .savings_interest(0.0f)
                 .late_fee(00.00f)
                 .build();
 
-        var User11 = Users.builder()
-                .id(14L)
-                .username("MikeY123")
-                .first_name("Mike")
-                .last_name("Wee")
+        var User12 = Users.builder()
+                .id(15L)
+                .username("Lisandra")
+                .first_name("Boyle")
+                .last_name("Will")
                 .address("338-1607 Egestas. St.")
                 .email("smoothstack@email.com")
                 .is_admin(false)
@@ -109,47 +114,47 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .permissions("")
                 .build();
 
-        var Accounts11 = Accounts.builder()
-                .id(11L)
+        var Accounts12 = Accounts.builder()
+                .id(12L)
                 .balance(9009.00f)
-                .accountTypes(AccountType11)
+                .accountTypes(AccountType12)
                 .active(true)
-
-                .debt_interest(0.01f)
+                .approved(true)
+                .confirmed(true)
+                .debt_interest(0.04f)
                 .limit(10000)
 
-                .users(User11)
+                .users(User12)
                 .build();
 
-        var Card11 = Cards.builder()
-                .id(11L)
+        var Card12 = Cards.builder()
+                .id(12L)
                 .card_num("999923393855048")
-                .accounts(Accounts11)
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
+                .accounts(Accounts12)
                 .cvc1(823)
                 .cvc2(756)
                 .pin(567)
-                .exp_date(null)
                 .build();
-        accountTypeRepository.save(AccountType11);
-        userRepository.save(User11);
-        accountsRepository.save(Accounts11);
-        cardsRepository.save(Card11);
+        accountTypeRepository.save(AccountType12);
+        userRepository.save(User12);
+        accountsRepository.save(Accounts12);
+        cardsRepository.save(Card12);
 
 
-        var AccountType12 = AccountTypes.builder()
-                .id(12L)
+        var AccountType13 = AccountTypes.builder()
+                .id(13L)
                 .foodie_pts(0.00f)
-                .savings_interest(0.00f)
-                .cashBack(0.0f)
-                .annual_fee(0)
                 .savings_interest(0.02f)
-                .late_fee(00.00f)
+                .cashBack(0.0f)
+                .annual_fee(50)
+                .late_fee(0.00f)
                 .build();
 
-        var User12 = Users.builder()
-                .id(15L)
+        var User13 = Users.builder()
+                .id(16L)
                 .username("GlassDoor")
-                .first_name("John")
+                .first_name("Summers")
                 .last_name("Mitt")
                 .email("smoothstack@email.com")
                 .is_admin(false)
@@ -159,76 +164,27 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .permissions("")
                 .build();
 
-        var Accounts12 = Accounts.builder()
-                .id(12L)
+        var Accounts13 = Accounts.builder()
+                .id(13L)
                 .balance(3230.00f)
-                .accountTypes(AccountType12)
+                .accountTypes(AccountType13)
                 .active(true)
-
+                .approved(true)
+                .confirmed(true)
                 .debt_interest(0.03f)
                 .limit(20000)
 
-                .users(User12)
-                .build();
-
-
-        var Card12 = Cards.builder()
-                .id(12L)
-                .card_num("998923582648170")
-                .accounts(Accounts12)
-                .pin(123)
-                .cvc2(987)
-                .cvc1(346)
-                .build();
-        accountTypeRepository.save(AccountType12);
-        userRepository.save(User12);
-        accountsRepository.save(Accounts12);
-        cardsRepository.save(Card12);
-
-        var AccountType13 = AccountTypes.builder()
-                .id(13L)
-                .foodie_pts(0.00f)
-                .savings_interest(0.00f)
-                .cashBack(0.00f)
-                .annual_fee(0)
-                .savings_interest(0.0f)
-                .late_fee(0.00f)
-                .build();
-
-
-        var User13 = Users.builder()
-                .id(16L)
-                .username("PenWindows")
-                .first_name("BearHeart")
-                .last_name("Tooo")
-                .address("Ap #475-7333 Aenean Avenue")
-                .email("smoothstack@email.com")
-                .is_admin(false)
-                .password(passwordEncoder.encode("dan123"))
-                .roles("USER")
-                .permissions("")
-                .build();
-
-
-        var Accounts13 = Accounts.builder()
-                .id(13L)
-                .balance(9230.00f)
-                .accountTypes(AccountType13)
-                .active(true)
-
-                .debt_interest(0.02f)
-                .limit(90000)
                 .users(User13)
-
                 .build();
 
 
         var Card13 = Cards.builder()
                 .id(13L)
-                .card_num("999923631274614")
+                .card_num("998923582648170")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts13)
-                .pin(963)
-                .cvc2(447)
+                .pin(123)
+                .cvc2(987)
                 .cvc1(346)
                 .build();
         accountTypeRepository.save(AccountType13);
@@ -238,19 +194,71 @@ public class H2DataBootstrap implements CommandLineRunner {
 
         var AccountType14 = AccountTypes.builder()
                 .id(14L)
-                .foodie_pts(0.0f)
-                .savings_interest(0.0f)
-                .cashBack(0.0f)
-                .annual_fee(0)
-                .savings_interest(0.0f)
+                .foodie_pts(0.00f)
+                .savings_interest(0.01f)
+                .cashBack(0.00f)
+                .annual_fee(60)
                 .late_fee(0.00f)
                 .build();
 
+
         var User14 = Users.builder()
                 .id(17L)
+                .username("PenWindows")
+                .first_name("Ulla")
+                .last_name("English")
+                .address("Ap #475-7333 Aenean Avenue")
+                .email("smoothstack@email.com")
+                .is_admin(false)
+                .password(passwordEncoder.encode("dan123"))
+                .roles("USER")
+                .permissions("")
+                .build();
+
+
+        var Accounts14 = Accounts.builder()
+                .id(14L)
+                .balance(9230.00f)
+                .accountTypes(AccountType14)
+                .active(true)
+                .approved(true)
+                .confirmed(true)
+                .debt_interest(0.02f)
+                .limit(90000)
+                .users(User14)
+
+                .build();
+
+
+        var Card14 = Cards.builder()
+                .id(14L)
+                .card_num("999923631274614")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
+                .accounts(Accounts14)
+                .pin(963)
+                .cvc2(447)
+                .cvc1(346)
+                .build();
+        accountTypeRepository.save(AccountType14);
+        userRepository.save(User14);
+        accountsRepository.save(Accounts14);
+        cardsRepository.save(Card14);
+
+        var AccountType15 = AccountTypes.builder()
+                .id(15L)
+                .foodie_pts(0.0f)
+                .savings_interest(0.01f)
+                .cashBack(0.0f)
+                .annual_fee(50)
+
+                .late_fee(0.00f)
+                .build();
+
+        var User15 = Users.builder()
+                .id(18L)
                 .username("NoteBook")
-                .first_name("Matt")
-                .last_name("Bvo")
+                .first_name("Axel")
+                .last_name("York")
                 .address("Ap #854-9769 Quam Rd.")
                 .email("smoothstack@email.com")
                 .is_admin(false)
@@ -261,84 +269,30 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
 
-        var Accounts14 = Accounts.builder()
-                .id(14L)
+        var Accounts15 = Accounts.builder()
+                .id(15L)
                 .balance(9230.00f)
-                .accountTypes(AccountType14)
+                .accountTypes(AccountType15)
                 .active(true)
-
+                .approved(true)
+                .confirmed(true)
                 .debt_interest(0.0f)
                 .limit(190000)
 
-                .users(User14)
-                .build();
-
-
-
-        var Card14 = Cards.builder()
-                .id(14L)
-                .card_num("888923738762800")
-                .accounts(Accounts14)
-                .pin(213)
-                .cvc2(447)
-                .cvc1(326)
-                .build();
-
-        accountTypeRepository.save(AccountType14);
-        userRepository.save(User14);
-        accountsRepository.save(Accounts14);
-        cardsRepository.save(Card14);
-
-
-
-        var AccountType15 = AccountTypes.builder()
-                .id(15L)
-                .foodie_pts(0.00f)
-                .savings_interest(0.0f)
-                .cashBack(0.0f)
-                .annual_fee(0.00f)
-                .savings_interest(0.0f)
-                .late_fee(0.00f)
-                .build();
-
-
-
-        var User15 = Users.builder()
-                .id(18L)
-                .username("Perpat467")
-                .first_name("Cindy")
-                .last_name("Jess")
-                .email("smoothstack@email.com")
-                .is_admin(false)
-                .address("P.O. Box 769, 2359 Vivamus St.")
-                .password(passwordEncoder.encode("dan123"))
-                .roles("USER")
-                .permissions("")
-                .build();
-
-
-        var Accounts15 = Accounts.builder()
-                .id(15L)
-                .balance(8230.00f)
-                .accountTypes(AccountType15)
-                .active(true)
-
-                .debt_interest(0.0f)
-                .limit(120000)
                 .users(User15)
-
                 .build();
+
 
 
         var Card15 = Cards.builder()
                 .id(15L)
-                .card_num("5566231168953886")
+                .card_num("888923738762800")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts15)
-                .pin(200)
+                .pin(213)
                 .cvc2(447)
                 .cvc1(326)
                 .build();
-
 
         accountTypeRepository.save(AccountType15);
         userRepository.save(User15);
@@ -349,52 +303,60 @@ public class H2DataBootstrap implements CommandLineRunner {
 
         var AccountType16 = AccountTypes.builder()
                 .id(16L)
-                .foodie_pts(0.0f)
-                .savings_interest(0.00f)
-                .cashBack(0.0f)
-                .annual_fee(0)
+                .foodie_pts(0.00f)
                 .savings_interest(0.0f)
+                .cashBack(0.0f)
+                .annual_fee(0.00f)
+
                 .late_fee(0.00f)
                 .build();
 
+
+
         var User16 = Users.builder()
                 .id(19L)
-                .username("Neck3467")
-                .first_name("Jolene")
-                .last_name("Lin")
+                .username("Perpat467")
+                .first_name("Hanna")
+                .last_name("Conrad")
                 .email("smoothstack@email.com")
                 .is_admin(false)
+                .address("P.O. Box 769, 2359 Vivamus St.")
                 .password(passwordEncoder.encode("dan123"))
                 .roles("USER")
-                .address( "551-8311 Luctus St.")
                 .permissions("")
                 .build();
 
+
         var Accounts16 = Accounts.builder()
                 .id(16L)
-                .balance(3004f)
+                .balance(8230.00f)
                 .accountTypes(AccountType16)
                 .active(true)
-
+                .approved(true)
+                .confirmed(true)
                 .debt_interest(0.0f)
-                .limit(20000)
-
+                .limit(120000)
                 .users(User16)
+
                 .build();
+
 
         var Card16 = Cards.builder()
                 .id(16L)
-                .card_num("441923393855048")
+                .card_num("5566231168953886")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts16)
-                .cvc1(603)
-                .cvc2(456)
-                .pin(547)
-                .exp_date(new Date())
+                .pin(200)
+                .cvc2(447)
+                .cvc1(326)
                 .build();
+
+
         accountTypeRepository.save(AccountType16);
         userRepository.save(User16);
         accountsRepository.save(Accounts16);
         cardsRepository.save(Card16);
+
 
 
         var AccountType17 = AccountTypes.builder()
@@ -403,15 +365,65 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.00f)
                 .cashBack(0.0f)
                 .annual_fee(0)
-                .savings_interest(0.0f)
                 .late_fee(0.00f)
                 .build();
 
         var User17 = Users.builder()
                 .id(20L)
+                .username("Neck3467")
+                .first_name("Oliver")
+                .last_name("Frost")
+                .email("smoothstack@email.com")
+                .is_admin(false)
+                .password(passwordEncoder.encode("dan123"))
+                .roles("USER")
+                .address( "551-8311 Luctus St.")
+                .permissions("")
+                .build();
+
+        var Accounts17 = Accounts.builder()
+                .id(17L)
+                .balance(3004f)
+                .accountTypes(AccountType17)
+                .active(true)
+                .approved(true)
+                .confirmed(true)
+                .debt_interest(0.0f)
+                .limit(20000)
+
+                .users(User17)
+                .build();
+
+        var Card17 = Cards.builder()
+                .id(17L)
+                .card_num("441923393855048")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
+                .accounts(Accounts17)
+                .cvc1(603)
+                .cvc2(456)
+                .pin(547)
+                .exp_date(new Date())
+                .build();
+        accountTypeRepository.save(AccountType17);
+        userRepository.save(User17);
+        accountsRepository.save(Accounts17);
+        cardsRepository.save(Card17);
+
+
+        var AccountType18 = AccountTypes.builder()
+                .id(18L)
+                .foodie_pts(0.0f)
+                .savings_interest(0.01f)
+                .cashBack(0.0f)
+                .annual_fee(50)
+                .late_fee(0.00f)
+                .build();
+
+        var User18 = Users.builder()
+                .id(21L)
                 .username("applestores")
-                .first_name("jimmy")
-                .last_name("Wo")
+                .first_name("Russell")
+                .last_name("Wright")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("324-1086 Parturient St.")
@@ -420,47 +432,48 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .permissions("")
                 .build();
 
-        var Accounts17 = Accounts.builder()
-                .id(17L)
+        var Accounts18 = Accounts.builder()
+                .id(18L)
                 .balance(6300.00f)
-                .accountTypes(AccountType17)
+                .accountTypes(AccountType18)
                 .active(true)
-
+                .approved(true)
+                .confirmed(true)
                 .debt_interest(0.03f)
                 .limit(50000)
 
-                .users(User17)
+                .users(User18)
                 .build();
 
 
-        var Card17 = Cards.builder()
-                .id(17L)
+        var Card18 = Cards.builder()
+                .id(18L)
                 .card_num("231923112648170")
-                .accounts(Accounts17)
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
+                .accounts(Accounts18)
                 .pin(123)
                 .cvc2(467)
                 .cvc1(346)
                 .build();
-        accountTypeRepository.save(AccountType17);
-        userRepository.save(User17);
-        accountsRepository.save(Accounts17);
-        cardsRepository.save(Card17);
+        accountTypeRepository.save(AccountType18);
+        userRepository.save(User18);
+        accountsRepository.save(Accounts18);
+        cardsRepository.save(Card18);
 
-        var AccountType18 = AccountTypes.builder()
-                .id(18L)
+        var AccountType19 = AccountTypes.builder()
+                .id(19L)
                 .foodie_pts(0.0f)
-                .savings_interest(0.00f)
+                .savings_interest(0.01f)
                 .cashBack(0.0f)
-                .annual_fee(0)
-                .savings_interest(0.0f)
+                .annual_fee(60)
                 .late_fee(0.00f)
                 .build();
 
 
-        var User18 = Users.builder()
-                .id(21L)
-                .username("Skygreen")
-                .first_name("Bob")
+        var User19 = Users.builder()
+                .id(22L)
+                .username("Dawn")
+                .first_name("Garcia")
                 .last_name("Chen")
                 .address("P.O. Box 430, 2261 Hendrerit Av.")
                 .email("smoothstack@email.com")
@@ -471,47 +484,48 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
-        var Accounts18 = Accounts.builder()
-                .id(18L)
+        var Accounts19 = Accounts.builder()
+                .id(19L)
                 .balance(6230.00f)
-                .accountTypes(AccountType18)
+                .accountTypes(AccountType19)
                 .active(true)
-
+                .approved(true)
+                .confirmed(true)
                 .debt_interest(0.02f)
                 .limit(70000)
-                .users(User18)
+                .users(User19)
 
                 .build();
 
 
-        var Card18 = Cards.builder()
-                .id(18L)
+        var Card19 = Cards.builder()
+                .id(19L)
                 .card_num("771923631274614")
-                .accounts(Accounts18)
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
+                .accounts(Accounts19)
                 .pin(903)
                 .cvc2(127)
                 .cvc1(306)
                 .build();
-        accountTypeRepository.save(AccountType18);
-        userRepository.save(User18);
-        accountsRepository.save(Accounts18);
-        cardsRepository.save(Card18);
+        accountTypeRepository.save(AccountType19);
+        userRepository.save(User19);
+        accountsRepository.save(Accounts19);
+        cardsRepository.save(Card19);
 
-        var AccountType19 = AccountTypes.builder()
-                .id(19L)
+        var AccountType20 = AccountTypes.builder()
+                .id(20L)
                 .foodie_pts(0.0f)
-                .savings_interest(0.0f)
+                .savings_interest(0.01f)
                 .cashBack(0.0f)
                 .annual_fee(50)
-                .savings_interest(0.0f)
                 .late_fee(0.00f)
                 .build();
 
-        var User19 = Users.builder()
-                .id(22L)
+        var User20 = Users.builder()
+                .id(23L)
                 .username("swimmingpool")
                 .first_name("Johnny")
-                .last_name("Tom")
+                .last_name("Moses")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("Ap #403-759 Quis St.")
@@ -522,53 +536,54 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
 
-        var Accounts19 = Accounts.builder()
-                .id(19L)
+        var Accounts20 = Accounts.builder()
+                .id(20L)
                 .balance(20030.00f)
                 .accountTypes(AccountType19)
                 .active(true)
-
+                .approved(true)
+                .confirmed(true)
                 .debt_interest(0.01f)
                 .limit(180000)
 
-                .users(User19)
+                .users(User20)
                 .build();
 
 
 
-        var Card19 = Cards.builder()
-                .id(19L)
+        var Card20 = Cards.builder()
+                .id(20L)
                 .card_num("656923738762800")
-                .accounts(Accounts19)
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
+                .accounts(Accounts20)
                 .pin(883)
                 .cvc2(777)
                 .cvc1(326)
                 .build();
 
-        accountTypeRepository.save(AccountType19);
-        userRepository.save(User19);
-        accountsRepository.save(Accounts19);
-        cardsRepository.save(Card19);
+        accountTypeRepository.save(AccountType20);
+        userRepository.save(User20);
+        accountsRepository.save(Accounts20);
+        cardsRepository.save(Card20);
 
 
 
-        var AccountType20 = AccountTypes.builder()
-                .id(20L)
+        var AccountType21 = AccountTypes.builder()
+                .id(21L)
                 .foodie_pts(0.0f)
                 .savings_interest(0.0f)
                 .cashBack(0.0f)
                 .annual_fee(0.00f)
-                .savings_interest(0.0f)
                 .late_fee(0.00f)
                 .build();
 
 
 
-        var User20 = Users.builder()
-                .id(23L)
+        var User21 = Users.builder()
+                .id(24L)
                 .username("Pearreer")
                 .first_name("Jenni")
-                .last_name("Lit")
+                .last_name("Briar")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("Ap #876-8402 Mauris Ave")
@@ -578,51 +593,108 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
-        var Accounts20 = Accounts.builder()
-                .id(20L)
+        var Accounts21 = Accounts.builder()
+                .id(21L)
                 .balance(11230.00f)
-                .accountTypes(AccountType20)
+                .accountTypes(AccountType21)
                 .active(true)
-                .debt_interest(0.01f)
+                .approved(true)
+                .confirmed(true)
+                .debt_interest(0.04f)
                 .limit(190000)
-                .users(User20)
+                .users(User21)
                 .build();
 
 
-        var Card20 = Cards.builder()
-                .id(20L)
+        var Card21 = Cards.builder()
+                .id(21L)
                 .card_num("4419231168953886")
-                .accounts(Accounts20)
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
+                .accounts(Accounts21)
                 .pin(600)
                 .cvc2(447)
                 .cvc1(996)
                 .build();
 
 
-        accountTypeRepository.save(AccountType20);
-        userRepository.save(User20);
-        accountsRepository.save(Accounts20);
-        cardsRepository.save(Card20);
+        accountTypeRepository.save(AccountType21);
+        userRepository.save(User21);
+        accountsRepository.save(Accounts21);
+        cardsRepository.save(Card21);
+
+        var AccountType22 = AccountTypes.builder()
+                .id(22L)
+                .foodie_pts(0.0f)
+                .savings_interest(0.0f)
+                .cashBack(0.0f)
+                .annual_fee(0.00f)
+                .late_fee(0.00f)
+                .build();
+
+
+
+        var User22 = Users.builder()
+                .id(25L)
+                .username("Peadddrreer")
+                .first_name("Xanthus")
+                .last_name("Gentry")
+                .email("smoothstack@email.com")
+                .is_admin(false)
+                .address("Ap #876-8402 Mauris Ave")
+                .password(passwordEncoder.encode("dan123"))
+                .roles("USER")
+                .permissions("")
+                .build();
+
+
+        var Accounts22 = Accounts.builder()
+                .id(22L)
+                .balance(11230.00f)
+                .accountTypes(AccountType22)
+                .active(true)
+                .approved(true)
+                .confirmed(true)
+                .debt_interest(0.05f)
+                .limit(190000)
+                .users(User22)
+                .build();
+
+
+        var Card22 = Cards.builder()
+                .id(22L)
+                .card_num("4419231168953886")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
+                .accounts(Accounts22)
+                .pin(600)
+                .cvc2(447)
+                .cvc1(996)
+                .build();
+
+
+        accountTypeRepository.save(AccountType22);
+        userRepository.save(User22);
+        accountsRepository.save(Accounts22);
+        cardsRepository.save(Card22);
 
 
     }
 
-    private void loadAllCreditAccounts(){
+    private void loadAllCreditAccounts() throws ParseException {
         var AccountType1 = AccountTypes.builder()
                 .id(1L)
                 .foodie_pts(0.06f)
                 .savings_interest(0.00f)
                 .cashBack(0.03f)
                 .annual_fee(100)
-                .savings_interest(0.0f)
+
                 .late_fee(29.00f)
                 .build();
 
         var User1 = Users.builder()
                 .id(4L)
                 .username("dan")
-                .first_name("Jim")
-                .last_name("Wo")
+                .first_name("Timothy")
+                .last_name("Mcdaniel")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .password(passwordEncoder.encode("dan123"))
@@ -636,10 +708,13 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(900.00f)
                 .accountTypes(AccountType1)
                 .active(true)
+                .approved(true)
+                .confirmed(true)
                 .due_date(new Date())
-                .debt_interest(0.01f)
+                .debt_interest(0.06f)
                 .limit(10000)
-                .payment_due(new Date())
+                .payment_due(60)
+                .due_date(new Date())
                 .users(User1)
                 .build();
 
@@ -650,7 +725,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc1(123)
                 .cvc2(456)
                 .pin(567)
-                .exp_date(new Date())
+                .exp_date(simpleDateFormat.parse(expDate))
                 .build();
         accountTypeRepository.save(AccountType1);
         userRepository.save(User1);
@@ -664,15 +739,15 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.00f)
                 .cashBack(0.03f)
                 .annual_fee(100)
-                .savings_interest(0.0f)
+
                 .late_fee(29.00f)
                 .build();
 
         var User2 = Users.builder()
                 .id(5L)
                 .username("intellij")
-                .first_name("Amy")
-                .last_name("Wo")
+                .first_name("Minerva")
+                .last_name("Calhoun")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("8948 Turpis. Rd.")
@@ -686,10 +761,13 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(1230.00f)
                 .accountTypes(AccountType2)
                 .active(true)
+                .approved(true)
+                .confirmed(true)
                 .due_date(new Date())
                 .debt_interest(0.03f)
                 .limit(20000)
-                .payment_due(new Date())
+                .payment_due(120)
+
                 .users(User2)
                 .build();
 
@@ -698,6 +776,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .id(2L)
                 .card_num("231923582648170")
                 .accounts(Accounts2)
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .pin(123)
                 .cvc2(467)
                 .cvc1(346)
@@ -713,7 +792,6 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.00f)
                 .cashBack(0.00f)
                 .annual_fee(100)
-                .savings_interest(0.0f)
                 .late_fee(0.00f)
                 .build();
 
@@ -721,8 +799,8 @@ public class H2DataBootstrap implements CommandLineRunner {
         var User3 = Users.builder()
                 .id(6L)
                 .username("Xcode")
-                .first_name("Kim")
-                .last_name("Wo")
+                .first_name("Barrett")
+                .last_name("Manning")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("954-3873 Et, Rd.")
@@ -737,18 +815,21 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(5230.00f)
                 .accountTypes(AccountType3)
                 .active(true)
+                .approved(true)
+                .confirmed(true)
                 .due_date(new Date())
                 .debt_interest(0.02f)
                 .limit(90000)
                 .users(User3)
-                .payment_due(new Date())
+                .payment_due(467)
                 .build();
 
 
         var Card3 = Cards.builder()
                 .id(3L)
-                .card_num("231923631274614")
+                .card_num("2319236312374614")
                 .accounts(Accounts3)
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .pin(223)
                 .cvc2(447)
                 .cvc1(346)
@@ -764,15 +845,14 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.03f)
                 .cashBack(0.03f)
                 .annual_fee(100)
-                .savings_interest(0.0f)
                 .late_fee(29.00f)
                 .build();
 
         var User4 = Users.builder()
                 .id(7L)
                 .username("eclipse")
-                .first_name("Water")
-                .last_name("To")
+                .first_name("Geoffrey")
+                .last_name("Vincent")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("491-6511 Aliquet Rd.")
@@ -788,10 +868,12 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(8230.00f)
                 .accountTypes(AccountType4)
                 .active(true)
+                .approved(true)
+                .confirmed(true)
                 .due_date(new Date())
                 .debt_interest(0.01f)
                 .limit(120000)
-                .payment_due(new Date())
+                .payment_due(675)
                 .users(User4)
                 .build();
 
@@ -800,6 +882,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Card4 = Cards.builder()
                 .id(4L)
                 .card_num("231923738762800")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts4)
                 .pin(213)
                 .cvc2(447)
@@ -819,7 +902,6 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.03f)
                 .cashBack(0.0f)
                 .annual_fee(50.00f)
-                .savings_interest(0.0f)
                 .late_fee(0.00f)
                 .build();
 
@@ -828,8 +910,8 @@ public class H2DataBootstrap implements CommandLineRunner {
         var User5 = Users.builder()
                 .id(8L)
                 .username("Xcode")
-                .first_name("Kim")
-                .last_name("Wo")
+                .first_name("Dana")
+                .last_name("Elliott")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("Ap #573-3947 Donec Ave")
@@ -844,9 +926,11 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(18230.00f)
                 .accountTypes(AccountType4)
                 .active(true)
-                .payment_due(new Date())
+                .approved(true)
+                .confirmed(true)
+                .payment_due(786)
                 .due_date(new Date())
-                .debt_interest(0.02f)
+                .debt_interest(0.06f)
                 .limit(120000)
                 .users(User5)
 
@@ -856,6 +940,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Card5 = Cards.builder()
                 .id(5L)
                 .card_num("2319231168953886")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts5)
                 .pin(200)
                 .cvc2(447)
@@ -876,15 +961,14 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.00f)
                 .cashBack(0.01f)
                 .annual_fee(60)
-                .savings_interest(0.0f)
                 .late_fee(29.00f)
                 .build();
 
         var User6 = Users.builder()
                 .id(9L)
                 .username("cuppies")
-                .first_name("Wendy")
-                .last_name("Wo")
+                .first_name("Kelly")
+                .last_name("Le")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("Ap #627-639 Non, Street")
@@ -898,10 +982,12 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(9004f)
                 .accountTypes(AccountType6)
                 .active(true)
+                .approved(true)
+                .confirmed(true)
                 .due_date(new Date())
-                .debt_interest(0.01f)
+                .debt_interest(0.06f)
                 .limit(10000)
-                .payment_due(new Date())
+                .payment_due(111)
                 .users(User6)
                 .build();
 
@@ -909,6 +995,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .id(6L)
                 .card_num("231923393855048")
                 .accounts(Accounts6)
+                .exp_date(simpleDateFormat.parse(expDate))
                 .cvc1(103)
                 .cvc2(456)
                 .pin(547)
@@ -926,15 +1013,14 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.00f)
                 .cashBack(0.02f)
                 .annual_fee(0)
-                .savings_interest(0.0f)
                 .late_fee(29.00f)
                 .build();
 
         var User7 = Users.builder()
                 .id(10L)
                 .username("microsoft")
-                .first_name("Betty")
-                .last_name("Wo")
+                .first_name("Tamekah")
+                .last_name("Bond")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .password(passwordEncoder.encode("dan123"))
@@ -948,17 +1034,20 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(2300.00f)
                 .accountTypes(AccountType7)
                 .active(true)
+                .approved(true)
+                .confirmed(true)
                 .due_date(new Date())
-                .debt_interest(0.03f)
+                .debt_interest(0.07f)
                 .limit(50000)
-                .payment_due(new Date())
+                .payment_due(222)
                 .users(User2)
                 .build();
 
 
         var Card7 = Cards.builder()
                 .id(7L)
-                .card_num("231923112648170")
+                .card_num("2319231126481670")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts7)
                 .pin(123)
                 .cvc2(467)
@@ -975,7 +1064,6 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.00f)
                 .cashBack(0.015f)
                 .annual_fee(0)
-                .savings_interest(0.0f)
                 .late_fee(30.00f)
                 .build();
 
@@ -983,8 +1071,8 @@ public class H2DataBootstrap implements CommandLineRunner {
         var User8 = Users.builder()
                 .id(11L)
                 .username("Xcode")
-                .first_name("Kim")
-                .last_name("Wo")
+                .first_name("Cadman")
+                .last_name("Dillon")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("Ap #157-9547 Diam St.")
@@ -999,17 +1087,20 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(4230.00f)
                 .accountTypes(AccountType8)
                 .active(true)
+                .approved(true)
+                .confirmed(true)
                 .due_date(new Date())
-                .debt_interest(0.02f)
+                .debt_interest(0.06f)
                 .limit(70000)
-                .users(User3)
-                .payment_due(new Date())
+                .users(User8)
+                .payment_due(356)
                 .build();
 
 
         var Card8 = Cards.builder()
                 .id(8L)
-                .card_num("451923631274614")
+                .card_num("4519236312374614")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts8)
                 .pin(903)
                 .cvc2(127)
@@ -1026,15 +1117,14 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.0f)
                 .cashBack(0.01f)
                 .annual_fee(50)
-                .savings_interest(0.0f)
                 .late_fee(29.00f)
                 .build();
 
         var User9 = Users.builder()
                 .id(12L)
                 .username("foldphone")
-                .first_name("group")
-                .last_name("To")
+                .first_name("Phyllis")
+                .last_name("Langley")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("889-7883 Ut Road")
@@ -1050,10 +1140,12 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(2030.00f)
                 .accountTypes(AccountType9)
                 .active(true)
+                .approved(true)
+                .confirmed(true)
                 .due_date(new Date())
-                .debt_interest(0.01f)
+                .debt_interest(0.06f)
                 .limit(180000)
-                .payment_due(new Date())
+                .payment_due(135)
                 .users(User9)
                 .build();
 
@@ -1062,6 +1154,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Card9 = Cards.builder()
                 .id(9L)
                 .card_num("666923738762800")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts9)
                 .pin(883)
                 .cvc2(777)
@@ -1081,7 +1174,6 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .savings_interest(0.03f)
                 .cashBack(0.0f)
                 .annual_fee(70.00f)
-                .savings_interest(0.0f)
                 .late_fee(10.00f)
                 .build();
 
@@ -1090,8 +1182,8 @@ public class H2DataBootstrap implements CommandLineRunner {
         var User10 = Users.builder()
                 .id(13L)
                 .username("BananaY")
-                .first_name("Rooth")
-                .last_name("Woth")
+                .first_name("Clinton")
+                .last_name("Steele")
                 .email("smoothstack@email.com")
                 .is_admin(false)
                 .address("Ap #901-4021 Commodo Av.")
@@ -1106,9 +1198,11 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .balance(11230.00f)
                 .accountTypes(AccountType10)
                 .active(true)
-                .payment_due(new Date())
+                .approved(true)
+                .confirmed(true)
+                .payment_due(214)
                 .due_date(new Date())
-                .debt_interest(0.01f)
+                .debt_interest(0.08f)
                 .limit(190000)
                 .users(User10)
                 .build();
@@ -1117,6 +1211,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Card10 = Cards.builder()
                 .id(10L)
                 .card_num("2319231168953886")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts10)
                 .pin(220)
                 .cvc2(447)
@@ -1128,6 +1223,66 @@ public class H2DataBootstrap implements CommandLineRunner {
         userRepository.save(User10);
         accountsRepository.save(Accounts10);
         cardsRepository.save(Card10);
+
+
+
+        var AccountType11 = AccountTypes.builder()
+                .id(11L)
+                .foodie_pts(0.06f)
+                .savings_interest(0.03f)
+                .cashBack(0.0f)
+                .annual_fee(70.00f)
+                .savings_interest(0.0f)
+                .late_fee(10.00f)
+                .build();
+
+
+
+        var User11 = Users.builder()
+                .id(14L)
+                .username("BdfdsY")
+                .first_name("Ori")
+                .last_name("Roberson")
+                .email("smoothstack@email.com")
+                .is_admin(false)
+                .address("Ap #901-4021 Commodo Av.")
+                .password(passwordEncoder.encode("dan123"))
+                .roles("USER")
+                .permissions("")
+                .build();
+
+
+        var Accounts11 = Accounts.builder()
+                .id(11L)
+                .balance(78230.00f)
+                .accountTypes(AccountType11)
+                .active(true)
+                .approved(true)
+                .confirmed(true)
+                .payment_due(356)
+                .due_date(new Date())
+                .debt_interest(0.09f)
+                .limit(190000)
+                .users(User11)
+                .build();
+
+
+        var Card11 = Cards.builder()
+                .id(11L)
+                .card_num("2355531168953886")
+                .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
+                .accounts(Accounts11)
+                .pin(220)
+                .cvc2(897)
+                .cvc1(996)
+                .build();
+
+
+        accountTypeRepository.save(AccountType11);
+        userRepository.save(User11);
+        accountsRepository.save(Accounts11);
+        cardsRepository.save(Card11);
+
 
 
 

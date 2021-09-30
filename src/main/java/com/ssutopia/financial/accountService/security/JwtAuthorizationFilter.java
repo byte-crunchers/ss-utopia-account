@@ -27,6 +27,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         // Read the Authorization header, where the JWT token should be
         String header = request.getHeader(JwtProperties.HEADER_STRING);
 
+
         // If header does not contain BEARER or is null delegate to Spring impl and exit
         if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
             chain.doFilter(request, response);
@@ -36,6 +37,17 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         // If header is present, try grab user principal from database and perform authorization
         Authentication authentication = getUsernamePasswordAuthentication(request);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods",
+                "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers",
+                "Content-Type, x-requested-with, X-Custom-Header, Request-Ajax");
+        if (request.getMethod().equalsIgnoreCase("OPTIONS")){
+//            response.setStatus(200);
+             return;
+        }
 
         // Continue filter execution
         chain.doFilter(request, response);

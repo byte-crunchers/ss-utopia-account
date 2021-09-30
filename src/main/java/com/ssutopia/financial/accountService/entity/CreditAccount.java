@@ -14,38 +14,58 @@ public class CreditAccount {
 
     private String card_num;
 
-    private int pin;
+    private String first_name;
+
+    private String last_name;
+
+    private String fullName;
+
+    private float balance;
+
+    private Date exp_date;
+
+    private int limit;
 
     private int cvc1;
 
     private int cvc2;
 
-    private Date exp_date;
+    private float payment_due;
 
-    private float balance;
-    private float debt_interest;
-    private Date payment_due;
     private Date due_date;
-    private int limit;
 
-    private String first_name;
 
-    private String last_name;
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
+    public CreditAccount(Long id, String card_num, String first_name,
+                         String last_name,float balance, Date exp_date, int limit, int cvc1, int cvc2
+    ,float payment_due,Date due_date) {
+        this.id = id;
+        this.card_num = card_num;
         this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
         this.last_name = last_name;
+        this.balance = balance;
+        this.exp_date = exp_date;
+        this.limit = limit;
+        this.cvc1 = cvc1;
+        this.cvc2 = cvc2;
+        this.payment_due = payment_due;
+        this.due_date = due_date;
+    }
+
+    public float getPayment_due() {
+        return payment_due;
+    }
+
+    public void setPayment_due(float payment_due) {
+        this.payment_due = payment_due;
+    }
+
+    public Date getDue_date() {
+        return due_date;
+    }
+
+    public void setDue_date(Date due_date) {
+        this.due_date = due_date;
     }
 
     public Long getId() {
@@ -64,12 +84,28 @@ public class CreditAccount {
         this.card_num = card_num;
     }
 
-    public int getPin() {
-        return pin;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setPin(int pin) {
-        this.pin = pin;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = first_name+" "+last_name;
     }
 
     public int getCvc1() {
@@ -102,30 +138,6 @@ public class CreditAccount {
 
     public void setBalance(float balance) {
         this.balance = balance;
-    }
-
-    public float getDebt_interest() {
-        return debt_interest;
-    }
-
-    public void setDebt_interest(float debt_interest) {
-        this.debt_interest = debt_interest;
-    }
-
-    public Date getPayment_due() {
-        return payment_due;
-    }
-
-    public void setPayment_due(Date payment_due) {
-        this.payment_due = payment_due;
-    }
-
-    public Date getDue_date() {
-        return due_date;
-    }
-
-    public void setDue_date(Date due_date) {
-        this.due_date = due_date;
     }
 
     public int getLimit() {

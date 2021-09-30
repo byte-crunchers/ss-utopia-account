@@ -15,19 +15,62 @@ public class DebitAccount {
 
     private String card_num;
 
-    private int pin;
-
-    private int cvc1;
-
-    private int cvc2;
-
-    private Date exp_date;
-
-    private float balance;
-
     private String first_name;
 
     private String last_name;
+
+    private float balance;
+
+    private int pin;
+
+    private Date exp_date;
+
+    private String fullName;
+
+    private float saving_interest;
+
+    private float annual_fee;
+
+
+
+
+    public DebitAccount(Long id, String card_num, String first_name, String last_name, float balance, int pin, Date exp_date
+    ,float saving_interest,float annual_fee) {
+        this.id = id;
+        this.card_num = card_num;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.balance = balance;
+        this.pin = pin;
+        this.exp_date = exp_date;
+        this.saving_interest = saving_interest;
+        this.annual_fee = annual_fee;
+
+    }
+
+    public float getSaving_interest() {
+        return saving_interest;
+    }
+
+    public void setSaving_interest(float saving_interest) {
+        this.saving_interest = saving_interest;
+    }
+
+    public float getAnnual_fee() {
+        return annual_fee;
+    }
+
+    public void setAnnual_fee(float annual_fee) {
+        this.annual_fee = annual_fee;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = first_name+last_name;
+    }
 
     public Long getId() {
         return id;
@@ -69,21 +112,6 @@ public class DebitAccount {
         this.pin = pin;
     }
 
-    public int getCvc1() {
-        return cvc1;
-    }
-
-    public void setCvc1(int cvc1) {
-        this.cvc1 = cvc1;
-    }
-
-    public int getCvc2() {
-        return cvc2;
-    }
-
-    public void setCvc2(int cvc2) {
-        this.cvc2 = cvc2;
-    }
 
     public Date getExp_date() {
         return exp_date;

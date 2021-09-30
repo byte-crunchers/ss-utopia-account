@@ -1,6 +1,7 @@
 package com.ssutopia.financial.accountService.controller;
 
 import com.ssutopia.financial.accountService.entity.Accounts;
+import com.ssutopia.financial.accountService.entity.UserAccount;
 import com.ssutopia.financial.accountService.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +24,8 @@ public class AccountController {
     //endpoints for get all accounts
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<Accounts>> getAllAccountTypes() {
-        List<Accounts> accounts = accountService.getAllAccounts();
+    public ResponseEntity<List<UserAccount>> getAllAccountTypes() {
+        List<UserAccount> accounts = accountService.getAllAccounts();
         if (accounts.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

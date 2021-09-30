@@ -8,11 +8,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -31,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
+
     @Override
     protected void configure(HttpSecurity http)throws Exception{
         http.cors().and().csrf().disable().
@@ -39,13 +46,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(),  this.userRepository))
                 .authorizeRequests()
                 //for Admin role to create card types
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(HttpMethod.POST, EndpointConstants.API_V_0_1_ACCOUNTTYPES).hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, EndpointConstants.API_V_0_1_ACCOUNTS).hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, EndpointConstants.API_V_0_1_CARDS+"/credit").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, EndpointConstants.API_V_0_1_CARDS+"/debit").hasRole("ADMIN")
                 //for Admin and user role to view card types
                 .antMatchers(HttpMethod.GET,EndpointConstants.API_V_0_1_ACCOUNTTYPES).hasAnyRole("ADMIN","USER")
-                .anyRequest().authenticated();  }
+                .anyRequest()
+                .authenticated();  }
     @Bean
     DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -53,6 +62,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailsService);
 
         return daoAuthenticationProvider;
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
+        configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
