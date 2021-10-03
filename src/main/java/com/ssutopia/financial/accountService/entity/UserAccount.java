@@ -14,7 +14,7 @@ public class UserAccount {
 
     private String last_name;
 
-    private Long Account_type;
+    private String Account_type;
 
     private float balance;
 
@@ -48,15 +48,11 @@ public class UserAccount {
         this.last_name = last_name;
     }
 
-    public long getAccount_type() {
+    public String getAccount_type() {
         return Account_type;
     }
 
-    public void setAccount_type(long account_type) {
-        Account_type = account_type;
-    }
-
-    public void setAccount_type(Long account_type) {
+    public void setAccount_type(String account_type) {
         Account_type = account_type;
     }
 

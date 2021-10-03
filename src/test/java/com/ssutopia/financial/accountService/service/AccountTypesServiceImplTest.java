@@ -24,16 +24,16 @@ public class AccountTypesServiceImplTest {
     @BeforeAll
     static void beforeAll(){
         account1 = AccountTypes.builder()
-                .id(1L)
+                .id("Basic Credit")
                 .build();
 
         account2 = AccountTypes.builder()
-                .id(2L)
+                .id("Platinum Credit")
                 .build();
 
 
         account3 = AccountTypes.builder()
-                .id(3L)
+                .id("Plus Credit")
                 .build();
 
     }

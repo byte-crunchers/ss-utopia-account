@@ -92,15 +92,22 @@ public class H2DataBootstrap implements CommandLineRunner {
     }
 
     private void loadAllDebitAccounts() throws ParseException {
-        var AccountType12 = AccountTypes.builder()
-                .id(12L)
+    	
+    	//only 1 type of debit card
+    	
+        var AccountType0 = AccountTypes.builder()
+                .id("Utopia Debit")
                 .foodie_pts(0.0f)
-                .savings_interest(0.01f)
-                .cashBack(0.00f)
-                .annual_fee(50)
-                .late_fee(00.00f)
+                .savings_interest(0.0f)
+                .cashBack(0.0f)
+                .annual_fee(0)
+                .late_fee(0.0f)
                 .build();
-
+        accountTypeRepository.save(AccountType0);
+        
+        
+        //checking account instances:
+        
         var User12 = Users.builder()
                 .id(15L)
                 .username("Lisandra")
@@ -117,7 +124,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts12 = Accounts.builder()
                 .id(12L)
                 .balance(9009.00f)
-                .accountTypes(AccountType12)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -136,20 +143,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc2(756)
                 .pin(567)
                 .build();
-        accountTypeRepository.save(AccountType12);
         userRepository.save(User12);
         accountsRepository.save(Accounts12);
         cardsRepository.save(Card12);
 
-
-        var AccountType13 = AccountTypes.builder()
-                .id(13L)
-                .foodie_pts(0.00f)
-                .savings_interest(0.02f)
-                .cashBack(0.0f)
-                .annual_fee(50)
-                .late_fee(0.00f)
-                .build();
 
         var User13 = Users.builder()
                 .id(16L)
@@ -167,7 +164,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts13 = Accounts.builder()
                 .id(13L)
                 .balance(3230.00f)
-                .accountTypes(AccountType13)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -187,19 +184,9 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc2(987)
                 .cvc1(346)
                 .build();
-        accountTypeRepository.save(AccountType13);
         userRepository.save(User13);
         accountsRepository.save(Accounts13);
         cardsRepository.save(Card13);
-
-        var AccountType14 = AccountTypes.builder()
-                .id(14L)
-                .foodie_pts(0.00f)
-                .savings_interest(0.01f)
-                .cashBack(0.00f)
-                .annual_fee(60)
-                .late_fee(0.00f)
-                .build();
 
 
         var User14 = Users.builder()
@@ -219,7 +206,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts14 = Accounts.builder()
                 .id(14L)
                 .balance(9230.00f)
-                .accountTypes(AccountType14)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -239,20 +226,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc2(447)
                 .cvc1(346)
                 .build();
-        accountTypeRepository.save(AccountType14);
         userRepository.save(User14);
         accountsRepository.save(Accounts14);
         cardsRepository.save(Card14);
 
-        var AccountType15 = AccountTypes.builder()
-                .id(15L)
-                .foodie_pts(0.0f)
-                .savings_interest(0.01f)
-                .cashBack(0.0f)
-                .annual_fee(50)
-
-                .late_fee(0.00f)
-                .build();
 
         var User15 = Users.builder()
                 .id(18L)
@@ -272,7 +249,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts15 = Accounts.builder()
                 .id(15L)
                 .balance(9230.00f)
-                .accountTypes(AccountType15)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -294,22 +271,9 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc1(326)
                 .build();
 
-        accountTypeRepository.save(AccountType15);
         userRepository.save(User15);
         accountsRepository.save(Accounts15);
         cardsRepository.save(Card15);
-
-
-
-        var AccountType16 = AccountTypes.builder()
-                .id(16L)
-                .foodie_pts(0.00f)
-                .savings_interest(0.0f)
-                .cashBack(0.0f)
-                .annual_fee(0.00f)
-
-                .late_fee(0.00f)
-                .build();
 
 
 
@@ -330,7 +294,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts16 = Accounts.builder()
                 .id(16L)
                 .balance(8230.00f)
-                .accountTypes(AccountType16)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -352,21 +316,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
-        accountTypeRepository.save(AccountType16);
         userRepository.save(User16);
         accountsRepository.save(Accounts16);
         cardsRepository.save(Card16);
 
-
-
-        var AccountType17 = AccountTypes.builder()
-                .id(17L)
-                .foodie_pts(0.0f)
-                .savings_interest(0.00f)
-                .cashBack(0.0f)
-                .annual_fee(0)
-                .late_fee(0.00f)
-                .build();
 
         var User17 = Users.builder()
                 .id(20L)
@@ -384,7 +337,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts17 = Accounts.builder()
                 .id(17L)
                 .balance(3004f)
-                .accountTypes(AccountType17)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -404,20 +357,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .pin(547)
                 .exp_date(new Date())
                 .build();
-        accountTypeRepository.save(AccountType17);
         userRepository.save(User17);
         accountsRepository.save(Accounts17);
         cardsRepository.save(Card17);
 
-
-        var AccountType18 = AccountTypes.builder()
-                .id(18L)
-                .foodie_pts(0.0f)
-                .savings_interest(0.01f)
-                .cashBack(0.0f)
-                .annual_fee(50)
-                .late_fee(0.00f)
-                .build();
 
         var User18 = Users.builder()
                 .id(21L)
@@ -435,7 +378,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts18 = Accounts.builder()
                 .id(18L)
                 .balance(6300.00f)
-                .accountTypes(AccountType18)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -455,19 +398,9 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc2(467)
                 .cvc1(346)
                 .build();
-        accountTypeRepository.save(AccountType18);
         userRepository.save(User18);
         accountsRepository.save(Accounts18);
         cardsRepository.save(Card18);
-
-        var AccountType19 = AccountTypes.builder()
-                .id(19L)
-                .foodie_pts(0.0f)
-                .savings_interest(0.01f)
-                .cashBack(0.0f)
-                .annual_fee(60)
-                .late_fee(0.00f)
-                .build();
 
 
         var User19 = Users.builder()
@@ -487,7 +420,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts19 = Accounts.builder()
                 .id(19L)
                 .balance(6230.00f)
-                .accountTypes(AccountType19)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -507,19 +440,9 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc2(127)
                 .cvc1(306)
                 .build();
-        accountTypeRepository.save(AccountType19);
         userRepository.save(User19);
         accountsRepository.save(Accounts19);
         cardsRepository.save(Card19);
-
-        var AccountType20 = AccountTypes.builder()
-                .id(20L)
-                .foodie_pts(0.0f)
-                .savings_interest(0.01f)
-                .cashBack(0.0f)
-                .annual_fee(50)
-                .late_fee(0.00f)
-                .build();
 
         var User20 = Users.builder()
                 .id(23L)
@@ -539,7 +462,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts20 = Accounts.builder()
                 .id(20L)
                 .balance(20030.00f)
-                .accountTypes(AccountType19)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -561,21 +484,9 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc1(326)
                 .build();
 
-        accountTypeRepository.save(AccountType20);
         userRepository.save(User20);
         accountsRepository.save(Accounts20);
         cardsRepository.save(Card20);
-
-
-
-        var AccountType21 = AccountTypes.builder()
-                .id(21L)
-                .foodie_pts(0.0f)
-                .savings_interest(0.0f)
-                .cashBack(0.0f)
-                .annual_fee(0.00f)
-                .late_fee(0.00f)
-                .build();
 
 
 
@@ -596,7 +507,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts21 = Accounts.builder()
                 .id(21L)
                 .balance(11230.00f)
-                .accountTypes(AccountType21)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -617,21 +528,9 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
-        accountTypeRepository.save(AccountType21);
         userRepository.save(User21);
         accountsRepository.save(Accounts21);
         cardsRepository.save(Card21);
-
-        var AccountType22 = AccountTypes.builder()
-                .id(22L)
-                .foodie_pts(0.0f)
-                .savings_interest(0.0f)
-                .cashBack(0.0f)
-                .annual_fee(0.00f)
-                .late_fee(0.00f)
-                .build();
-
-
 
         var User22 = Users.builder()
                 .id(25L)
@@ -650,7 +549,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts22 = Accounts.builder()
                 .id(22L)
                 .balance(11230.00f)
-                .accountTypes(AccountType22)
+                .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -671,7 +570,6 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
-        accountTypeRepository.save(AccountType22);
         userRepository.save(User22);
         accountsRepository.save(Accounts22);
         cardsRepository.save(Card22);
@@ -680,19 +578,56 @@ public class H2DataBootstrap implements CommandLineRunner {
     }
 
     private void loadAllCreditAccounts() throws ParseException {
-        var AccountType1 = AccountTypes.builder()
-                .id(1L)
-                .foodie_pts(0.06f)
-                .savings_interest(0.00f)
-                .cashBack(0.03f)
-                .annual_fee(100)
 
+    	//4 types of credit card accounts
+    	
+        var AccountType1 = AccountTypes.builder()
+                .id("Basic Credit")
+                .foodie_pts(0.0f)
+                .savings_interest(0.00f)
+                .cashBack(0.01f)
+                .annual_fee(0)
                 .late_fee(29.00f)
                 .build();
 
+        var AccountType2 = AccountTypes.builder()
+                .id("Platinum Credit")
+                .foodie_pts(0.00f)
+                .savings_interest(0.00f)
+                .cashBack(0.06f)
+                .annual_fee(200)
+                .late_fee(29.00f)
+                .build();
+
+        var AccountType3 = AccountTypes.builder()
+                .id("Plus Credit")
+                .foodie_pts(0.00f)
+                .savings_interest(0.00f)
+                .cashBack(0.03f)
+                .annual_fee(50)
+                .late_fee(29.00f)
+                .build();
+
+        var AccountType4 = AccountTypes.builder()
+                .id("Foodies Credit")
+                .foodie_pts(0.06f)
+                .savings_interest(0.0f)
+                .cashBack(0.02f)
+                .annual_fee(0)
+                .late_fee(29.00f)
+                .build();
+
+        accountTypeRepository.save(AccountType1);
+        accountTypeRepository.save(AccountType2);
+        accountTypeRepository.save(AccountType3);
+        accountTypeRepository.save(AccountType4);
+        
+        
+        //credit account instances:
+        
         var User1 = Users.builder()
                 .id(4L)
-                .username("dan")
+                .username("dan2")
                 .first_name("Timothy")
                 .last_name("Mcdaniel")
                 .email("smoothstack@email.com")
@@ -727,21 +662,12 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .pin(567)
                 .exp_date(simpleDateFormat.parse(expDate))
                 .build();
-        accountTypeRepository.save(AccountType1);
+        
         userRepository.save(User1);
         accountsRepository.save(Accounts1);
         cardsRepository.save(Card1);
 
 
-        var AccountType2 = AccountTypes.builder()
-                .id(2L)
-                .foodie_pts(0.00f)
-                .savings_interest(0.00f)
-                .cashBack(0.03f)
-                .annual_fee(100)
-
-                .late_fee(29.00f)
-                .build();
 
         var User2 = Users.builder()
                 .id(5L)
@@ -781,19 +707,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc2(467)
                 .cvc1(346)
                 .build();
-        accountTypeRepository.save(AccountType2);
+        
         userRepository.save(User2);
         accountsRepository.save(Accounts2);
         cardsRepository.save(Card2);
-
-        var AccountType3 = AccountTypes.builder()
-                .id(3L)
-                .foodie_pts(0.00f)
-                .savings_interest(0.00f)
-                .cashBack(0.00f)
-                .annual_fee(100)
-                .late_fee(0.00f)
-                .build();
 
 
         var User3 = Users.builder()
@@ -834,19 +751,9 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc2(447)
                 .cvc1(346)
                 .build();
-        accountTypeRepository.save(AccountType3);
         userRepository.save(User3);
         accountsRepository.save(Accounts3);
         cardsRepository.save(Card3);
-
-        var AccountType4 = AccountTypes.builder()
-                .id(4L)
-                .foodie_pts(0.06f)
-                .savings_interest(0.03f)
-                .cashBack(0.03f)
-                .annual_fee(100)
-                .late_fee(29.00f)
-                .build();
 
         var User4 = Users.builder()
                 .id(7L)
@@ -889,21 +796,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc1(326)
                 .build();
 
-        accountTypeRepository.save(AccountType4);
         userRepository.save(User4);
         accountsRepository.save(Accounts4);
         cardsRepository.save(Card4);
 
-
-
-        var AccountType5 = AccountTypes.builder()
-                .id(5L)
-                .foodie_pts(0.00f)
-                .savings_interest(0.03f)
-                .cashBack(0.0f)
-                .annual_fee(50.00f)
-                .late_fee(0.00f)
-                .build();
 
 
 
@@ -924,7 +820,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts5 = Accounts.builder()
                 .id(5L)
                 .balance(18230.00f)
-                .accountTypes(AccountType4)
+                .accountTypes(AccountType1)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -935,7 +831,6 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .users(User5)
 
                 .build();
-
 
         var Card5 = Cards.builder()
                 .id(5L)
@@ -948,21 +843,11 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
-        accountTypeRepository.save(AccountType5);
         userRepository.save(User5);
         accountsRepository.save(Accounts5);
         cardsRepository.save(Card5);
 
 
-
-        var AccountType6 = AccountTypes.builder()
-                .id(6L)
-                .foodie_pts(0.03f)
-                .savings_interest(0.00f)
-                .cashBack(0.01f)
-                .annual_fee(60)
-                .late_fee(29.00f)
-                .build();
 
         var User6 = Users.builder()
                 .id(9L)
@@ -980,7 +865,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts6 = Accounts.builder()
                 .id(6L)
                 .balance(9004f)
-                .accountTypes(AccountType6)
+                .accountTypes(AccountType2)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -1001,20 +886,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .pin(547)
                 .exp_date(new Date())
                 .build();
-        accountTypeRepository.save(AccountType6);
         userRepository.save(User6);
         accountsRepository.save(Accounts6);
         cardsRepository.save(Card6);
 
-
-        var AccountType7 = AccountTypes.builder()
-                .id(7L)
-                .foodie_pts(0.04f)
-                .savings_interest(0.00f)
-                .cashBack(0.02f)
-                .annual_fee(0)
-                .late_fee(29.00f)
-                .build();
 
         var User7 = Users.builder()
                 .id(10L)
@@ -1032,7 +907,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts7 = Accounts.builder()
                 .id(7L)
                 .balance(2300.00f)
-                .accountTypes(AccountType7)
+                .accountTypes(AccountType3)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -1053,19 +928,9 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc2(467)
                 .cvc1(346)
                 .build();
-        accountTypeRepository.save(AccountType7);
         userRepository.save(User7);
         accountsRepository.save(Accounts7);
         cardsRepository.save(Card7);
-
-        var AccountType8 = AccountTypes.builder()
-                .id(8L)
-                .foodie_pts(0.02f)
-                .savings_interest(0.00f)
-                .cashBack(0.015f)
-                .annual_fee(0)
-                .late_fee(30.00f)
-                .build();
 
 
         var User8 = Users.builder()
@@ -1085,7 +950,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts8 = Accounts.builder()
                 .id(8L)
                 .balance(4230.00f)
-                .accountTypes(AccountType8)
+                .accountTypes(AccountType4)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -1106,19 +971,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc2(127)
                 .cvc1(306)
                 .build();
-        accountTypeRepository.save(AccountType8);
         userRepository.save(User8);
         accountsRepository.save(Accounts8);
         cardsRepository.save(Card8);
 
-        var AccountType9 = AccountTypes.builder()
-                .id(9L)
-                .foodie_pts(0.07f)
-                .savings_interest(0.0f)
-                .cashBack(0.01f)
-                .annual_fee(50)
-                .late_fee(29.00f)
-                .build();
 
         var User9 = Users.builder()
                 .id(12L)
@@ -1138,7 +994,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts9 = Accounts.builder()
                 .id(9L)
                 .balance(2030.00f)
-                .accountTypes(AccountType9)
+                .accountTypes(AccountType1)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -1161,21 +1017,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .cvc1(326)
                 .build();
 
-        accountTypeRepository.save(AccountType9);
         userRepository.save(User9);
         accountsRepository.save(Accounts9);
         cardsRepository.save(Card9);
 
-
-
-        var AccountType10 = AccountTypes.builder()
-                .id(10L)
-                .foodie_pts(0.06f)
-                .savings_interest(0.03f)
-                .cashBack(0.0f)
-                .annual_fee(70.00f)
-                .late_fee(10.00f)
-                .build();
 
 
 
@@ -1196,7 +1041,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts10 = Accounts.builder()
                 .id(10L)
                 .balance(11230.00f)
-                .accountTypes(AccountType10)
+                .accountTypes(AccountType2)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -1219,22 +1064,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
-        accountTypeRepository.save(AccountType10);
         userRepository.save(User10);
         accountsRepository.save(Accounts10);
         cardsRepository.save(Card10);
 
-
-
-        var AccountType11 = AccountTypes.builder()
-                .id(11L)
-                .foodie_pts(0.06f)
-                .savings_interest(0.03f)
-                .cashBack(0.0f)
-                .annual_fee(70.00f)
-                .savings_interest(0.0f)
-                .late_fee(10.00f)
-                .build();
 
 
 
@@ -1255,7 +1088,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         var Accounts11 = Accounts.builder()
                 .id(11L)
                 .balance(78230.00f)
-                .accountTypes(AccountType11)
+                .accountTypes(AccountType3)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
@@ -1278,7 +1111,6 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
-        accountTypeRepository.save(AccountType11);
         userRepository.save(User11);
         accountsRepository.save(Accounts11);
         cardsRepository.save(Card11);

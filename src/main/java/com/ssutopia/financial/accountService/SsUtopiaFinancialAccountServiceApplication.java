@@ -17,22 +17,4 @@ public class SsUtopiaFinancialAccountServiceApplication {
         SpringApplication.run(SsUtopiaFinancialAccountServiceApplication.class, args);
     }
 
-    @Bean
-    public ServletWebServerFactory servletContainer() {
-        // Enable SSL Trafic
-        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
-            @Override
-            protected void postProcessContext(Context context) {
-                SecurityConstraint securityConstraint = new SecurityConstraint();
-                securityConstraint.setUserConstraint("CONFIDENTIAL");
-                SecurityCollection collection = new SecurityCollection();
-                collection.addPattern("/*");
-                securityConstraint.addCollection(collection);
-                context.addConstraint(securityConstraint);
-            }
-        };
-
-        return tomcat;
-    }
-
 }

@@ -16,8 +16,7 @@ import javax.persistence.*;
 @Table(name="account_types")
 public class AccountTypes {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Builder.Default
     private float late_fee = 0.0f;
