@@ -62,7 +62,7 @@ public class AccountTypesControllerSecurityTests {
 
 
     AccountTypes mockAccountTypes = AccountTypes.builder()
-            .id(1L)
+            .id("Utopia Debit2")
 
 
             .build();

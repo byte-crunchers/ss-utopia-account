@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -27,7 +28,7 @@ public class Cards {
 
     private int cvc2;
 
-    private Date exp_date;
+    private LocalDate exp_date;
 
     @ManyToOne
     @JoinColumn(

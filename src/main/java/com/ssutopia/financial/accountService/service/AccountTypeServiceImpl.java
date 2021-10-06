@@ -2,6 +2,7 @@ package com.ssutopia.financial.accountService.service;
 
 import com.ssutopia.financial.accountService.dto.AccountTypesDto;
 import com.ssutopia.financial.accountService.entity.AccountTypes;
+import com.ssutopia.financial.accountService.exception.DuplicateAccountNameException;
 import com.ssutopia.financial.accountService.exception.NoSuchAccountTypeException;
 import com.ssutopia.financial.accountService.repository.AccountTypeRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +28,12 @@ public class AccountTypeServiceImpl implements AccountTypeService {
     public AccountTypes createNewAccount_type(AccountTypesDto account_typeDto) {
         validateDto(account_typeDto);
 
-//        account_typeRepository.findByAccountName(account_typeDto.getAccountName()).
-//                ifPresent(account_type -> {
-//                    throw new DuplicateAccountNameException(account_typeDto.getAccountName());
-//                });
+        account_typeRepository.findById(account_typeDto.getId()).
+                ifPresent(account_type -> {
+                    throw new DuplicateAccountNameException(account_typeDto.getId());
+                });
         var account_type = AccountTypes.builder()
-
+              .id(account_typeDto.getId())
               .annual_fee(account_typeDto.getAnnual_fee())
                 .cashBack(account_typeDto.getCashBack())
                 .late_fee(account_typeDto.getLate_fee())
@@ -44,7 +45,7 @@ public class AccountTypeServiceImpl implements AccountTypeService {
     }
 
     @Override
-    public AccountTypes getAccountTypeById(Long id) {
+    public AccountTypes getAccountTypeById(String id) {
         return account_typeRepository.findById(id)
                 .orElseThrow(()->new NoSuchAccountTypeException(id));
     }

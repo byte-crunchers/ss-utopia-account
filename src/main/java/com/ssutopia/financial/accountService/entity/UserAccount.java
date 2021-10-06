@@ -14,7 +14,9 @@ public class UserAccount {
 
     private String last_name;
 
-    private Long Account_type;
+    private String fullName;
+
+    private String Account_type;
 
     private float balance;
 
@@ -23,6 +25,18 @@ public class UserAccount {
     private float saving_interest;
 
     private float annual_fee;
+
+    public UserAccount(Long id, String first_name, String last_name, String account_type, float balance, float debt_interest, float saving_interest, float annual_fee) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.fullName = first_name+ " "+last_name;
+        this.Account_type = account_type;
+        this.balance = balance;
+        this.debt_interest = debt_interest;
+        this.saving_interest = saving_interest;
+        this.annual_fee = annual_fee;
+    }
 
     public Long getId() {
         return id;
@@ -40,6 +54,14 @@ public class UserAccount {
         this.first_name = first_name;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public String getLast_name() {
         return last_name;
     }
@@ -48,15 +70,12 @@ public class UserAccount {
         this.last_name = last_name;
     }
 
-    public long getAccount_type() {
+    public String getAccount_type() {
         return Account_type;
     }
 
-    public void setAccount_type(long account_type) {
-        Account_type = account_type;
-    }
 
-    public void setAccount_type(Long account_type) {
+    public void setAccount_type(String account_type) {
         Account_type = account_type;
     }
 

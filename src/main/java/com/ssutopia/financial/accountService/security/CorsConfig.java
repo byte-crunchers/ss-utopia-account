@@ -13,3 +13,10 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD");
     }
 }
+
+
+
+
+//Yesterday I work on api to collect account
+// information from different tables, today my plan is to implement its UI.
+// so far no blocker

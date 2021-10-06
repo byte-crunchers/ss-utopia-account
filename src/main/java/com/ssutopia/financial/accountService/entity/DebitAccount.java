@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -23,7 +24,7 @@ public class DebitAccount {
 
     private int pin;
 
-    private Date exp_date;
+    private LocalDate exp_date;
 
     private String fullName;
 
@@ -34,13 +35,14 @@ public class DebitAccount {
 
 
 
-    public DebitAccount(Long id, String card_num, String first_name, String last_name, float balance, int pin, Date exp_date
+    public DebitAccount(Long id, String card_num, String first_name, String last_name, float balance, int pin, LocalDate exp_date
     ,float saving_interest,float annual_fee) {
         this.id = id;
         this.card_num = card_num;
         this.first_name = first_name;
         this.last_name = last_name;
         this.balance = balance;
+        this.fullName = first_name+ " "+last_name;
         this.pin = pin;
         this.exp_date = exp_date;
         this.saving_interest = saving_interest;
@@ -69,7 +71,7 @@ public class DebitAccount {
     }
 
     public void setFullName(String fullName) {
-        this.fullName = first_name+last_name;
+        this.fullName = fullName;
     }
 
     public Long getId() {
@@ -113,11 +115,11 @@ public class DebitAccount {
     }
 
 
-    public Date getExp_date() {
+    public LocalDate getExp_date() {
         return exp_date;
     }
 
-    public void setExp_date(Date exp_date) {
+    public void setExp_date(LocalDate exp_date) {
         this.exp_date = exp_date;
     }
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface AccountTypeRepository extends JpaRepository<AccountTypes,Long> {
+public interface AccountTypeRepository extends JpaRepository<AccountTypes,String> {
 //    @Query("select u from Account_type u where u.account_name = ?1")
 //    Optional<AccountTypes> findByAccountName(String account_name);
 }
