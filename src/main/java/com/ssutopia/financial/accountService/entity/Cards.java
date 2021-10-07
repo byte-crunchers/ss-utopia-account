@@ -17,10 +17,7 @@ import java.util.Date;
 @Builder
 public class Cards {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String card_num;
+    private Long card_num;
 
     private int pin;
 
