@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface AccountTypeRepository extends JpaRepository<AccountTypes,Long> {
 //    @Query("select u from Account_type u where u.account_name = ?1")
 //    Optional<AccountTypes> findByAccountName(String account_name);
+	
+	public AccountTypes getById(String id);
 }

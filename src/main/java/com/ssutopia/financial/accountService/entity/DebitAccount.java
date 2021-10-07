@@ -11,9 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class DebitAccount {
-    private Long id;
 
-    private String card_num;
+    private Long card_num;
 
     private String first_name;
 
@@ -34,9 +33,8 @@ public class DebitAccount {
 
 
 
-    public DebitAccount(Long id, String card_num, String first_name, String last_name, float balance, int pin, Date exp_date
+    public DebitAccount(Long card_num, String first_name, String last_name, float balance, int pin, Date exp_date
     ,float saving_interest,float annual_fee) {
-        this.id = id;
         this.card_num = card_num;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -72,9 +70,6 @@ public class DebitAccount {
         this.fullName = first_name+last_name;
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public String getFirst_name() {
         return first_name;
@@ -92,15 +87,12 @@ public class DebitAccount {
         this.last_name = last_name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getCard_num() {
+    public Long getCard_num() {
         return card_num;
     }
 
-    public void setCard_num(String card_num) {
+    public void setCard_num(Long card_num) {
         this.card_num = card_num;
     }
 

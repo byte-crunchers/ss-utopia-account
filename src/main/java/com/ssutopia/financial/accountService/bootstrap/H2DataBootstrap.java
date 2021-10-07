@@ -41,16 +41,19 @@ public class H2DataBootstrap implements CommandLineRunner {
         }
     }
 
-
     private void loadUser(){
 
         var User1 = Users.builder()
                 .id(1L)
                 .username("dan")
-                .first_name("Jim")
+                .first_name("Dan")
                 .last_name("Wo")
                 .address( "529-5103 Hendrerit. Rd.")
                 .email("smoothstack@email.com")
+                .city("Miami Beach")
+                .state("FL")
+                .zip(33139)
+                .phone(7778889999L)
                 .is_admin(false)
                 .password(passwordEncoder.encode("dan123"))
                 .roles("USER")
@@ -58,6 +61,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
         userRepository.save(User1);
 
+        
         var User2 = Users.builder()
                 .id(2L)
                 .username("admin")
@@ -135,8 +139,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
         var Card12 = Cards.builder()
-                .id(12L)
-                .card_num("999923393855048")
+                .card_num(9999233938550483L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts12)
                 .cvc1(823)
@@ -176,8 +179,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card13 = Cards.builder()
-                .id(13L)
-                .card_num("998923582648170")
+                .card_num(998923582648170L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts13)
                 .pin(123)
@@ -218,8 +220,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card14 = Cards.builder()
-                .id(14L)
-                .card_num("999923631274614")
+                .card_num(999923631274614L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts14)
                 .pin(963)
@@ -262,8 +263,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card15 = Cards.builder()
-                .id(15L)
-                .card_num("888923738762800")
+                .card_num(888923738762800L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts15)
                 .pin(213)
@@ -306,8 +306,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card16 = Cards.builder()
-                .id(16L)
-                .card_num("5566231168953886")
+                .card_num(5566231168953886L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts16)
                 .pin(200)
@@ -348,8 +347,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
         var Card17 = Cards.builder()
-                .id(17L)
-                .card_num("441923393855048")
+                .card_num(441923393855048L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts17)
                 .cvc1(603)
@@ -390,8 +388,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card18 = Cards.builder()
-                .id(18L)
-                .card_num("231923112648170")
+                .card_num(231923112648170L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts18)
                 .pin(123)
@@ -432,8 +429,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card19 = Cards.builder()
-                .id(19L)
-                .card_num("771923631274614")
+                .card_num(771923631274614L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts19)
                 .pin(903)
@@ -475,8 +471,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card20 = Cards.builder()
-                .id(20L)
-                .card_num("656923738762800")
+                .card_num(656923738762800L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts20)
                 .pin(883)
@@ -518,8 +513,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card21 = Cards.builder()
-                .id(21L)
-                .card_num("4419231168953886")
+                .card_num(4419231168953886L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts21)
                 .pin(600)
@@ -546,6 +540,10 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
+
+        // add 1 test debit card for user dan
+        Users dan = userRepository.findByUsername("dan");
+        
         var Accounts22 = Accounts.builder()
                 .id(22L)
                 .balance(11230.00f)
@@ -553,15 +551,14 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .active(true)
                 .approved(true)
                 .confirmed(true)
-                .debt_interest(0.05f)
-                .limit(190000)
-                .users(User22)
+                .debt_interest(0.0f)
+                .limit(0)
+                .users(dan)
                 .build();
 
 
         var Card22 = Cards.builder()
-                .id(22L)
-                .card_num("4419231168953886")
+                .card_num(4419231168957382L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts22)
                 .pin(600)
@@ -654,8 +651,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
         var Card1 = Cards.builder()
-                .id(1L)
-                .card_num("231923393855048")
+                .card_num(2319233938550499L)
                 .accounts(Accounts1)
                 .cvc1(123)
                 .cvc2(456)
@@ -699,8 +695,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card2 = Cards.builder()
-                .id(2L)
-                .card_num("231923582648170")
+                .card_num(231923582648170L)
                 .accounts(Accounts2)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .pin(123)
@@ -743,8 +738,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card3 = Cards.builder()
-                .id(3L)
-                .card_num("2319236312374614")
+                .card_num(2319236312374614L)
                 .accounts(Accounts3)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .pin(223)
@@ -787,8 +781,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card4 = Cards.builder()
-                .id(4L)
-                .card_num("231923738762800")
+                .card_num(231923738762800L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts4)
                 .pin(213)
@@ -833,8 +826,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
         var Card5 = Cards.builder()
-                .id(5L)
-                .card_num("2319231168953886")
+                .card_num(2319231168953886L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts5)
                 .pin(200)
@@ -877,8 +869,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
         var Card6 = Cards.builder()
-                .id(6L)
-                .card_num("231923393855048")
+                .card_num(231923393855048L)
                 .accounts(Accounts6)
                 .exp_date(simpleDateFormat.parse(expDate))
                 .cvc1(103)
@@ -920,8 +911,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card7 = Cards.builder()
-                .id(7L)
-                .card_num("2319231126481670")
+                .card_num(2319231126481670L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts7)
                 .pin(123)
@@ -963,8 +953,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card8 = Cards.builder()
-                .id(8L)
-                .card_num("4519236312374614")
+                .card_num(4519236312374614L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts8)
                 .pin(903)
@@ -990,7 +979,9 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
 
-
+        // add 3 test credit cards for user dan
+        Users dan = userRepository.findByUsername("dan");
+        
         var Accounts9 = Accounts.builder()
                 .id(9L)
                 .balance(2030.00f)
@@ -999,17 +990,16 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .approved(true)
                 .confirmed(true)
                 .due_date(new Date())
-                .debt_interest(0.06f)
-                .limit(180000)
+                .debt_interest(0.015f)
+                .limit(5000)
                 .payment_due(135)
-                .users(User9)
+                .users(dan)
                 .build();
 
 
 
         var Card9 = Cards.builder()
-                .id(9L)
-                .card_num("666923738762800")
+                .card_num(666923738762800L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts9)
                 .pin(883)
@@ -1040,22 +1030,21 @@ public class H2DataBootstrap implements CommandLineRunner {
 
         var Accounts10 = Accounts.builder()
                 .id(10L)
-                .balance(11230.00f)
+                .balance(1230.00f)
                 .accountTypes(AccountType2)
-                .active(true)
+                .active(false)
                 .approved(true)
                 .confirmed(true)
                 .payment_due(214)
                 .due_date(new Date())
-                .debt_interest(0.08f)
-                .limit(190000)
-                .users(User10)
+                .debt_interest(0.018f)
+                .limit(9000)
+                .users(dan)
                 .build();
 
 
         var Card10 = Cards.builder()
-                .id(10L)
-                .card_num("2319231168953886")
+                .card_num(2319231168953773L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts10)
                 .pin(220)
@@ -1087,22 +1076,21 @@ public class H2DataBootstrap implements CommandLineRunner {
 
         var Accounts11 = Accounts.builder()
                 .id(11L)
-                .balance(78230.00f)
+                .balance(7230.00f)
                 .accountTypes(AccountType3)
                 .active(true)
                 .approved(true)
                 .confirmed(true)
-                .payment_due(356)
+                .payment_due(0)
                 .due_date(new Date())
-                .debt_interest(0.09f)
-                .limit(190000)
-                .users(User11)
+                .debt_interest(0.017f)
+                .limit(19000)
+                .users(dan)
                 .build();
 
 
         var Card11 = Cards.builder()
-                .id(11L)
-                .card_num("2355531168953886")
+                .card_num(2355531168951029L)
                 .exp_date(new SimpleDateFormat("MM/yyyy").parse(sDate1))
                 .accounts(Accounts11)
                 .pin(220)
@@ -1114,8 +1102,6 @@ public class H2DataBootstrap implements CommandLineRunner {
         userRepository.save(User11);
         accountsRepository.save(Accounts11);
         cardsRepository.save(Card11);
-
-
 
 
     }
