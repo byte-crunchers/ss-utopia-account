@@ -52,8 +52,18 @@ public class CardController {
     
     // view card status by user id
     @GetMapping(value = "/credit/{id}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<CardStatusDto>> getCreditCardByUserId(@PathVariable Long id) {
-        List<CardStatusDto> cards = cardService.getCardsByUserId(id);
+    public ResponseEntity<List<CardStatusDto>> getAllCardsByUserId(@PathVariable Long id) {
+        List<CardStatusDto> cards = cardService.getAllCardsByUserId(id);
+        if (cards.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(cards);
+    }
+
+    // get all debit cards by user id
+    @GetMapping(value = "/debit/{id}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<CardStatusDto>> getDebitCardsByUserId(@PathVariable Long id) {
+        List<CardStatusDto> cards = cardService.getDebitCardsByUserId(id);
         if (cards.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

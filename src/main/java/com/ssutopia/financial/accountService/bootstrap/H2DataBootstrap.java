@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Component
@@ -29,12 +30,17 @@ public class H2DataBootstrap implements CommandLineRunner {
     String sDate1="12/2025";
     String expDate = "11/25"; // for example
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/yy");
-
+    Date dueDate;
 
     @Override
     public void run(String... args) throws Exception {
         if(accountTypeRepository.count()==0){
 
+        	Calendar c = Calendar.getInstance();
+        	c.setTime(new Date()); 
+        	c.add(Calendar.DATE, 30);
+        	dueDate = c.getTime();
+        	
             loadUser();
             loadAllCreditAccounts();
             loadAllDebitAccounts();
@@ -546,7 +552,7 @@ public class H2DataBootstrap implements CommandLineRunner {
         
         var Accounts22 = Accounts.builder()
                 .id(22L)
-                .balance(11230.00f)
+                .balance(60000.00f)
                 .accountTypes(AccountType0)
                 .active(true)
                 .approved(true)
@@ -989,7 +995,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .active(true)
                 .approved(true)
                 .confirmed(true)
-                .due_date(new Date())
+                .due_date(dueDate)
                 .debt_interest(0.015f)
                 .limit(5000)
                 .payment_due(135)
@@ -1036,7 +1042,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .approved(true)
                 .confirmed(true)
                 .payment_due(214)
-                .due_date(new Date())
+                .due_date(dueDate)
                 .debt_interest(0.018f)
                 .limit(9000)
                 .users(dan)
@@ -1082,7 +1088,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .approved(true)
                 .confirmed(true)
                 .payment_due(0)
-                .due_date(new Date())
+                .due_date(dueDate)
                 .debt_interest(0.017f)
                 .limit(19000)
                 .users(dan)

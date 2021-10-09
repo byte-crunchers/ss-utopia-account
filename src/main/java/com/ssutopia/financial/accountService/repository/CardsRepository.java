@@ -39,4 +39,13 @@ public interface CardsRepository extends CrudRepository<Cards,Long> {
     )
     List<CardStatusDto> findCardsByUserId(Long id);
 
+    @Query(
+            "select new com.ssutopia.financial.accountService.dto.CardStatusDto" +
+                    "( a.id, c.card_num, a.accountTypes.id, a.balance, a.payment_due, a.debt_interest, " +
+                    "a.limit, a.due_date, c.exp_date, a.active, a.approved, a.confirmed )" +
+                    "from Cards c, Accounts a where c.accounts = a " +
+                    "and a.users.id = ?1 and a.accountTypes.id = 'Utopia Debit'"
+    )
+    List<CardStatusDto> findDebitCardsByUserId(Long id);
+
 }

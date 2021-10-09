@@ -48,8 +48,12 @@ public class CardServiceImpl implements CardService{
         return cardsRepository.findAllCreditCard();
     }
     
-    public List<CardStatusDto> getCardsByUserId(Long id) {
+    public List<CardStatusDto> getAllCardsByUserId(Long id) {
     	return cardsRepository.findCardsByUserId(id);
+    }
+
+    public List<CardStatusDto> getDebitCardsByUserId(Long id) {
+    	return cardsRepository.findDebitCardsByUserId(id);
     }
 
 	private Random rand = new Random();
