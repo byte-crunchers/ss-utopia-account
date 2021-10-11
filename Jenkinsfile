@@ -64,7 +64,7 @@ pipeline {
 
       stage('Build') { 
         steps {
-          sh 'docker build . -t ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/ss-utopia-account:${GIT_COMMIT_MSG}'
+          sh 'docker build . -t ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/ss-utopia-account:${GIT_COMMIT_MSG} -t ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/ss-utopia-account:latest '
         }
       }
         stage('log into ecr') {
@@ -78,18 +78,16 @@ pipeline {
         steps {
           script{
               
-            sh 'docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/ss-utopia-account:${GIT_COMMIT_MSG}'
+            sh 'docker push -a ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/ss-utopia-account'
           }
         }
       }
       
       stage('Cleaning up') {
         steps{
-            sh "docker rmi ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/ss-utopia-account:${GIT_COMMIT_MSG}"
+            sh "docker image prune"
         }
         }
     }
 }
-
-
 
