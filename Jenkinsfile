@@ -13,24 +13,25 @@ pipeline {
     }
 
     stages {       
-      stage('Initialize'){
-        steps{
-          script{
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-          }
-        }
-    }
+      
       stage('checkout') {
         steps {
           git branch: 'feature_kubernetes', credentialsId: 'git_login', url: 'https://github.com/byte-crunchers/ss-utopia-account.git'
         }
       }
+      stage('get_commit_msg') {
+        steps {
+            script {
+                env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=format:"%H"', returnStdout: true).trim()
+            }
+        }
+      }
 
-      stage("Clean install") {  //test
+
+     stage("MVN Test") {  
         steps {
           withMaven(maven: 'maven') {
-            sh 'mvn clean install'
+            sh 'mvn clean test'
           }
         }
       }
@@ -53,26 +54,42 @@ pipeline {
           }*/
         }
       }
-      //package
-
-      stage('Build') { // git commit id for tag
+      stage("MVN Package") {  
         steps {
-          sh 'docker build . -t ss-utopia-account:latest'
-        }
-      }
-
-      stage('Deploy') {
-        steps {
-          script{
-            docker.withRegistry("https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com", toolName: 'myDocker', 'ecr:us-east-1:ss-AWS') 
-            {
-              sh 'docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ss-utopia-account:latest'
-            }
+          withMaven(maven: 'maven') {
+            sh 'mvn clean package -Dmaven.test.skip'
           }
         }
       }
-      //post docker prune
+
+      stage('Build') { 
+        steps {
+          sh 'docker build . -t ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/ss-utopia-account:${GIT_COMMIT_MSG}'
+        }
+      }
+        stage('log into ecr') {
+        steps {
+            script{
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com'
+            }
+        }
+      }
+      stage('Deploy') {
+        steps {
+          script{
+              
+            sh 'docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/ss-utopia-account:${GIT_COMMIT_MSG}'
+          }
+        }
+      }
+      
+      stage('Cleaning up') {
+        steps{
+            sh "docker rmi ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/ss-utopia-account:${GIT_COMMIT_MSG}"
+        }
+        }
     }
 }
+
 
 
