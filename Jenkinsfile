@@ -6,7 +6,6 @@ pipeline {
     agent any
 
     environment {
-      AWS_ACCOUNT_ID="422288715120"
       AWS_DEFAULT_REGION="us-east-1" 
       IMAGE_REPO_NAME="ss-utopia-account"
       IMAGE_TAG="latest"
@@ -14,7 +13,14 @@ pipeline {
     }
 
     stages {       
-
+      stage('Initialize'){
+        steps{
+          script{
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+          }
+        }
+    }
       stage('checkout') {
         steps {
           git branch: 'feature_kubernetes', credentialsId: 'git_login', url: 'https://github.com/byte-crunchers/ss-utopia-account.git'
@@ -58,9 +64,9 @@ pipeline {
       stage('Deploy') {
         steps {
           script{
-            docker.withRegistry("https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com", 'ecr:us-east-1:ss-AWS') 
+            docker.withRegistry("https://${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com", toolName: 'myDocker', 'ecr:us-east-1:ss-AWS') 
             {
-              docker.image('ss-utopia-account').push('latest')
+              sh 'docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/ss-utopia-account:latest'
             }
           }
         }
