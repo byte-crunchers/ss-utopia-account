@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(EndpointConstants.API_V_0_1_ACCOUNTTYPES)
+@CrossOrigin
 public class AccountTypeController {
     public static final String MAPPING = EndpointConstants.API_V_0_1_ACCOUNTTYPES;
     private final AccountTypeService accountTypeService;
