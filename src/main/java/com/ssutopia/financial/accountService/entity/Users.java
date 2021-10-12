@@ -3,7 +3,10 @@ package com.ssutopia.financial.accountService.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Entity;
@@ -18,11 +21,13 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotBlank
     private String username;
@@ -38,7 +43,11 @@ public class Users {
 
     private int active;
 
-    private String address;
+    private String address, city, state;
+    
+    private Integer zip;
+    
+    private Long phone;
 
     private boolean is_admin;
 

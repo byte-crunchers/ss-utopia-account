@@ -42,7 +42,7 @@ public class Accounts {
             name = "users_id")
     private Users users;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
             name = "account_type")
     private AccountTypes accountTypes;

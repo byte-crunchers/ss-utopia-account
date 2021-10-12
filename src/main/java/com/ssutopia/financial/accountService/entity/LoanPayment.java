@@ -1,42 +1,37 @@
 package com.ssutopia.financial.accountService.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-
 import java.lang.reflect.Field;
-import java.math.BigInteger;
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+/*
+ * Stores form data when a user submits a loan payment
+ */
 
 @Entity
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Cards {
-    @Id
-    private Long card_num;
+public class LoanPayment {
 
-    private int pin;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
 
-    private int cvc1;
-
-    private int cvc2;
-
-    private LocalDate exp_date;
-
-    @ManyToOne
-    @JoinColumn(
-            name = "accounts_id")
-    private Accounts accounts;
-
-    public Long getCardNum() {
-    	return card_num;
-    }
+	private Long loanId;
+	private Long account;
+	private Float amount;
+	private LocalDateTime timestamp;
 
 	// print all variables to console
 	public void printFields() {

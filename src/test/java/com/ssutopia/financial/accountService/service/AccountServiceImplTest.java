@@ -25,6 +25,19 @@ public class AccountServiceImplTest {
 
     @BeforeAll
     static void beforeAll(){
+//        account1 = AccountTypes.builder()
+//                .id("Basic Credit")
+//                .build();
+//
+//        account2 = AccountTypes.builder()
+//                .id("Platinum Credit")
+//                .build();
+//
+//
+//        account3 = AccountTypes.builder()
+//                .id("Plus Credit")
+//                .build();
+        
         accountType1 = AccountTypes.builder()
                 .id("Utopia Debit5")
                 .build();
