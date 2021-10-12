@@ -23,7 +23,9 @@ public class AccountTypeController {
     public ResponseEntity<AccountTypes> createNewAccountType(@Valid @RequestBody AccountTypesDto accountTypesDto){
 //        log.info("post account types");
         var accountType = accountTypeService.createNewAccount_type(accountTypesDto);
-        var uri = URI.create(MAPPING+"/"+accountType.getId());
+        String accountTypeName = accountType.getId();
+        accountTypeName = accountTypeName.replaceAll("\\s+","");
+        var uri = URI.create(MAPPING+"/"+accountTypeName);
         return ResponseEntity.created(uri).body(accountType);
     }
 

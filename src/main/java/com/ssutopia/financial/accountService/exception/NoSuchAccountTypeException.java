@@ -4,13 +4,13 @@ import java.util.NoSuchElementException;
 
 public class NoSuchAccountTypeException extends NoSuchElementException {
 
-    private final Long AccountTypeId;
+    private final String AccountTypeId;
 
-    public NoSuchAccountTypeException(Long AccountTypeId) {
+    public NoSuchAccountTypeException(String AccountTypeId) {
         super("No AccountType record for id=" + AccountTypeId);
         this.AccountTypeId = AccountTypeId;
     }
-    public Long getAccountTypeId() {
+    public String getAccountTypeId() {
         return AccountTypeId;
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AccountTypeService {
     AccountTypes createNewAccount_type(AccountTypesDto account_typeDto);
-    AccountTypes getAccountTypeById(Long id);
+    AccountTypes getAccountTypeById(String id);
     List<AccountTypes> getAllAccountTypes();
 
 }

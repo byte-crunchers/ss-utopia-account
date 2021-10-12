@@ -27,7 +27,7 @@ public class Cards {
 
     private int cvc2;
 
-    private Date exp_date;
+    private LocalDate exp_date;
 
     @ManyToOne
     @JoinColumn(

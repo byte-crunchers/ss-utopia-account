@@ -1,6 +1,7 @@
 package com.ssutopia.financial.accountService.dto;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +23,8 @@ public class CardStatusDto {
 	private String accountType;
 	private Float balance, paymentDue, debtInterest;
 	private Integer creditLimit;
-	private Date dueDate, expDate;
+	private Date dueDate;
+	private LocalDate expDate;
 	private Boolean active, approved, confirmed;
 	
 }

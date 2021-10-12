@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -85,19 +86,15 @@ public class CardServiceImpl implements CardService{
         
 		// save new card instance
 		Cards card = null;
-        try {
-			var Card6 = Cards.builder()
-			        .card_num(cardId)
-			        .accounts(Accounts6)
-			        .exp_date(simpleDateFormat.parse(expDate))
-			        .cvc1(random3Digits())
-			        .cvc2(random3Digits())
-			        .pin(random4Digits())
-			        .build();
-	        card = Card6;
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		var Card6 = Cards.builder()
+		        .card_num(cardId)
+		        .accounts(Accounts6)
+		        .exp_date(LocalDate.now())
+		        .cvc1(random3Digits())
+		        .cvc2(random3Digits())
+		        .pin(random4Digits())
+		        .build();
+        card = Card6;
 
 		return cardsRepository.save(card);
 	}

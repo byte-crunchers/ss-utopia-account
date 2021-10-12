@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -21,7 +22,7 @@ public class CreditAccount {
 
     private float balance;
 
-    private Date exp_date;
+    private LocalDate exp_date;
 
     private int limit;
 
@@ -36,11 +37,14 @@ public class CreditAccount {
 
 
     public CreditAccount(Long card_num, String first_name,
-                         String last_name,float balance, Date exp_date, int limit, int cvc1, int cvc2
+                         String last_name,float balance, LocalDate exp_date, int limit, int cvc1, int cvc2
     ,float payment_due,Date due_date) {
+
+
         this.card_num = card_num;
         this.first_name = first_name;
         this.last_name = last_name;
+        this.fullName = first_name+ " "+last_name;
         this.balance = balance;
         this.exp_date = exp_date;
         this.limit = limit;
@@ -116,11 +120,11 @@ public class CreditAccount {
         this.cvc2 = cvc2;
     }
 
-    public Date getExp_date() {
+    public LocalDate getExp_date() {
         return exp_date;
     }
 
-    public void setExp_date(Date exp_date) {
+    public void setExp_date(LocalDate exp_date) {
         this.exp_date = exp_date;
     }
 

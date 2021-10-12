@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
+
+import javax.persistence.Id;
 //import javax.validation.constraints.NotBlank;
 
 @Data
@@ -12,6 +14,10 @@ import org.hibernate.validator.constraints.NotBlank;
 @AllArgsConstructor
 @Builder
 public class AccountTypesDto {
+
+    @Id
+    private String id;
+
     @Builder.Default
     private float late_fee = 0.0f;
 
