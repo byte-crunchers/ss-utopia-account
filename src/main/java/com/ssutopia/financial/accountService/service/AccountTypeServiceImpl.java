@@ -1,7 +1,7 @@
 package com.ssutopia.financial.accountService.service;
 
-import com.ssutopia.financial.accountService.dto.AccountTypeDto;
-import com.ssutopia.financial.accountService.entity.AccountType;
+import com.ssutopia.financial.accountService.dto.AccountTypesDto;
+import com.ssutopia.financial.accountService.entity.AccountTypes;
 import com.ssutopia.financial.accountService.exception.DuplicateAccountNameException;
 import com.ssutopia.financial.accountService.exception.NoSuchAccountTypeException;
 import com.ssutopia.financial.accountService.repository.AccountTypeRepository;
@@ -25,37 +25,37 @@ public class AccountTypeServiceImpl implements AccountTypeService {
 
     @Override
     @Transactional
-    public AccountType createNewAccount_type(AccountTypeDto account_typeDto) {
+    public AccountTypes createNewAccount_type(AccountTypesDto account_typeDto) {
         validateDto(account_typeDto);
-        log.debug("Create new account type=" + account_typeDto.getAccountName());
-        account_typeRepository.findByAccountName(account_typeDto.getAccountName()).
+
+        account_typeRepository.findById(account_typeDto.getId()).
                 ifPresent(account_type -> {
-                    throw new DuplicateAccountNameException(account_typeDto.getAccountName());
+                    throw new DuplicateAccountNameException(account_typeDto.getId());
                 });
-        var account_type = AccountType.builder()
-                .accountName(account_typeDto.getAccountName())
-                .apy(account_typeDto.getApy())
-                .contributionLimits(account_typeDto.getContributionLimits())
-                .withdrawalAgeLimits(account_typeDto.getWithdrawalAgeLimits())
-                .fee(account_typeDto.getFee())
-                .withdrawalLimits(account_typeDto.getWithdrawalLimits())
+        var account_type = AccountTypes.builder()
+              .id(account_typeDto.getId())
+              .annual_fee(account_typeDto.getAnnual_fee())
+                .cashBack(account_typeDto.getCashBack())
+                .late_fee(account_typeDto.getLate_fee())
+                .savings_interest(account_typeDto.getSavings_interest())
+                .foodie_pts(account_typeDto.getFoodie_pts())
                 .build();
         account_type = account_typeRepository.save(account_type);
         return account_type;
     }
 
     @Override
-    public AccountType getAccountTypeById(Long id) {
+    public AccountTypes getAccountTypeById(String id) {
         return account_typeRepository.findById(id)
                 .orElseThrow(()->new NoSuchAccountTypeException(id));
     }
 
     @Override
-    public List<AccountType> getAllAccountTypes() {
+    public List<AccountTypes> getAllAccountTypes() {
         return account_typeRepository.findAll();
     }
 
-    private void validateDto(AccountTypeDto account_typeDto) {
+    private void validateDto(AccountTypesDto account_typeDto) {
         var violations = validator.validate(account_typeDto);
         if (!violations.isEmpty()) {
             throw new IllegalArgumentException("Invalid DTO " + account_typeDto);

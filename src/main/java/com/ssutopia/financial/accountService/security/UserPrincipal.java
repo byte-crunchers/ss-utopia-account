@@ -1,6 +1,6 @@
 package com.ssutopia.financial.accountService.security;
 
-import com.ssutopia.financial.accountService.entity.User;
+import com.ssutopia.financial.accountService.entity.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,10 +10,10 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserPrincipal implements UserDetails {
-    private User user;
+    private Users users;
 
-    public UserPrincipal(User user){
-        this.user = user;
+    public UserPrincipal(Users users){
+        this.users = users;
     }
 
     @Override
@@ -21,13 +21,13 @@ public class UserPrincipal implements UserDetails {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         // Extract list of permissions (name)
-        this.user.getPermissionList().forEach(p -> {
+        this.users.getPermissionList().forEach(p -> {
             GrantedAuthority authority = new SimpleGrantedAuthority(p);
             authorities.add(authority);
         });
 
         // Extract list of roles (ROLE_name)
-        this.user.getRoleList().forEach(r -> {
+        this.users.getRoleList().forEach(r -> {
             GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
             authorities.add(authority);
         });
@@ -37,12 +37,12 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.user.getPassword();
+        return this.users.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.user.getUsername();
+        return this.users.getUsername();
     }
 
     @Override
@@ -62,6 +62,6 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.user.getActive() == 1;
+        return this.users.getActive() == 1;
     }
 }

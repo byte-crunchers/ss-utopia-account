@@ -1,13 +1,13 @@
 package com.ssutopia.financial.accountService.service;
 
-import com.ssutopia.financial.accountService.dto.AccountTypeDto;
-import com.ssutopia.financial.accountService.entity.AccountType;
+import com.ssutopia.financial.accountService.dto.AccountTypesDto;
+import com.ssutopia.financial.accountService.entity.AccountTypes;
 
 import java.util.List;
 
 public interface AccountTypeService {
-    AccountType createNewAccount_type(AccountTypeDto account_typeDto);
-    AccountType getAccountTypeById(Long id);
-    List<AccountType> getAllAccountTypes();
+    AccountTypes createNewAccount_type(AccountTypesDto account_typeDto);
+    AccountTypes getAccountTypeById(String id);
+    List<AccountTypes> getAllAccountTypes();
 
 }
