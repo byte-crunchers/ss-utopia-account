@@ -8,6 +8,7 @@
 #### REST controller methods:	
 - Create a new account type
 - Get all account types
+- Get all accounts summary
 - Apply for a card
 - Get cards by user ID
 
