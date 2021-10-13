@@ -7,7 +7,11 @@
 
 #### REST controller methods:	
 - Create a new account type
-- Get all account types
+- Get all accounts summary
+- Delete an account
+- suspend an account
+- view credit limit by credit number
+- increase credit limit by credit number  
 - Apply for a card
 - Get cards by user ID
 
