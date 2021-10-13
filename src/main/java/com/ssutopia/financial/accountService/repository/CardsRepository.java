@@ -2,9 +2,12 @@ package com.ssutopia.financial.accountService.repository;
 
 
 import com.ssutopia.financial.accountService.dto.CardStatusDto;
+import com.ssutopia.financial.accountService.dto.CreditLimitDto;
+import com.ssutopia.financial.accountService.entity.Accounts;
 import com.ssutopia.financial.accountService.entity.Cards;
 import com.ssutopia.financial.accountService.entity.CreditAccount;
 import com.ssutopia.financial.accountService.entity.DebitAccount;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -47,5 +50,11 @@ public interface CardsRepository extends CrudRepository<Cards,Long> {
                     "and a.users.id = ?1 and a.accountTypes.id = 'Utopia Debit'"
     )
     List<CardStatusDto> findDebitCardsByUserId(Long id);
+
+    @Query("select a.limit from Accounts a,Cards c where c.accounts = a and c.card_num = ?1")
+    int findCreditAccountLimit(Long id);
+
+    @Query("select c.accounts from Cards c where c.card_num = ?1")
+    Accounts findAccountByCardNum(Long id);
 
 }

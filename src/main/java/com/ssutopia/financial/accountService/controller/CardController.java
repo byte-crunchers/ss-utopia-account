@@ -1,5 +1,6 @@
 package com.ssutopia.financial.accountService.controller;
 
+import com.ssutopia.financial.accountService.dto.CreditLimitDto;
 import com.ssutopia.financial.accountService.entity.CardForm;
 import com.ssutopia.financial.accountService.dto.CardStatusDto;
 import com.ssutopia.financial.accountService.entity.Accounts;
@@ -14,14 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -69,6 +66,19 @@ public class CardController {
         }
         return ResponseEntity.ok(cards);
     }
+
+
+	@GetMapping(value = "/creditlimit/{id}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public int viewCreditLimit(@PathVariable Long id){
+    	return cardService.viewCreditLimit(id);
+	}
+
+	@PutMapping(value = "/increasecreditlimit",
+			consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<Void> increaseCreditLimit(@Valid @RequestBody CreditLimitDto creditLimitDto){
+    	cardService.increaseCreditLimit(creditLimitDto);
+		return ResponseEntity.noContent().build();
+	}
 
 
 	// receive card application form & print to console

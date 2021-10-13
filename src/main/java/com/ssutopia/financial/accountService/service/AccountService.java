@@ -8,4 +8,6 @@ import java.util.List;
 public interface AccountService {
     List<UserAccount> getAllAccounts();
     Accounts updateBalance(Long id, Float payment);
+    void deleteAccountById(Long id);
+    void suspendAccountById(boolean status,Long id);
 }

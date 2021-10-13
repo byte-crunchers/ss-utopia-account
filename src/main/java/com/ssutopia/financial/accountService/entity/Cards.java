@@ -29,7 +29,7 @@ public class Cards {
 
     private LocalDate exp_date;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "accounts_id")
     private Accounts accounts;
