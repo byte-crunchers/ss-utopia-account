@@ -10,9 +10,9 @@
 - Get all account types
 - Get all accounts summary
 - Delete an account
-- suspend an account
-- view credit limit by credit card number
-- increase credit limit by credit card number  
+- Suspend an account
+- View credit limit by credit card number
+- Increase credit limit by credit card number  
 - Apply for a card
 - Get cards by user ID
 
