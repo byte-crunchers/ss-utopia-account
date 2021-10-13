@@ -11,8 +11,8 @@
 - Get all accounts summary
 - Delete an account
 - suspend an account
-- view credit limit by credit number
-- increase credit limit by credit number  
+- view credit limit by credit card number
+- increase credit limit by credit card number  
 - Apply for a card
 - Get cards by user ID
 
