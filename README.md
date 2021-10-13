@@ -7,6 +7,7 @@
 
 #### REST controller methods:	
 - Create a new account type
+- Get all account types
 - Get all accounts summary
 - Delete an account
 - suspend an account
