@@ -69,7 +69,7 @@ public class CardController {
 
 
 	@GetMapping(value = "/creditlimit/{id}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public int viewCreditLimit(@PathVariable Long id){
+	public Integer viewCreditLimit(@PathVariable Long id){
     	return cardService.viewCreditLimit(id);
 	}
 
@@ -96,6 +96,7 @@ public class CardController {
 		// set location header
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(card.getCardNum())
 				.toUri();
+
 
 		// return status code 201
 		return ResponseEntity.created(location).build();

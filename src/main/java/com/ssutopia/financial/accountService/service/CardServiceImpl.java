@@ -64,7 +64,7 @@ public class CardServiceImpl implements CardService{
 	}
 
 	@Override
-	public int viewCreditLimit(Long id) {
+	public Integer viewCreditLimit(Long id) {
 		return cardsRepository.findCreditAccountLimit(id);
 	}
 

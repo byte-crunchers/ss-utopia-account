@@ -12,5 +12,5 @@ public interface CardService {
     List<DebitAccount> getDebitCards();
     List<CreditAccount> getCreditCards();
     void increaseCreditLimit(CreditLimitDto creditLimitDto);
-    int viewCreditLimit(Long id);
+    Integer viewCreditLimit(Long id);
 }

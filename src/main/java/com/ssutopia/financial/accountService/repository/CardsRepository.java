@@ -52,7 +52,7 @@ public interface CardsRepository extends CrudRepository<Cards,Long> {
     List<CardStatusDto> findDebitCardsByUserId(Long id);
 
     @Query("select a.limit from Accounts a,Cards c where c.accounts = a and c.card_num = ?1")
-    int findCreditAccountLimit(Long id);
+    Integer findCreditAccountLimit(Long id);
 
     @Query("select c.accounts from Cards c where c.card_num = ?1")
     Accounts findAccountByCardNum(Long id);
