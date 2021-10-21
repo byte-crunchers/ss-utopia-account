@@ -16,9 +16,13 @@ import com.ssutopia.financial.accountService.service.AccountTypeService;
 import com.ssutopia.financial.accountService.service.CardService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -26,6 +30,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.context.ActiveProfiles;
 
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -60,6 +66,9 @@ public class AccountControllerSecurityTests {
 
     @MockBean
     CardService cardService;
+
+    @MockBean
+    CardController cardController;
 
     @MockBean
     AccountTypeRepository accountTypeRepository;
@@ -189,6 +198,10 @@ public class AccountControllerSecurityTests {
             .permissions("")
             .build();
 
+    Cards mockCard1 = Cards.builder()
+            .card_num(499923393855048L)
+            .build();
+
 
     @BeforeEach
     void beforeEach() {
@@ -201,6 +214,8 @@ public class AccountControllerSecurityTests {
         Mockito.reset(accountTypeRepository);
         Mockito.reset(accountService);
         Mockito.reset(accountRepository);
+        Mockito.reset(cardsRepository);
+        Mockito.reset(cardService);
 
         when(accountTypeRepository.save(any(AccountTypes.class))).thenReturn(mockAccountTypes);
         when(userRepository.findByUsername(any())).thenReturn(mockAdminUsers);
@@ -211,6 +226,7 @@ public class AccountControllerSecurityTests {
         when(cardService.getCreditCards()).thenReturn(List.of(mockCreditAccount1,mockCreditAccount2,mockCreditAccount3));
         when(cardsRepository.findAllDebitCard()).thenReturn(List.of(mockDebitAccount1,mockDebitAccount2,mockDebitAccount3));
         when(cardService.getDebitCards()).thenReturn(List.of(mockDebitAccount1,mockDebitAccount2,mockDebitAccount3));
+        when(cardService.viewCreditLimit(any())).thenReturn(1000);
 
     }
     String getJwt(MockUser mockUser) {
@@ -234,6 +250,18 @@ public class AccountControllerSecurityTests {
                 get(EndpointConstants.API_V_0_1_ACCOUNTS))
                 .andExpect(status().isForbidden());
 
+    }
+
+    @Test
+    void test_viewCreditLimit_canOnlyBePerformByAdmin()throws Exception{
+        mvc.perform(
+                get(EndpointConstants.API_V_0_1_CARDS+"/"+mockCard1.getCardNum())
+                .header("Authorization", getJwt(MockUser.ADMIN)))
+        .andExpect(status().isOk());
+
+        mvc.perform(
+                get(EndpointConstants.API_V_0_1_CARDS))
+                .andExpect(status().isForbidden());
     }
 
 
@@ -378,6 +406,9 @@ public class AccountControllerSecurityTests {
                     .andExpect(status().isForbidden());
         }
     }
+
+
+
 
 
     enum MockUser {

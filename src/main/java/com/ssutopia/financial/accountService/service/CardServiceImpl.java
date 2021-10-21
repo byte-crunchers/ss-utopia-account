@@ -33,7 +33,7 @@ import java.util.Random;
 @Service
 public class CardServiceImpl implements CardService{
 	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
     private final CardsRepository cardsRepository;
     private final AccountsRepository accountRepository;
     private final AccountTypeRepository accountTypeRepository;
@@ -41,7 +41,7 @@ public class CardServiceImpl implements CardService{
     String expDate = "11/25"; // for example
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/yy");
 
-    @Override
+	@Override
     public List<DebitAccount> getDebitCards() {
         return cardsRepository.findAllDebitCard();
     }
