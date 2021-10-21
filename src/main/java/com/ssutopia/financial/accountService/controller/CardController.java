@@ -1,17 +1,9 @@
 package com.ssutopia.financial.accountService.controller;
 
-import com.ssutopia.financial.accountService.entity.CardForm;
-import com.ssutopia.financial.accountService.dto.CardStatusDto;
-import com.ssutopia.financial.accountService.entity.Accounts;
-import com.ssutopia.financial.accountService.entity.Cards;
-import com.ssutopia.financial.accountService.entity.CreditAccount;
-import com.ssutopia.financial.accountService.entity.DebitAccount;
-import com.ssutopia.financial.accountService.service.CardService;
-import com.ssutopia.financial.accountService.service.CardServiceImpl;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-import java.util.List;
-import java.util.Optional;
+import com.ssutopia.financial.accountService.dto.PaymentDto;
+import com.ssutopia.financial.accountService.dto.CardStatusDto;
+import com.ssutopia.financial.accountService.dto.ReportForm;
+import com.ssutopia.financial.accountService.entity.Accounts;
+import com.ssutopia.financial.accountService.entity.CardForm;
+import com.ssutopia.financial.accountService.entity.Cards;
+import com.ssutopia.financial.accountService.entity.CreditAccount;
+import com.ssutopia.financial.accountService.entity.DebitAccount;
+import com.ssutopia.financial.accountService.service.CardServiceImpl;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -70,6 +72,20 @@ public class CardController {
         return ResponseEntity.ok(cards);
     }
 
+
+	// report card as stolen
+	@PostMapping(value = "/report", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<?> reportCardAsStolen(@RequestBody ReportForm reportForm) {
+		System.out.println("Card reported as stolen with account ID = " + reportForm.getAccountId());
+
+		Long accountId = Long.parseLong(reportForm.getAccountId());
+		Accounts a = cardService.disableCard(accountId);
+
+		if(a != null)
+			return ResponseEntity.noContent().build();  //status code 204
+		else
+			return ResponseEntity.unprocessableEntity().build();  //status code 422
+	}
 
 	// receive card application form & print to console
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.TEXT_PLAIN_VALUE })

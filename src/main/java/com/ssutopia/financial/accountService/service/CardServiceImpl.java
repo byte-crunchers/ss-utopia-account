@@ -56,6 +56,21 @@ public class CardServiceImpl implements CardService{
     public List<CardStatusDto> getDebitCardsByUserId(Long id) {
     	return cardsRepository.findDebitCardsByUserId(id);
     }
+    
+    @Override
+    public Accounts disableCard(Long accountId) {
+    	try {
+	    	Accounts a = accountRepository.findById(accountId).orElse(null);
+			a.setActive(false);
+			return accountRepository.save(a);
+    	}
+    	catch(Exception ex) {
+    		System.out.println("Update account failed!");
+    		ex.printStackTrace();
+    	}
+    	
+    	return null;
+    }
 
 	private Random rand = new Random();
 
