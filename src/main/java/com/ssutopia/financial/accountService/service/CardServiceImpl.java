@@ -56,6 +56,9 @@ public class CardServiceImpl implements CardService{
 		notNull(creditLimitDto.getCardNum());
 		if(cardsRepository.existsById(creditLimitDto.getCardNum())){
              var account = cardsRepository.findAccountByCardNum(creditLimitDto.getCardNum());
+			if(!account.getAccountTypes().getId().toLowerCase().contains("credit")){
+				throw new NoSuchCreditCardException(creditLimitDto.getCardNum());
+			}
              account.setLimit(creditLimitDto.getCreditLimit());
              accountRepository.save(account);
 		}else {
@@ -65,6 +68,15 @@ public class CardServiceImpl implements CardService{
 
 	@Override
 	public Integer viewCreditLimit(Long id) {
+		if(cardsRepository.existsById(id)){
+			var account = cardsRepository.findAccountByCardNum(id);
+			if(!account.getAccountTypes().getId().toLowerCase().contains("credit")){
+				throw new NoSuchCreditCardException(id);
+			}
+		}else{
+			throw new NoSuchCreditCardException(id);
+		}
+
 		return cardsRepository.findCreditAccountLimit(id);
 	}
 
