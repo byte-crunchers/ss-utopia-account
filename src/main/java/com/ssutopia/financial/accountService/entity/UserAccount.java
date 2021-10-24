@@ -1,6 +1,7 @@
 package com.ssutopia.financial.accountService.entity;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,10 +35,12 @@ public class UserAccount {
     
     private Long card_num;
     
+    private Date due_date;
+    
     private Boolean confirmed, approved, active;
 
     public UserAccount(Long id, String first_name, String last_name, String account_type, float balance, float debt_interest, float saving_interest, float annual_fee, 
-    		Float payment_due, Integer credit_limit, Long card_num, Boolean confirmed, Boolean approved, Boolean active) {
+    		Float payment_due, Date due_date, Integer credit_limit, Long card_num, Boolean confirmed, Boolean approved, Boolean active) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -48,6 +51,7 @@ public class UserAccount {
         this.saving_interest = saving_interest;
         this.annual_fee = annual_fee;
         this.payment_due = payment_due;
+        this.due_date = due_date;
         this.credit_limit = credit_limit;
         this.card_num = card_num;
         this.confirmed = confirmed;
@@ -198,6 +202,14 @@ public class UserAccount {
 
 	public void setCard_num(Long card_num) {
 		this.card_num = card_num;
+	}
+
+	public Date getDue_date() {
+		return due_date;
+	}
+
+	public void setDue_date(Date due_date) {
+		this.due_date = due_date;
 	}
 
 }

@@ -16,7 +16,7 @@ public interface AccountsRepository extends CrudRepository<Accounts,Long> {
     @Query( "select new com.ssutopia.financial.accountService.entity.UserAccount" +
             "( a.id,a.users.first_name,a.users.last_name,a.accountTypes.id" +
             ",a.balance,a.debt_interest,a.accountTypes.savings_interest,a.accountTypes.annual_fee" +
-            ",a.payment_due ,a.limit, c.card_num, a.confirmed, a.approved, a.active ) " +
+            ",a.payment_due, a.due_date, a.limit, c.card_num, a.confirmed, a.approved, a.active ) " +
             
             "from Accounts a, Users u, Cards c where a.users = u and c.accounts = a " +
             "order by a.id"

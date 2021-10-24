@@ -91,9 +91,10 @@ public class AccountServiceImpl implements AccountService {
 			Accounts a = accountsRepository.findById(dto.getId()).orElse(null);
 
 			a.setBalance(dto.getBalance());
-			a.setLimit(dto.getCredit_limit());
+//			a.setLimit(dto.getCredit_limit());
 			a.setDebt_interest(dto.getDebt_interest());
 			a.setPayment_due(dto.getPayment_due());
+			a.setDue_date(dto.getDue_date());
 			a.setConfirmed(dto.getConfirmed());
 			a.setApproved(dto.getApproved());
 			a.setActive(dto.getActive());
