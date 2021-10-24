@@ -48,10 +48,9 @@ pipeline {
     
       stage("Quality Gate") {
         steps {
-          echo message: "can not do on local machine "
-          /* timeout(time: 5, unit: 'MINUTES') {
+           timeout(time: 5, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
-          }*/
+          }
         }
       }
       stage("MVN Package") {  
@@ -83,9 +82,9 @@ pipeline {
         }
       }
       
-      stage('Cleaning up') {
-        steps{
-            sh "docker image prune"
+      post {
+        always{
+            sh "docker image prune -f"
         }
         }
     }
