@@ -52,7 +52,7 @@ public class AccountTypeController {
         return "Hi";
     }
 
-    @GetMapping(value = "/test")
+    @GetMapping(path = "/test", produces = { MediaType.APPLICATION_JSON_VALUE })
     public String Test(){
         return "Hi";
     }
