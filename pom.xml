@@ -152,32 +152,20 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
-                <configuration>
-                    <skip>${maven.test.skip}</skip>
-                    <destFile>${basedir}/target/site/jacoco/jacoco.xml</destFile>
-                    <dataFile>${basedir}/target/site/jacoco/jacoco.xml</dataFile>
-                    <output>file</output>
-                    <append>true</append>
-                    <excludes>
-                        <exclude>*MethodAccess</exclude>
-                    </excludes>
-                </configuration>
                 <executions>
-                    <execution>
-                        <id>jacoco-initialize</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                        <phase>test-compile</phase>
-                    </execution>
-                    <execution>
-                        <id>jacoco-site</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
+        <execution>
+            <goals>
+                <goal>prepare-agent</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>report</id>
+            <phase>prepare-package</phase>
+            <goals>
+                <goal>report</goal>
+            </goals>
+        </execution>
+    </executions>
             </plugin>
         </plugins>
     </build>
