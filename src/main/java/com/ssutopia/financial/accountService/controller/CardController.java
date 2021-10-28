@@ -1,18 +1,28 @@
 package com.ssutopia.financial.accountService.controller;
 
+
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import com.ssutopia.financial.accountService.dto.CreditLimitDto;
+import com.ssutopia.financial.accountService.entity.CardForm;
+import com.ssutopia.financial.accountService.dto.CardStatusDto;
+import com.ssutopia.financial.accountService.entity.Accounts;
+import com.ssutopia.financial.accountService.entity.Cards;
+import com.ssutopia.financial.accountService.entity.CreditAccount;
+import com.ssutopia.financial.accountService.entity.DebitAccount;
+import com.ssutopia.financial.accountService.service.CardService;
+import com.ssutopia.financial.accountService.service.CardServiceImpl;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 
 import com.ssutopia.financial.accountService.dto.PaymentDto;
 import com.ssutopia.financial.accountService.dto.CardStatusDto;
@@ -26,6 +36,12 @@ import com.ssutopia.financial.accountService.service.CardServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -73,6 +89,7 @@ public class CardController {
     }
 
 
+
 	// report card as stolen
 	@PostMapping(value = "/report", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<?> reportCardAsStolen(@RequestBody ReportForm reportForm) {
@@ -86,6 +103,21 @@ public class CardController {
 		else
 			return ResponseEntity.unprocessableEntity().build();  //status code 422
 	}
+
+
+	@GetMapping(value = "/creditlimit/{id}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public Integer viewCreditLimit(@PathVariable Long id){
+    	return cardService.viewCreditLimit(id);
+	}
+
+	@PutMapping(value = "/increasecreditlimit",
+			consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<Void> increaseCreditLimit(@Valid @RequestBody CreditLimitDto creditLimitDto){
+    	cardService.increaseCreditLimit(creditLimitDto);
+		return ResponseEntity.noContent().build();
+	}
+
+
 
 	// receive card application form & print to console
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.TEXT_PLAIN_VALUE })
@@ -102,6 +134,7 @@ public class CardController {
 		// set location header
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(card.getCardNum())
 				.toUri();
+
 
 		// return status code 201
 		return ResponseEntity.created(location).build();

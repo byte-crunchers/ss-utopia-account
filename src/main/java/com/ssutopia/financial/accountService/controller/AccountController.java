@@ -1,11 +1,22 @@
 package com.ssutopia.financial.accountService.controller;
 
+
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import com.ssutopia.financial.accountService.dto.CreditLimitDto;
+import com.ssutopia.financial.accountService.entity.LoanPayment;
+import com.ssutopia.financial.accountService.dto.UserInfoDto;
+import com.ssutopia.financial.accountService.entity.Accounts;
+import com.ssutopia.financial.accountService.entity.UserAccount;
+import com.ssutopia.financial.accountService.service.AccountService;
+import com.ssutopia.financial.accountService.service.UserService;
+
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +35,14 @@ import com.ssutopia.financial.accountService.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.web.bind.annotation.*;
+
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
+
 
 @Slf4j
 @RestController
@@ -45,6 +64,21 @@ public class AccountController {
         }
         return ResponseEntity.ok(accounts);
     }
+
+	@PutMapping(value = "/{accountId}",
+			consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<Void> suspendAccount(@RequestBody boolean status,@PathVariable("accountId") Long accountId){
+    	accountService.suspendAccountById(status,accountId);
+		return ResponseEntity.noContent().build();
+	}
+
+	@DeleteMapping("/{accountId}")
+	public ResponseEntity<String> deleteAccount(@PathVariable Long accountId) {
+		log.info("DELETE id=" + accountId);
+		accountService.deleteAccountById(accountId);
+		return ResponseEntity.noContent().build();
+	}
+
 
     //get user info DTO for autofilling forms
     @GetMapping(value = "/userinfo/{name}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
