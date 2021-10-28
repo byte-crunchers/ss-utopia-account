@@ -1,6 +1,7 @@
 package com.ssutopia.financial.accountService.service;
 
 import com.ssutopia.financial.accountService.dto.CardStatusDto;
+import com.ssutopia.financial.accountService.dto.CreditLimitDto;
 import com.ssutopia.financial.accountService.entity.AccountTypes;
 import com.ssutopia.financial.accountService.entity.Accounts;
 import com.ssutopia.financial.accountService.entity.CardForm;
@@ -8,6 +9,7 @@ import com.ssutopia.financial.accountService.entity.Cards;
 import com.ssutopia.financial.accountService.entity.Users;
 import com.ssutopia.financial.accountService.entity.CreditAccount;
 import com.ssutopia.financial.accountService.entity.DebitAccount;
+import com.ssutopia.financial.accountService.exception.NoSuchCreditCardException;
 import com.ssutopia.financial.accountService.repository.AccountTypeRepository;
 import com.ssutopia.financial.accountService.repository.AccountsRepository;
 import com.ssutopia.financial.accountService.repository.CardsRepository;
@@ -31,7 +33,7 @@ import java.util.Random;
 @Service
 public class CardServiceImpl implements CardService{
 	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
     private final CardsRepository cardsRepository;
     private final AccountsRepository accountRepository;
     private final AccountTypeRepository accountTypeRepository;
@@ -39,7 +41,7 @@ public class CardServiceImpl implements CardService{
     String expDate = "11/25"; // for example
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/yy");
 
-    @Override
+	@Override
     public List<DebitAccount> getDebitCards() {
         return cardsRepository.findAllDebitCard();
     }
@@ -48,8 +50,38 @@ public class CardServiceImpl implements CardService{
     public List<CreditAccount> getCreditCards() {
         return cardsRepository.findAllCreditCard();
     }
-    
-    public List<CardStatusDto> getAllCardsByUserId(Long id) {
+
+	@Override
+	public void increaseCreditLimit(CreditLimitDto creditLimitDto) {
+		notNull(creditLimitDto.getCardNum());
+		if(cardsRepository.existsById(creditLimitDto.getCardNum())){
+             var account = cardsRepository.findAccountByCardNum(creditLimitDto.getCardNum());
+			if(!account.getAccountTypes().getId().toLowerCase().contains("credit")){
+				throw new NoSuchCreditCardException(creditLimitDto.getCardNum());
+			}
+             account.setLimit(creditLimitDto.getCreditLimit());
+             accountRepository.save(account);
+		}else {
+			throw new NoSuchCreditCardException(creditLimitDto.getCardNum());
+		}
+	}
+
+	@Override
+	public Integer viewCreditLimit(Long id) {
+		if(cardsRepository.existsById(id)){
+			var account = cardsRepository.findAccountByCardNum(id);
+			if(!account.getAccountTypes().getId().toLowerCase().contains("credit")){
+				throw new NoSuchCreditCardException(id);
+			}
+		}else{
+			throw new NoSuchCreditCardException(id);
+		}
+
+		return cardsRepository.findCreditAccountLimit(id);
+	}
+
+
+	public List<CardStatusDto> getAllCardsByUserId(Long id) {
     	return cardsRepository.findCardsByUserId(id);
     }
 
@@ -110,5 +142,18 @@ public class CardServiceImpl implements CardService{
 
 	private int random3Digits() {
 		return 100 + rand.nextInt(900); // range 100 - 999;
+	}
+
+	/**
+	 * Util method to check for null ID values.
+	 *
+	 * @param ids vararg ids to check.
+	 */
+	private void notNull(Object... ids) {
+		for (var i : ids) {
+			if (i == null) {
+				throw new IllegalArgumentException("Expected value but received null.");
+			}
+		}
 	}
 }

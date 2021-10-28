@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -37,10 +38,14 @@ public class Accounts {
 
     private boolean confirmed;
 
+
     @ManyToOne
     @JoinColumn(
             name = "users_id")
     private Users users;
+
+    @OneToMany(mappedBy = "accounts",cascade = CascadeType.ALL)
+    private List<Cards> cards;
 
     @ManyToOne
     @JoinColumn(
