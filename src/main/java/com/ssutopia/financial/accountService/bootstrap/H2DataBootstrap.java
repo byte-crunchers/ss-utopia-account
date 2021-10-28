@@ -152,7 +152,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .build();
 
         var Card12 = Cards.builder()
-                .card_num(999923393855048L)
+                .card_num(9990923393855048L)
                 .exp_date(LocalDate.now())
                 .accounts(Accounts12)
                 .cvc1(823)
@@ -319,7 +319,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card16 = Cards.builder()
-                .card_num(52566231168953886L)
+                .card_num(5256231168953881L)
                 .exp_date(LocalDate.now())
                 .accounts(Accounts16)
                 .pin(200)
@@ -526,7 +526,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card21 = Cards.builder()
-                .card_num(44192311268953886L)
+                .card_num(4419231268953886L)
                 .exp_date(LocalDate.now())
                 .accounts(Accounts21)
                 .pin(600)
@@ -571,7 +571,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         var Card22 = Cards.builder()
-                .card_num(44192311689532886L)
+                .card_num(4419211689532416L)
                 .exp_date(LocalDate.now())
                 .accounts(Accounts22)
                 .pin(600)

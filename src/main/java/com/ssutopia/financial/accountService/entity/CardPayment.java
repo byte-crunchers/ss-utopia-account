@@ -1,34 +1,46 @@
-package com.ssutopia.financial.accountService.dto;
-
+package com.ssutopia.financial.accountService.entity;
 
 import java.lang.reflect.Field;
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+import javax.persistence.*;
+
+@Entity
 @Builder
-public class CardStatusDto {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name="transactions")
+public class CardPayment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	//DTO for viewing card status
-	
-	private Long accountId, cardNum;
-	private String accountType;
-	private Float balance, paymentDue, debtInterest;
-	private Integer creditLimit;
-	private Date dueDate;
-	private LocalDate expDate;
-	private Boolean active, approved, confirmed;
-	
+    private String memo;
 
+    private Float transfer_value;
+
+    private LocalDateTime time_stamp;
+
+    private int status;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "origin_account")
+    private Accounts originAccount;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "destination_account")
+    private Accounts destinationAccount;
+
+
+	// print all variables to console
 	public void printFields() {
 		StringBuilder result = new StringBuilder();
 		String newLine = System.getProperty("line.separator");
@@ -50,5 +62,4 @@ public class CardStatusDto {
 
 		System.out.println(result.toString());
 	}
-
 }
