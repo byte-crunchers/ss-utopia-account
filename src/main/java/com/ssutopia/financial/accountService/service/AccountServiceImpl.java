@@ -117,7 +117,20 @@ public class AccountServiceImpl implements AccountService {
 		return cardPaymentRepository.findById(id);
 	}
 
-
+	@Override
+    public Accounts updateBalance(Long id, Float payment) {
+    	Accounts a = accountsRepository.findById(id).orElse(null);
+    	
+    	//verify there are sufficient funds in the account
+    	if(a.getBalance() > payment)
+    	{
+    		a.setBalance(a.getBalance() - payment);
+    		return accountsRepository.save(a);
+    	}
+    	
+    	return null;
+    }
+	
     @Override
     public void deleteAccountById(Long id) {
         notNull(id);

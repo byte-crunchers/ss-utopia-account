@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ssutopia.financial.accountService.dto.CreditLimitDto;
-import com.ssutopia.financial.accountService.entity.LoanPayment;
 import com.ssutopia.financial.accountService.dto.UserInfoDto;
 import com.ssutopia.financial.accountService.entity.Accounts;
 import com.ssutopia.financial.accountService.entity.UserAccount;

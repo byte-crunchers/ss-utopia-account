@@ -5,6 +5,7 @@ import com.ssutopia.financial.accountService.entity.*;
 import com.ssutopia.financial.accountService.exception.DuplicateAccountNameException;
 import com.ssutopia.financial.accountService.repository.AccountTypeRepository;
 import com.ssutopia.financial.accountService.repository.AccountsRepository;
+import com.ssutopia.financial.accountService.repository.CardPaymentRepository;
 import com.ssutopia.financial.accountService.repository.CardsRepository;
 import com.ssutopia.financial.accountService.repository.UserRepository;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,7 +33,8 @@ public class AccountServiceImplTest {
     private final AccountTypeService service = new AccountTypeServiceImpl(repository);
 
     private final AccountsRepository accountsRepository = Mockito.mock(AccountsRepository.class);
-    private final AccountService accountService = new AccountServiceImpl(accountsRepository);
+    private final CardPaymentRepository cardPaymentRepository = Mockito.mock(CardPaymentRepository.class);
+    private final AccountService accountService = new AccountServiceImpl(accountsRepository, cardPaymentRepository);
 
     private final UserRepository userRepository = Mockito.mock(UserRepository.class);
     private final UserService userService = new UserServiceImpl(userRepository);
