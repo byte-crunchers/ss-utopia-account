@@ -132,7 +132,7 @@ public class CardController {
 		card.printFields();
 
 		// set location header
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(card.getCardNum())
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(card.getAccounts().getId())
 				.toUri();
 
 
