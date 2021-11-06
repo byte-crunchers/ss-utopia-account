@@ -555,7 +555,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
         // add 1 test debit card for user dan
-//        Users dan = userRepository.findByUsername("dan");
+        Users dan = userRepository.findByUsername("dan");
         
         var Accounts22 = Accounts.builder()
                 .id(22L)
@@ -566,7 +566,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .confirmed(true)
                 .debt_interest(0.0f)
                 .limit(0)
-                .users(User22)
+                .users(dan)
                 .build();
 
 
@@ -993,7 +993,7 @@ public class H2DataBootstrap implements CommandLineRunner {
 
 
 //        // add 3 test credit cards for user dan
-//        Users dan = userRepository.findByUsername("dan");
+        Users dan = userRepository.findByUsername("dan");
         
         var Accounts9 = Accounts.builder()
                 .id(9L)
@@ -1006,7 +1006,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .debt_interest(0.015f)
                 .limit(5000)
                 .payment_due(135)
-                .users(User9)
+                .users(dan)
                 .build();
 
 
@@ -1052,7 +1052,7 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .due_date(dueDate)
                 .debt_interest(0.018f)
                 .limit(9000)
-                .users(User10)
+                .users(dan)
                 .build();
 
 
@@ -1098,12 +1098,12 @@ public class H2DataBootstrap implements CommandLineRunner {
                 .due_date(dueDate)
                 .debt_interest(0.017f)
                 .limit(19000)
-                .users(User11)
+                .users(dan)
                 .build();
 
 
         var Card11 = Cards.builder()
-                .card_num(3255531168953886L)
+                .card_num(3255531168953897L)
                 .exp_date(LocalDate.now())
                 .accounts(Accounts11)
                 .pin(220)
