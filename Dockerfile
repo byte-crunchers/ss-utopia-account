@@ -1,17 +1,6 @@
-FROM openjdk:11-jre-slim as builder
-WORKDIR application
-ADD maven/${project.build.finalName}.jar ${project.build.finalName}.jar
-RUN java -Djarmode=layertools -jar ${project.build.finalName}.jar extract
-
-FROM openjdk:11-jre-slim
-LABEL PROJECT_NAME=${project.artifactId} \
-      PROJECT=${project.id}
-
+FROM adoptopenjdk/openjdk11:jre-11.0.9.1_1-alpine@sha256:b6ab039066382d39cfc843914ef1fc624aa60e2a16ede433509ccadd6d995b1f
+RUN mkdir /app
+COPY  /target/*.war /app/java-application.war
+WORKDIR /app
 EXPOSE 8088
-
-WORKDIR application
-COPY --from=builder application/dependencies/ ./
-COPY --from=builder application/spring-boot-loader/ ./
-COPY --from=builder application/snapshot-dependencies/ ./
-COPY --from=builder application/application/ ./
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "org.springframework.boot.loader.JarLauncher"]
+CMD "java" "-jar" "java-application.war"
