@@ -10,6 +10,12 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/feature/fs_cloud']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/byte-crunchers/ss-utopia-account.git']]])     
             }
         }
+
+    stage("Clean install") {
+       steps {
+                      sh 'mvn clean install'
+               }
+           }
   
     // Building Docker images
     stage('Building image') {
