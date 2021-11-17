@@ -7,7 +7,7 @@ import com.ssutopia.financial.accountService.exception.NoSuchAccountTypeExceptio
 import com.ssutopia.financial.accountService.repository.AccountTypeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.experimental.var;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -14,7 +14,7 @@ import com.ssutopia.financial.accountService.security.JwtProperties;
 import com.ssutopia.financial.accountService.service.AccountService;
 import com.ssutopia.financial.accountService.service.AccountTypeService;
 import com.ssutopia.financial.accountService.service.CardService;
-import lombok.experimental.var;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
