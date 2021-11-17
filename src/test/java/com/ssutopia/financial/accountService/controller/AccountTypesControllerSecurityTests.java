@@ -27,6 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -131,7 +132,7 @@ public class AccountTypesControllerSecurityTests {
     @Test
     void test_createNewAccountType_CanBeForbiddenByNormalUser() throws Exception{
         when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
-        var unauthed = List.of(MockUser.DEFAULT,
+        var unauthed = Arrays.asList(MockUser.DEFAULT,
                 MockUser.DEFAULT,
                 MockUser.MATCH_USER,
                 MockUser.UNMATCH_USER

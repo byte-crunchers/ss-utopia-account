@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import lombok.experimental.var;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -129,37 +130,37 @@ public class AccountServiceImplTest {
 
     @Test
     void test_getAllCreditCard_ReturnsAllCreditCardWithExpectedValuesOnSuccess(){
-        when(cardsRepository.findAllCreditCard()).thenReturn(List.of(creditAccount1,creditAccount2,creditAccount3));
+        when(cardsRepository.findAllCreditCard()).thenReturn(Arrays.asList(creditAccount1,creditAccount2,creditAccount3));
         var creditAccount = cardService.getCreditCards();
-        var expectedCreditCards = List.of(creditAccount1,creditAccount2,creditAccount3);
+        var expectedCreditCards = Arrays.asList(creditAccount1,creditAccount2,creditAccount3);
         assertEquals(expectedCreditCards,creditAccount);
     }
 
 
     @Test
     void test_getAllUserAccount_ReturnsAllUserAccountWithExpectedValuesOnSuccess(){
-        when(accountsRepository.findAllAccounts()).thenReturn(List.of(userAccount1,userAccount2,userAccount3));
+        when(accountsRepository.findAllAccounts()).thenReturn(Arrays.asList(userAccount1,userAccount2,userAccount3));
         var userAccount = accountService.getAllAccounts();
-        var expectedUserAccount = List.of(userAccount1,userAccount2,userAccount3);
+        var expectedUserAccount = Arrays.asList(userAccount1,userAccount2,userAccount3);
         assertEquals(expectedUserAccount,userAccount);
     }
 
 
     @Test
     void test_getAllDebitCard_ReturnsAllDebitCardWithExpectedValuesOnSuccess(){
-        when(cardsRepository.findAllDebitCard()).thenReturn(List.of(debitAccount1,debitAccount2,debitAccount3));
+        when(cardsRepository.findAllDebitCard()).thenReturn(Arrays.asList(debitAccount1,debitAccount2,debitAccount3));
         var debitAccount = cardService.getDebitCards();
-        var expectedDebitCards = List.of(debitAccount1,debitAccount2,debitAccount3);
+        var expectedDebitCards = Arrays.asList(debitAccount1,debitAccount2,debitAccount3);
         assertEquals(expectedDebitCards,debitAccount);
     }
 
 
     @Test
     void test_getAllAccountTypes_ReturnsAllAccountTypes() {
-        when(repository.findAll()).thenReturn(List.of( accountType1, accountType2, accountType3));
+        when(repository.findAll()).thenReturn(Arrays.asList( accountType1, accountType2, accountType3));
 
         var accountTypes = service.getAllAccountTypes();
-        var expectedAccountTypes = List.of( accountType1, accountType2, accountType3);
+        var expectedAccountTypes = Arrays.asList( accountType1, accountType2, accountType3);
 
         assertEquals(expectedAccountTypes, accountTypes);
     }

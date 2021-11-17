@@ -39,6 +39,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -220,13 +221,13 @@ public class AccountControllerSecurityTests {
 
         when(accountTypeRepository.save(any(AccountTypes.class))).thenReturn(mockAccountTypes);
         when(userRepository.findByUsername(any())).thenReturn(mockAdminUsers);
-        when(accountRepository.findAllAccounts()).thenReturn((List.of(mockUserAccount1,mockUserAccount2,mockUserAccount3)));
-        when(accountService.getAllAccounts()).thenReturn((List.of(mockUserAccount1,mockUserAccount2,mockUserAccount3)));
+        when(accountRepository.findAllAccounts()).thenReturn((Arrays.asList(mockUserAccount1,mockUserAccount2,mockUserAccount3)));
+        when(accountService.getAllAccounts()).thenReturn((Arrays.asList(mockUserAccount1,mockUserAccount2,mockUserAccount3)));
         when(accountTypeService.createNewAccount_type(any())).thenReturn(mockAccountTypes);
-        when(cardsRepository.findAllCreditCard()).thenReturn(List.of(mockCreditAccount1,mockCreditAccount2,mockCreditAccount3));
-        when(cardService.getCreditCards()).thenReturn(List.of(mockCreditAccount1,mockCreditAccount2,mockCreditAccount3));
-        when(cardsRepository.findAllDebitCard()).thenReturn(List.of(mockDebitAccount1,mockDebitAccount2,mockDebitAccount3));
-        when(cardService.getDebitCards()).thenReturn(List.of(mockDebitAccount1,mockDebitAccount2,mockDebitAccount3));
+        when(cardsRepository.findAllCreditCard()).thenReturn(Arrays.asList(mockCreditAccount1,mockCreditAccount2,mockCreditAccount3));
+        when(cardService.getCreditCards()).thenReturn(Arrays.asList(mockCreditAccount1,mockCreditAccount2,mockCreditAccount3));
+        when(cardsRepository.findAllDebitCard()).thenReturn(Arrays.asList(mockDebitAccount1,mockDebitAccount2,mockDebitAccount3));
+        when(cardService.getDebitCards()).thenReturn(Arrays.asList(mockDebitAccount1,mockDebitAccount2,mockDebitAccount3));
         when(cardService.viewCreditLimit(any())).thenReturn(1000);
 
     }
@@ -269,7 +270,7 @@ public class AccountControllerSecurityTests {
     @Test
     void test_getAllUserAccount_CanBeForbiddenByNormalUser()throws Exception{
         when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
-        var unauthed = List.of(MockUser.DEFAULT,
+        var unauthed = Arrays.asList(MockUser.DEFAULT,
                 MockUser.DEFAULT,
                 MockUser.MATCH_USER,
                 MockUser.UNMATCH_USER
@@ -291,7 +292,7 @@ public class AccountControllerSecurityTests {
     @Test
     void test_getAllCreditAccount_CanBeForbiddenByNormalUser()throws Exception{
         when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
-        var unauthed = List.of(MockUser.DEFAULT,
+        var unauthed = Arrays.asList(MockUser.DEFAULT,
                 MockUser.DEFAULT,
                 MockUser.MATCH_USER,
                 MockUser.UNMATCH_USER
@@ -313,7 +314,7 @@ public class AccountControllerSecurityTests {
     @Test
     void test_getAllDebitAccount_CanBeForbiddenByNormalUser()throws Exception{
         when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
-        var unauthed = List.of(MockUser.DEFAULT,
+        var unauthed = Arrays.asList(MockUser.DEFAULT,
                 MockUser.DEFAULT,
                 MockUser.MATCH_USER,
                 MockUser.UNMATCH_USER
@@ -389,7 +390,7 @@ public class AccountControllerSecurityTests {
     @Test
     void test_createNewAccountType_CanBeForbiddenByNormalUser() throws Exception{
         when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
-        var unauthed = List.of(MockUser.DEFAULT,
+        var unauthed = Arrays.asList(MockUser.DEFAULT,
                 MockUser.DEFAULT,
                 MockUser.MATCH_USER,
                 MockUser.UNMATCH_USER
