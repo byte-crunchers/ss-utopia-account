@@ -7,7 +7,7 @@ import com.ssutopia.financial.accountService.exception.AlreadySuspendedException
 import com.ssutopia.financial.accountService.exception.NoSuchAccountException;
 import com.ssutopia.financial.accountService.repository.AccountsRepository;
 import com.ssutopia.financial.accountService.repository.CardPaymentRepository;
-import lombok.var;
+import lombok.experimental.var;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

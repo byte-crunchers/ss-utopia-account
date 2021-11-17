@@ -16,7 +16,7 @@ import com.ssutopia.financial.accountService.repository.CardsRepository;
 import com.ssutopia.financial.accountService.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.var;
+import lombok.experimental.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

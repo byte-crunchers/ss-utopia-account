@@ -18,19 +18,18 @@ public class AccountTypes {
     @Id
     private String id;
 
-    @Builder.Default
+
     private float late_fee = 0.0f;
 
-    @Builder.Default
+
     private float savings_interest = 0.0f;
 
-    @Builder.Default
+
     private float cashBack = 0.0f;
 
-    @Builder.Default
     private float annual_fee = 0.0f;
 
-    @Builder.Default
+
     private float foodie_pts = 0.0f;
 
 
