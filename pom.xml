@@ -160,10 +160,12 @@
 				<plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-compiler-plugin</artifactId>
-    <configuration>
-        <source>9</source>
-        <target>9</target>
-    </configuration>
+					<version>3.7.0</version>
+					<configuration>
+						<source>9</source>
+						<target>9</target>
+						<verbose>true</verbose>
+					</configuration>
 </plugin>
 		</plugins>
 	</build>
