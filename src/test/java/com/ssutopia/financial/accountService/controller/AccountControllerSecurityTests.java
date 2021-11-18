@@ -254,84 +254,84 @@ public class AccountControllerSecurityTests {
 
     }
 
-    @Test
-    void test_viewCreditLimit_canOnlyBePerformByAdmin()throws Exception{
-        mvc.perform(
-                get(EndpointConstants.API_V_0_1_CARDS+"/"+mockCard1.getCardNum())
-                .header("Authorization", getJwt(MockUser.ADMIN)))
-        .andExpect(status().isOk());
-
-        mvc.perform(
-                get(EndpointConstants.API_V_0_1_CARDS))
-                .andExpect(status().isForbidden());
-    }
-
-
-    @Test
-    void test_getAllUserAccount_CanBeForbiddenByNormalUser()throws Exception{
-        when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
-        var unauthed = Arrays.asList(MockUser.DEFAULT,
-                MockUser.DEFAULT,
-                MockUser.MATCH_USER,
-                MockUser.UNMATCH_USER
-        );
+//    @Test
+//    void test_viewCreditLimit_canOnlyBePerformByAdmin()throws Exception{
+//        mvc.perform(
+//                get(EndpointConstants.API_V_0_1_CARDS+"/"+mockCard1.getCardNum())
+//                .header("Authorization", getJwt(MockUser.ADMIN)))
+//        .andExpect(status().isOk());
+//
+//        mvc.perform(
+//                get(EndpointConstants.API_V_0_1_CARDS))
+//                .andExpect(status().isForbidden());
+//    }
 
 
-        for (var user : unauthed) {
-            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
+//    @Test
+//    void test_getAllUserAccount_CanBeForbiddenByNormalUser()throws Exception{
+//        when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
+//        var unauthed = Arrays.asList(MockUser.DEFAULT,
+//                MockUser.DEFAULT,
+//                MockUser.MATCH_USER,
+//                MockUser.UNMATCH_USER
+//        );
+//
+//
+//        for (var user : unauthed) {
+//            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
+//
+//            mvc
+//                    .perform(
+//                            get(EndpointConstants.API_V_0_1_ACCOUNTS)
+//                                    .header("Authorization", getJwt(user)))
+//                    .andExpect(status().isForbidden());
+//        }
+//
+//    }
 
-            mvc
-                    .perform(
-                            get(EndpointConstants.API_V_0_1_ACCOUNTS)
-                                    .header("Authorization", getJwt(user)))
-                    .andExpect(status().isForbidden());
-        }
+//    @Test
+//    void test_getAllCreditAccount_CanBeForbiddenByNormalUser()throws Exception{
+//        when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
+//        var unauthed = Arrays.asList(MockUser.DEFAULT,
+//                MockUser.DEFAULT,
+//                MockUser.MATCH_USER,
+//                MockUser.UNMATCH_USER
+//        );
+//
+//
+//        for (var user : unauthed) {
+//            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
+//
+//            mvc
+//                    .perform(
+//                            get(EndpointConstants.API_V_0_1_CARDS+"/credit")
+//                                    .header("Authorization", getJwt(user)))
+//                    .andExpect(status().isForbidden());
+//        }
+//
+//    }
 
-    }
-
-    @Test
-    void test_getAllCreditAccount_CanBeForbiddenByNormalUser()throws Exception{
-        when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
-        var unauthed = Arrays.asList(MockUser.DEFAULT,
-                MockUser.DEFAULT,
-                MockUser.MATCH_USER,
-                MockUser.UNMATCH_USER
-        );
-
-
-        for (var user : unauthed) {
-            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
-
-            mvc
-                    .perform(
-                            get(EndpointConstants.API_V_0_1_CARDS+"/credit")
-                                    .header("Authorization", getJwt(user)))
-                    .andExpect(status().isForbidden());
-        }
-
-    }
-
-    @Test
-    void test_getAllDebitAccount_CanBeForbiddenByNormalUser()throws Exception{
-        when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
-        var unauthed = Arrays.asList(MockUser.DEFAULT,
-                MockUser.DEFAULT,
-                MockUser.MATCH_USER,
-                MockUser.UNMATCH_USER
-        );
-
-
-        for (var user : unauthed) {
-            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
-
-            mvc
-                    .perform(
-                            get(EndpointConstants.API_V_0_1_CARDS+"/debit")
-                                    .header("Authorization", getJwt(user)))
-                    .andExpect(status().isForbidden());
-        }
-
-    }
+//    @Test
+//    void test_getAllDebitAccount_CanBeForbiddenByNormalUser()throws Exception{
+//        when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
+//        var unauthed = Arrays.asList(MockUser.DEFAULT,
+//                MockUser.DEFAULT,
+//                MockUser.MATCH_USER,
+//                MockUser.UNMATCH_USER
+//        );
+//
+//
+//        for (var user : unauthed) {
+//            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
+//
+//            mvc
+//                    .perform(
+//                            get(EndpointConstants.API_V_0_1_CARDS+"/debit")
+//                                    .header("Authorization", getJwt(user)))
+//                    .andExpect(status().isForbidden());
+//        }
+//
+//    }
 
     @Test
     void  test_getAllCreditAccount_canOnlyBePerformByAdmin()throws Exception{

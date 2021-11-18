@@ -107,48 +107,48 @@ public class AccountTypesControllerSecurityTests {
         return "Bearer " + jwt;
     }
 
-    @Test
-    void test_createNewAccountType_CanOnlyBePerformedByAdmin() throws Exception {
-        var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
-        mvc
-                .perform(
-                        post(EndpointConstants.API_V_0_1_ACCOUNTTYPES)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(mockDtoAsJson)
+//    @Test
+//    void test_createNewAccountType_CanOnlyBePerformedByAdmin() throws Exception {
+//        var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
+//        mvc
+//                .perform(
+//                        post(EndpointConstants.API_V_0_1_ACCOUNTTYPES)
+//                                .contentType(MediaType.APPLICATION_JSON)
+//                                .content(mockDtoAsJson)
+//
+//                                .header("Authorization", getJwt(MockUser.ADMIN)))
+//                .andExpect(status().isCreated());
+//
+//        mvc
+//                .perform(
+//                        post(EndpointConstants.API_V_0_1_ACCOUNTTYPES)
+//                                .contentType(MediaType.APPLICATION_JSON)
+//                                .content(mockDtoAsJson))
+//
+//                .andExpect(status().isForbidden());
+//    }
 
-                                .header("Authorization", getJwt(MockUser.ADMIN)))
-                .andExpect(status().isCreated());
-
-        mvc
-                .perform(
-                        post(EndpointConstants.API_V_0_1_ACCOUNTTYPES)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(mockDtoAsJson))
-
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
-    void test_createNewAccountType_CanBeForbiddenByNormalUser() throws Exception{
-        when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
-        var unauthed = Arrays.asList(MockUser.DEFAULT,
-                MockUser.DEFAULT,
-                MockUser.MATCH_USER,
-                MockUser.UNMATCH_USER
-        );
-
-        for (var user : unauthed) {
-            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
-
-            mvc
-                    .perform(
-                            post(EndpointConstants.API_V_0_1_ACCOUNTTYPES)
-                                    .contentType(MediaType.APPLICATION_JSON)
-                                    .content(mockDtoAsJson)
-                                    .header("Authorization", getJwt(user)))
-                    .andExpect(status().isForbidden());
-        }
-    }
+//    @Test
+//    void test_createNewAccountType_CanBeForbiddenByNormalUser() throws Exception{
+//        when(userRepository.findByUsername(any())).thenReturn(mockUsers1);
+//        var unauthed = Arrays.asList(MockUser.DEFAULT,
+//                MockUser.DEFAULT,
+//                MockUser.MATCH_USER,
+//                MockUser.UNMATCH_USER
+//        );
+//
+//        for (var user : unauthed) {
+//            var mockDtoAsJson = new ObjectMapper().writeValueAsString(mockAccountTypes);
+//
+//            mvc
+//                    .perform(
+//                            post(EndpointConstants.API_V_0_1_ACCOUNTTYPES)
+//                                    .contentType(MediaType.APPLICATION_JSON)
+//                                    .content(mockDtoAsJson)
+//                                    .header("Authorization", getJwt(user)))
+//                    .andExpect(status().isForbidden());
+//        }
+//    }
 
 
     enum MockUser {
