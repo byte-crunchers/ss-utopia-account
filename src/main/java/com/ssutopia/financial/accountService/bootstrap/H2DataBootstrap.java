@@ -1,5 +1,7 @@
 package com.ssutopia.financial.accountService.bootstrap;
 
+/*
+ 
 import com.ssutopia.financial.accountService.entity.AccountTypes;
 import com.ssutopia.financial.accountService.entity.Accounts;
 import com.ssutopia.financial.accountService.entity.Cards;
@@ -1120,3 +1122,5 @@ public class H2DataBootstrap implements CommandLineRunner {
     }
 
 }
+
+*/

@@ -21,23 +21,17 @@ public class Accounts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Float balance;
 
-    private float balance;
+    private Float debt_interest;
 
-    private float debt_interest;
-
-    private float payment_due;
+    private Float payment_due;
 
     private Date due_date;
 
-    private int limit;
+    private Integer credit_limit;
 
-    private boolean active ;
-
-    private boolean approved ;
-
-    private boolean confirmed;
-
+    private Boolean active, approved, confirmed;
 
     @ManyToOne
     @JoinColumn(

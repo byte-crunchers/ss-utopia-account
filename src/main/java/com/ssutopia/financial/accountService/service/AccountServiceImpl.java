@@ -151,7 +151,7 @@ public class AccountServiceImpl implements AccountService {
 
         accountsRepository.findById(id).map(
                 accounts -> {
-                    if(accounts.isActive()){
+                    if(accounts.getActive()){
                         accounts.setActive(status);
                         return accountsRepository.save(accounts);
                     }else {

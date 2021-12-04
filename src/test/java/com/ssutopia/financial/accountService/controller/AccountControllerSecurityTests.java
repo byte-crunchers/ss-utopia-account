@@ -180,22 +180,22 @@ public class AccountControllerSecurityTests {
             .id("Basic Credit")
             .foodie_pts(0.0f)
             .savings_interest(0.00f)
-            .cashBack(0.01f)
+            .cashback(0.01f)
             .annual_fee(0)
             .late_fee(29.00f)
             .build();
     Users mockAdminUsers = Users.builder()
             .username("admin")
             .password("admin123")
-            .roles("ADMIN")
-            .permissions("ACCESS_TEST1,ACCESS_TEST2")
+//            .roles("ADMIN")
+//            .permissions("ACCESS_TEST1,ACCESS_TEST2")
             .build();
 
     Users mockUsers1 = Users.builder()
             .username("adan")
             .password("adan123")
-            .roles("USER")
-            .permissions("")
+//            .roles("USER")
+//            .permissions("")
             .build();
 
     Cards mockCard1 = Cards.builder()

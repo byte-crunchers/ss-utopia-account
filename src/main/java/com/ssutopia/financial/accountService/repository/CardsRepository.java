@@ -19,7 +19,7 @@ public interface CardsRepository extends CrudRepository<Cards,Long> {
     @Query(
             "select new com.ssutopia.financial.accountService.entity.CreditAccount" +
                     "(c.card_num, c.accounts.users.first_name,c.accounts.users.last_name," +
-                    "c.accounts.balance,c.exp_date,c.accounts.limit,c.cvc1,c.cvc2,c.accounts.payment_due,c.accounts.due_date)" +
+                    "c.accounts.balance,c.exp_date,c.accounts.credit_limit,c.cvc1,c.cvc2,c.accounts.payment_due,c.accounts.due_date)" +
                     "from Cards c, Accounts a where c.accounts = a and a.due_date is not null"
     )
     List<CreditAccount> findAllCreditCard();
@@ -36,7 +36,7 @@ public interface CardsRepository extends CrudRepository<Cards,Long> {
     @Query(
             "select new com.ssutopia.financial.accountService.dto.CardStatusDto" +
                     "( a.id, c.card_num, a.accountTypes.id, a.balance, a.payment_due, a.debt_interest, " +
-                    "a.limit, a.due_date, c.exp_date, a.active, a.approved, a.confirmed )" +
+                    "a.credit_limit, a.due_date, c.exp_date, a.active, a.approved, a.confirmed )" +
                     "from Cards c, Accounts a where c.accounts = a " +
                     "and a.users.id = ?1"
     )
@@ -45,13 +45,13 @@ public interface CardsRepository extends CrudRepository<Cards,Long> {
     @Query(
             "select new com.ssutopia.financial.accountService.dto.CardStatusDto" +
                     "( a.id, c.card_num, a.accountTypes.id, a.balance, a.payment_due, a.debt_interest, " +
-                    "a.limit, a.due_date, c.exp_date, a.active, a.approved, a.confirmed )" +
+                    "a.credit_limit, a.due_date, c.exp_date, a.active, a.approved, a.confirmed )" +
                     "from Cards c, Accounts a where c.accounts = a " +
                     "and a.users.id = ?1 and a.accountTypes.id = 'Utopia Debit'"
     )
     List<CardStatusDto> findDebitCardsByUserId(Long id);
 
-    @Query("select a.limit from Accounts a,Cards c where c.accounts = a and c.card_num = ?1")
+    @Query("select a.credit_limit from Accounts a,Cards c where c.accounts = a and c.card_num = ?1")
     Integer findCreditAccountLimit(Long id);
 
     @Query("select c.accounts from Cards c where c.card_num = ?1")

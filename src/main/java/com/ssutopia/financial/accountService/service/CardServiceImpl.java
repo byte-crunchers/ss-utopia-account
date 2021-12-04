@@ -59,7 +59,7 @@ public class CardServiceImpl implements CardService{
 			if(!account.getAccountTypes().getId().toLowerCase().contains("credit")){
 				throw new NoSuchCreditCardException(creditLimitDto.getCardNum());
 			}
-             account.setLimit(creditLimitDto.getCreditLimit());
+             account.setCredit_limit(creditLimitDto.getCreditLimit());
              accountRepository.save(account);
 		}else {
 			throw new NoSuchCreditCardException(creditLimitDto.getCardNum());
@@ -130,7 +130,7 @@ public class CardServiceImpl implements CardService{
                 .confirmed(false)
                 .due_date(new Date())
                 .debt_interest(0.015f)
-                .limit(3000)
+                .credit_limit(3000)
                 .payment_due(0f)
                 .users(user)
                 .build();
