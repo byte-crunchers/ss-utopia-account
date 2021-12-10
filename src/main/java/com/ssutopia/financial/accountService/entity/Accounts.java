@@ -44,8 +44,8 @@ public class Accounts {
             name = "users_id")
     private Users users;
 
-//    @OneToMany(mappedBy = "accounts",cascade = CascadeType.ALL)
-//    private List<Cards> cards;
+    @OneToMany(mappedBy = "accounts",cascade = CascadeType.ALL)
+    private List<Cards> cards;
 
     @ManyToOne
     @JoinColumn(
