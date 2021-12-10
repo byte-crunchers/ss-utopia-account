@@ -49,6 +49,7 @@ import java.util.Optional;
 @RequestMapping(EndpointConstants.API_V_0_1_CARDS)
 public class CardController {
     private final CardServiceImpl cardService;
+	public static final String MAPPING = EndpointConstants.API_V_0_1_CARDS;
     @GetMapping(value = "/credit",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<CreditAccount>> getCreditCards() {
         List<CreditAccount> cards = cardService.getCreditCards();
@@ -87,6 +88,16 @@ public class CardController {
         }
         return ResponseEntity.ok(cards);
     }
+
+
+	@PostMapping(value = "/{cardId}",produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Cards> requestNewCard(@PathVariable Long cardId){
+		var card = cardService.requestNewCard(cardId);
+		Long newCardId = card.getCardNum();
+		var uri = URI.create(MAPPING+"/"+newCardId);
+		return ResponseEntity.created(uri).body(card);
+
+	}
 
 
 
