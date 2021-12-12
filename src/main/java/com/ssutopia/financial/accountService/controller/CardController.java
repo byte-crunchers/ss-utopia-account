@@ -2,8 +2,7 @@ package com.ssutopia.financial.accountService.controller;
 
 
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.ssutopia.financial.accountService.dto.CreditLimitDto;
 import com.ssutopia.financial.accountService.entity.CardForm;
@@ -18,9 +17,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
@@ -48,6 +50,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping(EndpointConstants.API_V_0_1_CARDS)
 public class CardController {
+
+
     private final CardServiceImpl cardService;
 	public static final String MAPPING = EndpointConstants.API_V_0_1_CARDS;
     @GetMapping(value = "/credit",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -146,6 +150,29 @@ public class CardController {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(card.getAccounts().getId())
 				.toUri();
 
+
+
+       //sending confirm request to email server
+        String url = EndpointConstants.API_V_0_1_CARDSEMAILCONFIRM;
+
+        // for testing email server
+		// cause email use h2, it only has a few dummy data
+		int min = 1;
+		int max = 13;
+		int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("email", card.getAccounts().getUsers().getEmail());
+		map.put("firstName", card.getAccounts().getUsers().getFirst_name());
+		map.put("account_id", random_int);
+
+		try
+		{ResponseEntity<Void> response = restTemplate.postForEntity(url, map, Void.class);
+		}catch (Exception ex){
+			System.out.println(ex.toString());
+		}
 
 		// return status code 201
 		return ResponseEntity.created(location).build();
