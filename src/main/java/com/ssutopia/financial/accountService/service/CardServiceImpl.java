@@ -126,6 +126,7 @@ public class CardServiceImpl implements CardService{
 					  .build();
 			  // create new credit card
 			  cardsRepository.save(newCard);
+			  System.out.println(cardsRepository.existsById(cardId));
 
 		  }	else {
 			  throw new NoSuchCreditCardException(cardId);
