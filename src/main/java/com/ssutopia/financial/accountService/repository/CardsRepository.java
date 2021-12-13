@@ -47,7 +47,7 @@ public interface CardsRepository extends CrudRepository<Cards,Long> {
                     "( a.id, c.card_num, a.accountTypes.id, a.balance, a.payment_due, a.debt_interest, " +
                     "a.credit_limit, a.due_date, c.exp_date, a.active, a.approved, a.confirmed )" +
                     "from Cards c, Accounts a where c.accounts = a " +
-                    "and a.users.id = ?1 and a.accountTypes.id = 'Utopia Debit'"
+                    "and a.users.id = ?1 and a.accountTypes.id = 'Checking'"
     )
     List<CardStatusDto> findDebitCardsByUserId(Long id);
 
