@@ -57,10 +57,11 @@ public class AccountServiceImpl implements AccountService {
 
 				// update card balalnce
 				Accounts destinationAccount = accountsRepository.findById(destinationId).orElse(null);
-				destinationAccount.setBalance(destinationAccount.getBalance() - amount);
-				if(destinationAccount.getBalance() < 0.01)
+				destinationAccount.setBalance(destinationAccount.getBalance() + amount);
+				if(Math.abs(destinationAccount.getBalance()) < 0.01)
 					destinationAccount.setBalance(0f);
 				
+				// update payment due
 				destinationAccount.setPayment_due(destinationAccount.getPayment_due() - amount);
 				if(destinationAccount.getPayment_due() < 0.01)
 					destinationAccount.setPayment_due(0f);
@@ -73,6 +74,7 @@ public class AccountServiceImpl implements AccountService {
 						.destinationAccount(destinationAccount)
 						.transfer_value(amount)
 						.time_stamp(LocalDateTime.now())
+						.memo("")
 						.build();
 								
 				return cardPaymentRepository.save(payment);
@@ -93,7 +95,6 @@ public class AccountServiceImpl implements AccountService {
 			Accounts a = accountsRepository.findById(dto.getId()).orElse(null);
 
 			a.setBalance(dto.getBalance());
-//			a.setLimit(dto.getCredit_limit());
 			a.setDebt_interest(dto.getDebt_interest());
 			a.setPayment_due(dto.getPayment_due());
 			a.setDue_date(dto.getDue_date());

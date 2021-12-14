@@ -117,12 +117,7 @@ public class CardServiceImpl implements CardService{
 		Users user = userRepository.getById(form.getUserId());
 		AccountTypes accountType = accountTypeRepository.getById(form.getCardType());
 
-		int min = 50;
-		int max = 200;
-		int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
-		
         var Accounts6 = Accounts.builder()
-				.id((long) random_int)
                 .balance(0f)
                 .accountTypes(accountType)
                 .active(false)

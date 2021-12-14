@@ -58,8 +58,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,    EndpointConstants.API_V_0_1_CARDS+ "/*").hasRole("ADMIN")
                 //for Admin and user role to view card types
                 .antMatchers(HttpMethod.GET,EndpointConstants.API_V_0_1_ACCOUNTTYPES).hasAnyRole("ADMIN","USER")
-                .anyRequest()
-                .authenticated();  }
+                .antMatchers("/").permitAll()
+                .anyRequest().authenticated();  
+        }
     @Bean
     DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
