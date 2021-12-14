@@ -9,6 +9,7 @@ import com.ssutopia.financial.accountService.repository.AccountsRepository;
 import com.ssutopia.financial.accountService.repository.CardsRepository;
 import com.ssutopia.financial.accountService.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

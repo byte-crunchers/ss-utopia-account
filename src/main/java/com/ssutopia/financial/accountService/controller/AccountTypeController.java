@@ -4,6 +4,7 @@ import com.ssutopia.financial.accountService.dto.AccountTypesDto;
 import com.ssutopia.financial.accountService.entity.AccountTypes;
 import com.ssutopia.financial.accountService.service.AccountTypeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,11 +51,14 @@ public class AccountTypeController {
 
     @PostMapping(value = "/test")
     public String Test1(){
+
         return "Hi";
     }
 
     @GetMapping(value = "/test")
+    @ResponseStatus(HttpStatus.OK)
     public String Test(){
-        return "Hi";
+
+        return "OK";
     }
 }

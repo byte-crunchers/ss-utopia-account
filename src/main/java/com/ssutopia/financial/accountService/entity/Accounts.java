@@ -1,5 +1,7 @@
 package com.ssutopia.financial.accountService.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,8 +46,9 @@ public class Accounts {
             name = "users_id")
     private Users users;
 
-//    @OneToMany(mappedBy = "accounts",cascade = CascadeType.ALL)
-//    private List<Cards> cards;
+    @OneToMany(mappedBy = "accounts")
+    @JsonManagedReference
+    private List<Cards> cards;
 
     @ManyToOne
     @JoinColumn(
