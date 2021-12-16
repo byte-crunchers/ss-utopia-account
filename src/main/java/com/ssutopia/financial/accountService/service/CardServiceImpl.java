@@ -113,7 +113,7 @@ public class CardServiceImpl implements CardService{
 		Long cardId = (long) (2319L * Math.pow(10, 12) + random4Digits() * Math.pow(10, 8)
 				+ random4Digits() * Math.pow(10, 4) + random4Digits());
 
-		// TODO - get the user, create an account, and a card
+		// get the user, create an account, and a card
 		Users user = userRepository.getById(form.getUserId());
 		AccountTypes accountType = accountTypeRepository.getById(form.getCardType());
 
@@ -125,7 +125,7 @@ public class CardServiceImpl implements CardService{
                 .confirmed(false)
                 .due_date(new Date())
                 .debt_interest(0.015f)
-                .credit_limit(3000)
+                .credit_limit(-3000)
                 .payment_due(0f)
                 .users(user)
                 .build();
