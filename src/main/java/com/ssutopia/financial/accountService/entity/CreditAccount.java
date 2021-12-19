@@ -20,25 +20,25 @@ public class CreditAccount {
 
     private String fullName;
 
-    private float balance;
+    private Float balance;
 
     private LocalDate exp_date;
 
-    private int limit;
+    private Integer limit;
 
-    private int cvc1;
+    private Integer cvc1;
 
-    private int cvc2;
+    private Integer cvc2;
 
-    private float payment_due;
+    private Float payment_due;
 
     private Date due_date;
 
 
 
     public CreditAccount(Long card_num, String first_name,
-                         String last_name,float balance, LocalDate exp_date, int limit, int cvc1, int cvc2
-    ,float payment_due,Date due_date) {
+                         String last_name, Float balance, LocalDate exp_date, Integer limit, Integer cvc1, Integer cvc2,
+                         Float payment_due,Date due_date) {
 
 
         this.card_num = card_num;
@@ -47,7 +47,10 @@ public class CreditAccount {
         this.fullName = first_name+ " "+last_name;
         this.balance = balance;
         this.exp_date = exp_date;
-        this.limit = limit;
+        if(limit != null)
+        	this.limit = limit;
+        else
+        	this.limit = 0;
         this.cvc1 = cvc1;
         this.cvc2 = cvc2;
         this.payment_due = payment_due;
@@ -58,7 +61,7 @@ public class CreditAccount {
         return payment_due;
     }
 
-    public void setPayment_due(float payment_due) {
+    public void setPayment_due(Float payment_due) {
         this.payment_due = payment_due;
     }
 
@@ -108,7 +111,7 @@ public class CreditAccount {
         return cvc1;
     }
 
-    public void setCvc1(int cvc1) {
+    public void setCvc1(Integer cvc1) {
         this.cvc1 = cvc1;
     }
 
@@ -116,7 +119,7 @@ public class CreditAccount {
         return cvc2;
     }
 
-    public void setCvc2(int cvc2) {
+    public void setCvc2(Integer cvc2) {
         this.cvc2 = cvc2;
     }
 
@@ -132,7 +135,7 @@ public class CreditAccount {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(Float balance) {
         this.balance = balance;
     }
 
@@ -140,7 +143,7 @@ public class CreditAccount {
         return limit;
     }
 
-    public void setLimit(int limit) {
+    public void setLimit(Integer limit) {
         this.limit = limit;
     }
 }
