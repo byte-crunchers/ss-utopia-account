@@ -59,7 +59,7 @@ public class CardServiceImpl implements CardService{
 			if(!account.getAccountTypes().getId().toLowerCase().contains("credit")){
 				throw new NoSuchCreditCardException(creditLimitDto.getCardNum());
 			}
-             account.setLimit(creditLimitDto.getCreditLimit());
+             account.setCredit_limit(creditLimitDto.getCreditLimit());
              accountRepository.save(account);
 		}else {
 			throw new NoSuchCreditCardException(creditLimitDto.getCardNum());
@@ -144,16 +144,16 @@ public class CardServiceImpl implements CardService{
 		Long cardId = (long) (2319L * Math.pow(10, 12) + random4Digits() * Math.pow(10, 8)
 				+ random4Digits() * Math.pow(10, 4) + random4Digits());
 
-		// TODO - get the user, create an account, and a card
+		// get the user, create an account, and a card
 		Users user = userRepository.getById(form.getUserId());
 		AccountTypes accountType = accountTypeRepository.getById(form.getCardType());
 
-		int min = 50;
-		int max = 20000;
-		int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+
+		//int min = 50;
+		//int max = 20000;
+		//int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
 		
         var Accounts6 = Accounts.builder()
-				.id((long) random_int)
                 .balance(0f)
                 .accountTypes(accountType)
                 .active(false)
@@ -161,7 +161,7 @@ public class CardServiceImpl implements CardService{
                 .confirmed(false)
                 .due_date(new Date())
                 .debt_interest(0.015f)
-                .limit(3000)
+                .credit_limit(-3000)
                 .payment_due(0f)
                 .users(user)
                 .build();

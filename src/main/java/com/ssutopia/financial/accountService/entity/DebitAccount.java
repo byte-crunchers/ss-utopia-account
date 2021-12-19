@@ -17,31 +17,31 @@ public class DebitAccount {
 
     private String last_name;
 
-    private float balance;
+    private Float balance;
 
-    private int pin;
+    private Integer pin;
 
     private LocalDate exp_date;
 
     private String fullName;
 
-    private float saving_interest;
+    private Float saving_interest;
 
-    private float annual_fee;
-
-
+    private Float annual_fee;
 
 
-    public DebitAccount(Long card_num, String first_name, String last_name, float balance, int pin, LocalDate exp_date
-    ,float saving_interest,float annual_fee) {
-
+    public DebitAccount(Long card_num, String first_name, String last_name, Float balance, Integer pin, 
+    		LocalDate exp_date, Float saving_interest, Float annual_fee) {
 
         this.card_num = card_num;
         this.first_name = first_name;
         this.last_name = last_name;
         this.balance = balance;
         this.fullName = first_name+ " "+last_name;
-        this.pin = pin;
+        if(pin == null)
+        	this.pin = 0;
+        else
+        	this.pin = pin;
         this.exp_date = exp_date;
         this.saving_interest = saving_interest;
         this.annual_fee = annual_fee;
@@ -52,7 +52,7 @@ public class DebitAccount {
         return saving_interest;
     }
 
-    public void setSaving_interest(float saving_interest) {
+    public void setSaving_interest(Float saving_interest) {
         this.saving_interest = saving_interest;
     }
 
@@ -60,7 +60,7 @@ public class DebitAccount {
         return annual_fee;
     }
 
-    public void setAnnual_fee(float annual_fee) {
+    public void setAnnual_fee(Float annual_fee) {
         this.annual_fee = annual_fee;
     }
 
@@ -102,7 +102,7 @@ public class DebitAccount {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public void setPin(Integer pin) {
         this.pin = pin;
     }
 
@@ -119,7 +119,7 @@ public class DebitAccount {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(Float balance) {
         this.balance = balance;
     }
 }

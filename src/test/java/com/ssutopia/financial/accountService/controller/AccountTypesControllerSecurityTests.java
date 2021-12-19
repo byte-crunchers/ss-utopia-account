@@ -71,15 +71,15 @@ public class AccountTypesControllerSecurityTests {
     Users mockAdminUsers = Users.builder()
             .username("admin")
             .password("admin123")
-            .roles("ADMIN")
-            .permissions("ACCESS_TEST1,ACCESS_TEST2")
+//            .roles("ADMIN")
+//            .permissions("ACCESS_TEST1,ACCESS_TEST2")
             .build();
 
     Users mockUsers1 = Users.builder()
             .username("adan")
             .password("adan123")
-            .roles("USER")
-            .permissions("")
+//            .roles("USER")
+//            .permissions("")
             .build();
 
 

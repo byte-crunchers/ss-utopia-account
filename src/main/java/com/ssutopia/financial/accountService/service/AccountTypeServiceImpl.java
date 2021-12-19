@@ -35,7 +35,7 @@ public class AccountTypeServiceImpl implements AccountTypeService {
         var account_type = AccountTypes.builder()
               .id(account_typeDto.getId())
               .annual_fee(account_typeDto.getAnnual_fee())
-                .cashBack(account_typeDto.getCashBack())
+                .cashback(account_typeDto.getCashBack())
                 .late_fee(account_typeDto.getLate_fee())
                 .savings_interest(account_typeDto.getSavings_interest())
                 .foodie_pts(account_typeDto.getFoodie_pts())

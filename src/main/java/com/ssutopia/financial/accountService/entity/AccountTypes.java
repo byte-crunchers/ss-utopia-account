@@ -24,8 +24,8 @@ public class AccountTypes {
 
     private float savings_interest = 0.0f;
 
-
-    private float cashBack = 0.0f;
+    @Builder.Default
+    private float cashback = 0.0f;
 
     private float annual_fee = 0.0f;
 

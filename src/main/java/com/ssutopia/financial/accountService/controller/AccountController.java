@@ -54,7 +54,7 @@ public class AccountController {
     //endpoints for get all accounts
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<UserAccount>> getAllAccountTypes() {
+    public ResponseEntity<List<UserAccount>> getAllAccounts() {
         List<UserAccount> accounts = accountService.getAllAccounts();
         if (accounts.isEmpty()) {
             return ResponseEntity.noContent().build();

@@ -38,7 +38,7 @@ public class Users {
 
     private LocalDate dob;
 
-    private Long ssn;
+//    private Long ssn;  //ssn now has to be decrypted somehow
 
     private String email;
 
@@ -46,34 +46,38 @@ public class Users {
 
     private String last_name;
 
-    private int active;
+    private Boolean active;
 
-    private String address, city, state;
+    private String street_address, city, state;
     
     private Integer zip;
     
     private Long phone;
 
-    private boolean is_admin;
+    private Boolean is_admin;
 
-    private String roles = "";
+    //the db only has boolean is_admin, so convert that to a string
+    public String getRoles() {
+    	if(is_admin)
+    		return "ADMIN";
+    	else
+    		return "USER";
+    }
 
-    private String permissions = "";
+    //the db doesn't have a column for permissions
+    public String getPermissions() {
+        return "";
+    }
 
     public List<String> getRoleList(){
-        if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
+    	if(is_admin)
+    		return Arrays.asList(new String[] {"ADMIN"});
+    	else
+    		return Arrays.asList(new String[] {"USER"});
     }
 
     public List<String> getPermissionList(){
-        if(this.permissions.length() > 0){
-            return Arrays.asList(this.permissions.split(","));
-        }
         return new ArrayList<>();
     }
-
-
 
 }

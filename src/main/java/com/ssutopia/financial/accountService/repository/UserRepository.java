@@ -15,7 +15,7 @@ public  interface UserRepository extends JpaRepository<Users, Long> {
     
     @Query(
             "select new com.ssutopia.financial.accountService.dto.UserInfoDto" +
-                    "( u.id, u.username, u.first_name, u.last_name, u.email, u.address, u.city, u.state, u.zip, u.phone ) " +
+                    "( u.id, u.username, u.first_name, u.last_name, u.email, u.street_address, u.city, u.state, u.zip, u.phone ) " +
                     "from Users u where u.username = ?1"
     )
     List<UserInfoDto> getUserInfoDto(String username);

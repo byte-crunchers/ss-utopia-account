@@ -22,11 +22,11 @@ public class Cards {
     @Id
     private Long card_num;
 
-    private int pin;
+    private Integer pin;
 
-    private int cvc1;
+    private Integer cvc1;
 
-    private int cvc2;
+    private Integer cvc2;
 
     private LocalDate exp_date;
 
