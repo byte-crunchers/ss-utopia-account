@@ -21,6 +21,8 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
 	</properties>
 
@@ -69,11 +71,18 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.projectlombok</groupId>-->
+<!--			<artifactId>lombok</artifactId>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.20</version>
+			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -119,7 +128,12 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-		
+		<dependency>
+			<groupId>com.thoughtworks.qdox</groupId>
+			<artifactId>qdox</artifactId>
+			<version>2.0-M9</version>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -148,6 +162,15 @@
 					</excludes>
 				</configuration>
 			</plugin>
+				<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+					<version>3.5.1</version>
+					<configuration>
+						<source>11</source>
+						<target>11</target>
+					</configuration>
+</plugin>
 		</plugins>
 	</build>
 

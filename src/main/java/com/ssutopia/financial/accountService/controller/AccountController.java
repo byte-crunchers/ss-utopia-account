@@ -7,8 +7,7 @@ import java.util.Optional;
 
 import com.ssutopia.financial.accountService.dto.CreditLimitDto;
 import com.ssutopia.financial.accountService.dto.UserInfoDto;
-import com.ssutopia.financial.accountService.entity.Accounts;
-import com.ssutopia.financial.accountService.entity.UserAccount;
+import com.ssutopia.financial.accountService.entity.*;
 import com.ssutopia.financial.accountService.service.AccountService;
 import com.ssutopia.financial.accountService.service.UserService;
 
@@ -27,7 +26,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.ssutopia.financial.accountService.dto.PaymentDto;
 import com.ssutopia.financial.accountService.dto.UserInfoDto;
 import com.ssutopia.financial.accountService.entity.Accounts;
-import com.ssutopia.financial.accountService.entity.CardPayment;
 import com.ssutopia.financial.accountService.entity.UserAccount;
 import com.ssutopia.financial.accountService.service.AccountService;
 import com.ssutopia.financial.accountService.service.UserService;
@@ -88,6 +86,7 @@ public class AccountController {
         }
         return ResponseEntity.ok(userInfo);
     }
+
 
     // edit account information
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.TEXT_PLAIN_VALUE })

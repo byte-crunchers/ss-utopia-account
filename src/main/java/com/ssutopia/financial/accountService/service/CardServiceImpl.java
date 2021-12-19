@@ -104,6 +104,37 @@ public class CardServiceImpl implements CardService{
     	return null;
     }
 
+	@Override
+	public Cards requestNewCard(Long cardId) {
+		Cards cards = cardsRepository.findById(cardId).orElse(null);
+		Cards newCard;
+		  if(cards != null){
+			 Accounts account = cards.getAccounts();
+			 //delete old card
+			 cardsRepository.deleteById(cardId);
+			  // generate 16 digit card number
+			  Long newCardId = (long) (2319L * Math.pow(10, 12) + random4Digits() * Math.pow(10, 8)
+					  + random4Digits() * Math.pow(10, 4) + random4Digits());
+
+			  newCard = Cards.builder()
+					  .card_num(newCardId)
+					  .accounts(account)
+					  .exp_date(LocalDate.now())
+					  .cvc1(random3Digits())
+					  .cvc2(random3Digits())
+					  .pin(random4Digits())
+					  .build();
+			  // create new credit card
+			  cardsRepository.save(newCard);
+			  System.out.println(cardsRepository.existsById(cardId));
+
+		  }	else {
+			  throw new NoSuchCreditCardException(cardId);
+		  }
+
+         return newCard;
+	}
+
 	private Random rand = new Random();
 
 	// generate a new card when form is submitted
@@ -117,6 +148,11 @@ public class CardServiceImpl implements CardService{
 		Users user = userRepository.getById(form.getUserId());
 		AccountTypes accountType = accountTypeRepository.getById(form.getCardType());
 
+
+		//int min = 50;
+		//int max = 20000;
+		//int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+		
         var Accounts6 = Accounts.builder()
                 .balance(0f)
                 .accountTypes(accountType)

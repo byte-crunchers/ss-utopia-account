@@ -1,5 +1,6 @@
 package com.ssutopia.financial.accountService.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Cards {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "accounts_id")
+	@JsonBackReference
     private Accounts accounts;
 
     public Long getCardNum() {

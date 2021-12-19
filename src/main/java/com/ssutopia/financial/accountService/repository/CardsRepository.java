@@ -57,4 +57,6 @@ public interface CardsRepository extends CrudRepository<Cards,Long> {
     @Query("select c.accounts from Cards c where c.card_num = ?1")
     Accounts findAccountByCardNum(Long id);
 
+
+
 }
