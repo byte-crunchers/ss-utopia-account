@@ -140,7 +140,7 @@ public class AccountController {
 		if(a != null)  //valid payment
 		{
 			System.out.println("Saved payment entity:");
-			a.printFields();
+			//a.printFields();
 			
 			// set location header
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(a.getId())
