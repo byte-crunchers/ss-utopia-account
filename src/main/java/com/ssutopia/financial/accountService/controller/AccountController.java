@@ -77,17 +77,6 @@ public class AccountController {
 	}
 
 
-    //get user info DTO for autofilling forms
-    @GetMapping(value = "/userinfo/{name}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<UserInfoDto>> getUserInfo(@PathVariable String name) {
-        List<UserInfoDto> userInfo = userService.getUserInfo(name);
-        if (userInfo.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(userInfo);
-    }
-
-
     // edit account information
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<?> updateAccount(@RequestBody UserAccount accountInfo) {
@@ -102,8 +91,9 @@ public class AccountController {
 			return ResponseEntity.unprocessableEntity().build();  //status code 422
 	}
 
-	// loan payment
-	@PostMapping(path = "/loanpayment", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.TEXT_PLAIN_VALUE })
+	// called from loan microservice via restTemplate, 
+	// reduces account balance when loan payment is submitted
+	@PutMapping(path = "/loanpayment", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<?> makeLoanPayment(@RequestBody PaymentDto paymentForm) {
 
 		System.out.println("Payment amount = $" + paymentForm.getAmount());
