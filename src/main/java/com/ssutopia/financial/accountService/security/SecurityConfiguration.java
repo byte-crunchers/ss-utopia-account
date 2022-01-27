@@ -52,8 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,   EndpointConstants.API_V_0_1_ACCOUNTS+ "/**").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.GET,    EndpointConstants.API_V_0_1_ACCOUNTS+ "/**").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.DELETE, EndpointConstants.API_V_0_1_ACCOUNTS+ "/**").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.PUT,    EndpointConstants.API_V_0_1_ACCOUNTS+ "/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT,   EndpointConstants.API_V_0_1_ACCOUNTS+ "/**").permitAll()  //temporary
+                .antMatchers(HttpMethod.PUT,    EndpointConstants.API_V_0_1_ACCOUNTS+ "/**").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.POST,   EndpointConstants.API_V_0_1_CARDS+ "/**").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.GET,    EndpointConstants.API_V_0_1_CARDS+ "/**").hasAnyRole("ADMIN","USER")
                 .antMatchers(HttpMethod.PUT,    EndpointConstants.API_V_0_1_CARDS+ "/**").hasRole("ADMIN")

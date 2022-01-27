@@ -6,11 +6,13 @@ import java.util.*;
 
 import com.ssutopia.financial.accountService.dto.CreditLimitDto;
 import com.ssutopia.financial.accountService.entity.CardForm;
+import com.ssutopia.financial.accountService.repository.UserRepository;
 import com.ssutopia.financial.accountService.dto.CardStatusDto;
 import com.ssutopia.financial.accountService.entity.Accounts;
 import com.ssutopia.financial.accountService.entity.Cards;
 import com.ssutopia.financial.accountService.entity.CreditAccount;
 import com.ssutopia.financial.accountService.entity.DebitAccount;
+import com.ssutopia.financial.accountService.entity.Users;
 import com.ssutopia.financial.accountService.service.CardService;
 import com.ssutopia.financial.accountService.service.CardServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -51,8 +54,9 @@ import java.util.Optional;
 @RequestMapping(EndpointConstants.API_V_0_1_CARDS)
 public class CardController {
 
-
+	private final UserRepository userRepository;
     private final CardServiceImpl cardService;
+    
 	public static final String MAPPING = EndpointConstants.API_V_0_1_CARDS;
     @GetMapping(value = "/credit",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<CreditAccount>> getCreditCards() {
@@ -75,22 +79,40 @@ public class CardController {
     
     // view card status by user id
     @GetMapping(value = "/credit/{id}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<CardStatusDto>> getAllCardsByUserId(@PathVariable Long id) {
-        List<CardStatusDto> cards = cardService.getAllCardsByUserId(id);
-        if (cards.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(cards);
+    public ResponseEntity<List<CardStatusDto>> getAllCardsByUserId(@PathVariable Long id, Authentication authentication) {
+        
+    	//only allow access if user ID matches, or if user is an admin
+		Users user = userRepository.findByUsername(authentication.getName());
+    			
+		if("ADMIN".equals(user.getRoles()) || id.equals(user.getId())) {
+	    	List<CardStatusDto> cards = cardService.getAllCardsByUserId(id);
+	        if (cards.isEmpty()) {
+	            return ResponseEntity.noContent().build();
+	        }
+	        return ResponseEntity.ok(cards);
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
     }
 
     // get all debit cards by user id
     @GetMapping(value = "/debit/{id}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<CardStatusDto>> getDebitCardsByUserId(@PathVariable Long id) {
-        List<CardStatusDto> cards = cardService.getDebitCardsByUserId(id);
-        if (cards.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(cards);
+    public ResponseEntity<List<CardStatusDto>> getDebitCardsByUserId(@PathVariable Long id, Authentication authentication) {
+
+    	//only allow access if user ID matches, or if user is an admin
+		Users user = userRepository.findByUsername(authentication.getName());
+    			
+		if("ADMIN".equals(user.getRoles()) || id.equals(user.getId())) {
+			List<CardStatusDto> cards = cardService.getDebitCardsByUserId(id);
+	        if (cards.isEmpty()) {
+	            return ResponseEntity.noContent().build();
+	        }
+	        return ResponseEntity.ok(cards);
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
     }
 
 
